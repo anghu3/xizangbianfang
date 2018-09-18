@@ -61,7 +61,7 @@ class TESTCAST_RYDLRZ(TESTCASE):
         self.pagination_num(paginal_number, search_value_loginId, column)
         print('系统管理-人员登录日志：登录账户条件查询功能正常')
 
-    def test2_rydlrz_search_loginId(self):
+    def test2_rydlrz_search_loginstatus(self):
         self.rydlrz_search()
         option_chioce=Select(self.dr.find_element_by_xpath('//*[@id="form"]/div[2]/div/select'))
         for i in range(0,3):
