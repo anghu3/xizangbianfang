@@ -94,10 +94,6 @@ class TESTCAST_ZZJGGL(TESTCASE):
         self.dr.switch_to.frame('iframeb')
         paginal_number = self.dr.find_element_by_xpath('/html/body/div[1]/div[2]/div/div/div[1]/div/div[4]/div[1]/span[1]').text
         column = 4
-
-
-
-
         self.pagination_num(paginal_number, search_value_zzjg, column)
         print('系统管理-组织结构管理：组织机构查询功能正常')
 
