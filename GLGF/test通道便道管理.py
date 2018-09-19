@@ -73,7 +73,7 @@ class TESTCAST_TONGDAOBIANDAO(TESTCASE):
         time.sleep(1)
         self.dr.find_element_by_xpath('//*[@id="treeSelect_151_span"]').click()
         self.dr.find_element_by_xpath('//*[@id="gxdw"]').click()
-        time.sleep(2)
+        time.sleep(1)
         self.dr.find_element_by_xpath('//*[@id="gxtreeSelect_108_switch"]').click()
         time.sleep(1)
         self.dr.find_element_by_xpath('//*[@id="gxtreeSelect_148_switch"]').click()
