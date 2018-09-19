@@ -71,7 +71,7 @@ class TESTCAST_CZRK(unittest.TestCase):
         self.assertEqual(search_value, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[3]').text,
                          '姓名条件查询')
         self.dr.find_element_by_xpath('//*[@id="reset"]').click()
-        self.dr.implicitly_wait(10)
+        time.sleep(5)
         self.dr.find_element_by_xpath('//*[@id="search"]').click()
         time.sleep(5)
         self.assertNotEqual(search_value, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[3]').text,

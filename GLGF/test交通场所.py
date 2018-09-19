@@ -52,7 +52,7 @@ class TESTCAST_JIAOTONG(TESTCASE):
 
     def jiaotong_add(self):
         self.jiaotong_search()
-        self.dr.find_element_by_xpath('/html/body/div[3]/div[1]/div[2]/a[2]').click()
+        self.dr.find_element_by_xpath('/html/body/div[4]/div[1]/div[2]/a[2]').click()
         time.sleep(2)
 
     # def test1_jiaotong_add_esc(self):
@@ -108,7 +108,6 @@ class TESTCAST_JIAOTONG(TESTCASE):
         self.dr.find_element_by_xpath('//*[@id="listFj"]/tbody/tr/td[10]/span/div/form/div/div[1]/div/input').send_keys('240')
         self.dr.find_element_by_xpath('//*[@id="saveAirport"]').click()
         print('管理防范-交通场所管理：新增飞机场功能正常')
-
 
 if __name__=='__main__':
     unittest.main()
