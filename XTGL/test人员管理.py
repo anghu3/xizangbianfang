@@ -195,7 +195,7 @@ class TESTCAST_RKGL(TESTCASE):
         print('系统管理-人口管理：编辑功能正常')
 
     def test7_rkgl_pwd(self):
-        self.rkgl_search_test()
+        self.rkgl_search()
         search_value_loginId='test'
         self.dr.find_element_by_xpath('//*[@id="form"]/div[2]/div/input').send_keys(search_value_loginId)
         self.dr.find_element_by_xpath('//*[@id="search"]').click()
@@ -219,7 +219,7 @@ class TESTCAST_RKGL(TESTCASE):
         print('系统管理-人员管理：修改密码功能')
 
     def test8_rkgl_pwd(self):
-        self.rkgl_search_test()
+        self.rkgl_search()
         search_value_loginId='test'
         self.dr.find_element_by_xpath('//*[@id="form"]/div[2]/div/input').send_keys(search_value_loginId)
         self.dr.find_element_by_xpath('//*[@id="search"]').click()
@@ -241,10 +241,10 @@ class TESTCAST_RKGL(TESTCASE):
         self.login(login_name_test,login_password_test)
         self.assertEqual('用户：test',self.dr.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/div[1]').text,'校验修改密码后登录')
         print('系统管理-人员管理：修改密码功能')
-
-    def test9_rkgl_add_juese(self):
-        # self.rkgl_search()
-        print('待角色管理中查询功能正常后完成')
+    #
+    # def test9_rkgl_add_juese(self):
+    #     # self.rkgl_search()
+    #     print('待角色管理中查询功能正常后完成')
 
 
 

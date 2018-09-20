@@ -11,7 +11,7 @@ from selenium.webdriver.support.ui import Select
 import time
 import os
 import re
-from public_package.pubilc_package import url,login_name,login_name_test,login_password,login_password_test1,login_password_test2
+from public_package.pubilc_package import url,login_name,login_name_test,login_password,login_password_test,login_password_test2
 from public_package.pubilc_package import TESTCASE
 import HTMLTestRunner
 '''
