@@ -236,12 +236,12 @@ class TESTCAST_RKGL(TESTCASE):
         self.dr.find_element_by_xpath('//*[@id="pwd"]').send_keys(login_password_test)
         self.dr.find_element_by_xpath('/html/body/div[6]/div[3]/div/button[2]/span').click()
         self.dr.switch_to.default_content()
-        time.sleep(3)
+        time.sleep(5)
         self.dr.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[4]/a[2]').click()
         self.login(login_name_test,login_password_test)
         self.assertEqual('用户：test',self.dr.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/div[1]').text,'校验修改密码后登录')
         print('系统管理-人员管理：修改密码功能')
-    #
+
     # def test9_rkgl_add_juese(self):
     #     # self.rkgl_search()
     #     print('待角色管理中查询功能正常后完成')
