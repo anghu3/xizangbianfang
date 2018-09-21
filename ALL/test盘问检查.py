@@ -52,13 +52,15 @@ class TESTCAST_PWJC(TESTCASE):
         self.pwjc_search()
         self.dr.find_element_by_xpath('/html/body/div[3]/div[1]/div[2]/a[2]').click()
         self.dr.find_element_by_xpath('//*[@id="pwkssjA"]').click()
+        date1=time.strftime('%Y-%m-%d 08:30:00')
         self.dr.find_element_by_xpath('//*[@id="pwkssjA"]').clear()
-        self.dr.find_element_by_xpath('//*[@id="pwkssjA"]').send_keys('2018-09-13 08:30:00')
+        self.dr.find_element_by_xpath('//*[@id="pwkssjA"]').send_keys(date1)
         self.dr.find_element_by_xpath('//*[@id="questForm"]/div[1]/div[1]/div/div[2]/ul/li[2]/table/tbody/tr/td[2]/a/span').click()
         time.sleep(2)
         self.dr.find_element_by_xpath('//*[@id="pwjssjA"]').click()
+        date2=time.strftime('%Y-%m-%d 12:00:00')
         self.dr.find_element_by_xpath('//*[@id="pwjssjA"]').clear()
-        self.dr.find_element_by_xpath('//*[@id="pwjssjA"]').send_keys('2018-09-13 12:00:00')
+        self.dr.find_element_by_xpath('//*[@id="pwjssjA"]').send_keys(date2)
         self.dr.find_element_by_xpath('//*[@id="questForm"]/div[1]/div[2]/div/div[2]/ul/li[2]/table/tbody/tr/td[2]/a/span').click()
         self.dr.find_element_by_xpath('//*[@id="sfzhm"]').send_keys('370123198009220510')
         self.dr.find_element_by_xpath('//*[@id="xm"]').send_keys('荆帅')
@@ -84,7 +86,7 @@ class TESTCAST_PWJC(TESTCASE):
 
     def test2_pwjc_search_date(self):
         self.pwjc_search()
-        search_value_date='2018-09-13'
+        search_value_date=time.strftime('%Y-%m-%d',time.localtime(time.time()))
         self.dr.find_element_by_xpath('//*[@id="pwkssjA"]').send_keys(search_value_date)
         self.dr.find_element_by_xpath('//*[@id="search"]').click()
         self.dr.switch_to.default_content()
