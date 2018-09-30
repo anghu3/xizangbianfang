@@ -132,7 +132,7 @@ class TESTCAST_QFKHGL(TESTCASE):
     def test05_qfkhgl_search_period(self):
         self.qfkhgl_search()
         search_value_period='2018-09-17'
-        self.dr.find_element_by_xpath('//*[@id="period"]').send_keys(search_value_period)
+        self.dr.find_element_by_xpath('//*[@id="assessmentPeriod"]').send_keys(search_value_period)
         self.dr.find_element_by_xpath('//*[@id="name"]').click()
         self.dr.find_element_by_xpath('//*[@id="search"]').click()
         self.dr.switch_to.default_content()
