@@ -52,6 +52,7 @@ class TESTCAST_EXZ(unittest.TestCase):
         time.sleep(2)
         self.assertEqual('人口管理', self.dr.find_element_by_xpath('//*[@id="currMenu"]').text, '人口管理')
         self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div/ul/li[1]').click()
+
         time.sleep(2)
         self.dr.find_element_by_xpath('//*[@id="821"]').click()
         time.sleep(2)

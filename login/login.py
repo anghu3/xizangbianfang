@@ -43,17 +43,17 @@ class TESTCAST_LOGIN(unittest.TestCase):
 
     def test2_login_pwd_error(self):
         self.login(login_name, '83849898')
-        self.assertNotEqual('http://192.168.110.79:8081/', self.dr.current_url, '用户名或密码错误')
+        self.assertEqual(self.dr.find_element_by_xpath('//*[@id="login_ff"]/div[3]/span').text, '用户名或密码错误','用户名或密码错误')
         print('登录测试-密码错误-admin')
 
     def test3_login_pwd_null(self):
         self.login(login_name, '')
-        self.assertNotEqual('http://192.168.110.79:8081/', self.dr.current_url, '用户名或密码错误')
+        self.assertEqual(self.dr.find_element_by_xpath('//*[@id="login_ff"]/div[3]/span').text, '用户名或密码错误','用户名或密码错误')
         print('登录测试-密码为空-amdin')
 
     def test4_login_user_null(self):
         self.login('', login_password)
-        self.assertNotEqual('http://192.168.110.79:8081/', self.dr.current_url, '用户名或密码错误')
+        self.assertEqual(self.dr.find_element_by_xpath('//*[@id="login_ff"]/div[3]/span').text, '用户名或密码错误','用户名或密码错误')
         print('登录测试-用户名为空-admin')
 
     def test5_login_success(self):
