@@ -178,6 +178,7 @@ class TESTCAST_QFRYGL(TESTCASE):
         self.dr.find_element_by_xpath('//*[@id="treeSelect_46_switch"]').click()
         time.sleep(1)
         self.dr.find_element_by_xpath('//*[@id="treeSelect_48_span"]').click()
+
         time.sleep(1)
         self.dr.find_element_by_xpath('//*[@id="search"]').click()
         self.dr.switch_to.default_content()
