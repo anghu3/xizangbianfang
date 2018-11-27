@@ -33,6 +33,8 @@ import os
 import re
 import sys
 from public_package.pubilc_package import url,login_name,login_name_test,login_password,login_password_test
+from public_package.pubilc_package import TESTCASE
+import xlrd
 '''
 用例名称：
 用例编号：
@@ -40,16 +42,23 @@ from public_package.pubilc_package import url,login_name,login_name_test,login_p
 用例作者：
 '''
 
-def findnum(string):
-    comp = re.compile('-?[1-9]\d*')
-    list_str = comp.findall(string)
-    list_num = []
-    for item in list_str:
-        item = int(item)
-        list_num.append(item)
-    return list_num
-
 class TESTCAST_WJRK(unittest.TestCase):
+
+    dir = os.getcwd()
+    xlsfile = dir + '.xls'
+    excel = xlrd.open_workbook(xlsfile)
+    sheet_name = excel.sheet_names()[0]
+    global sheet_menu
+    sheet_menu = excel.sheet_by_name('menu')
+    global sheet
+    sheet = excel.sheet_by_name('暂住人口')
+    global sheet_setting, search, reset, add, delete, currMenupath, page_title
+    sheet_setting = excel.sheet_by_name('setting')
+    search = sheet_setting.col_values(2, 1, 2)[0]
+    reset = sheet_setting.col_values(3, 1, 2)[0]
+    currMenupath = sheet_setting.col_values(0, 1, 2)[0]
+    page_title = sheet_setting.col_values(1, 1, 2)[0]
+
     def setUp(self):
         self.dr = webdriver.Chrome()
         self.dr.maximize_window()
@@ -67,34 +76,36 @@ class TESTCAST_WJRK(unittest.TestCase):
     def wjrk_search(self):
         self.login(login_name,login_password)
         time.sleep(5)
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[1]/a[2]').click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(1,7,8)[0]).click()
         time.sleep(2)
-        self.assertEqual('人口管理', self.dr.find_element_by_xpath('//*[@id="currMenu"]').text, '人口管理')
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div/ul/li[3]/p[2]').click()
+        self.assertEqual('人口管理', self.dr.find_element_by_xpath(currMenupath).text, '人口管理')
+        self.dr.find_element_by_xpath(sheet_menu.col_values(3,7,8)[0]).click()
         time.sleep(2)
-        self.dr.find_element_by_xpath('//*[@id="560"]').click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(5,7,8)[0]).click()
         time.sleep(2)
         self.dr.switch_to.frame('iframeb')
-        self.assertEqual('外籍人口列表', self.dr.find_element_by_xpath('/html/body/div[1]/div').text,
+        self.assertEqual('外籍人口列表', self.dr.find_element_by_xpath(page_title).text,
                          '外籍人口')
 
-    def test1_wjrk_search_name(self):
+    def test01_wjrk_search_name(self):
         self.wjrk_search()
-        search_value = '萨姆'
+        search_value_name = sheet.col_values(1,0,1)[0]
+        name_path=sheet.col_values(1,1,2)[0]
         self.dr.implicitly_wait(30)
-        self.dr.find_element_by_xpath('//*[@id="form"]/div[1]/div/input').send_keys(search_value)
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
+        self.dr.find_element_by_xpath(sheet.col_values(1,1,2)[0]).send_keys(search_value_name)
+        self.dr.find_element_by_xpath(search).click()
         time.sleep(5)
         self.dr.switch_to.default_content()
         self.dr.switch_to.frame('iframeb')
-        self.assertEqual(search_value, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[1]').text,
-                         '姓名条件查询')
-        self.dr.find_element_by_xpath('//*[@id="reset"]').click()
+        paginal_number = self.dr.find_element_by_xpath(sheet_setting.col_values(4, 1, 2)[0]).text
+        column = 1
+        self.pagination_num(paginal_number,name_path,column)
+        self.dr.find_element_by_xpath(reset).click()
         self.dr.implicitly_wait(10)
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
+        self.dr.find_element_by_xpath(search).click()
         time.sleep(5)
-        self.assertNotEqual(search_value, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[1]').text,
-                            '重置功能')
+        self.assertEqual('', self.dr.find_element_by_xpath(name_path).get_attribute('value'),
+                            '中文名-重置功能异常')
         print('人口管理-人员基本信息-外籍人口:姓名条件查询功能正常')
 
     def test2_wjrk_search_gj(self):

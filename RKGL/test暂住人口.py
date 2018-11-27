@@ -14,6 +14,8 @@ import os
 import re
 import sys
 from public_package.pubilc_package import url,login_name,login_name_test,login_password,login_password_test
+from public_package.pubilc_package import TESTCASE
+import xlrd
 '''
 用例名称：
 用例编号：
@@ -30,7 +32,23 @@ def findnum(string):
         list_num.append(item)
     return list_num
 
-class TESTCAST_ZZRK(unittest.TestCase):
+class TESTCAST_ZZRK(TESTCASE):
+
+    dir = os.getcwd()
+    xlsfile = dir + '.xls'
+    excel = xlrd.open_workbook(xlsfile)
+    sheet_name = excel.sheet_names()[0]
+    global sheet_menu
+    sheet_menu = excel.sheet_by_name('menu')
+    global sheet
+    sheet = excel.sheet_by_name('暂住人口')
+    global sheet_setting, search, reset, add, delete, currMenupath, page_title
+    sheet_setting = excel.sheet_by_name('setting')
+    search = sheet_setting.col_values(2, 1, 2)[0]
+    reset = sheet_setting.col_values(3, 1, 2)[0]
+    currMenupath = sheet_setting.col_values(0, 1, 2)[0]
+    page_title = sheet_setting.col_values(1, 1, 2)[0]
+
     def setUp(self):
         self.dr = webdriver.Chrome()
         self.dr.maximize_window()
@@ -48,164 +66,161 @@ class TESTCAST_ZZRK(unittest.TestCase):
     def zzrk_search(self):
         self.login(login_name, login_password)
         time.sleep(5)
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[1]/a[2]').click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(1,4,5)[0]).click()
         time.sleep(2)
-        self.assertEqual('人口管理', self.dr.find_element_by_xpath('//*[@id="currMenu"]').text, '人口管理')
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div/ul/li[3]/p[2]').click()
+        self.assertEqual('人口管理', self.dr.find_element_by_xpath(currMenupath).text, '人口管理')
+        self.dr.find_element_by_xpath(sheet_menu.col_values(3,4,5)[0]).click()
         time.sleep(2)
-        self.dr.find_element_by_xpath('//*[@id="803"]').click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(5,4,5)[0]).click()
         time.sleep(5)
         self.dr.switch_to.frame('iframeb')
-        self.assertEqual('流动人口信息列表', self.dr.find_element_by_xpath('/html/body/div[1]/div').text,
+        self.assertEqual('流动人口信息列表', self.dr.find_element_by_xpath(page_title).text,
                          '暂住人口')
 
-    def test1_zzrk_search_name(self):
+    def test01_zzrk_search_name(self):
         self.zzrk_search()
-        search_value = '杨东岳'
         self.dr.implicitly_wait(30)
-        self.dr.find_element_by_xpath('//*[@id="form"]/div[1]/div/input').send_keys(search_value)
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
+        self.dr.find_element_by_xpath(sheet.col_values(1,1,2)[0]).send_keys(sheet.col_values(1,0,1)[0])
+        self.dr.find_element_by_xpath(search).click()
         self.dr.switch_to.default_content()
         time.sleep(5)
         self.dr.switch_to.frame('iframeb')
-        self.assertEqual(search_value,self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[2]').text,'姓名条件查询')
-        self.dr.find_element_by_xpath('//*[@id="reset"]').click()
+        paginal_number = self.dr.find_element_by_xpath(sheet_setting.col_values(4, 1, 2)[0]).text
+        column = 2
+        self.pagination_num(paginal_number, sheet.col_values(1, 0, 1)[0], column)
+        self.dr.find_element_by_xpath(reset).click()
         self.dr.implicitly_wait(10)
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
+        self.dr.find_element_by_xpath(search).click()
         time.sleep(5)
-        self.assertNotEqual(search_value, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[2]').text,
-                            '重置功能')
+        self.assertEqual('', self.dr.find_element_by_xpath(sheet.col_values(1, 1, 2)[0]).get_attribute('value'),
+                         '姓名-重置功能异常')
         print('人口管理-人员基本信息-暂住人口:姓名条件查询功能正常')
 
-    def test2_zzrk_search_cardid(self):
+    def test02_zzrk_search_cardid(self):
         self.zzrk_search()
-        search_value = '51062319710606001X'
         self.dr.implicitly_wait(30)
-        self.dr.find_element_by_xpath('//*[@id="form"]/div[2]/div/input').send_keys(search_value)
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
+        self.dr.find_element_by_xpath(sheet.col_values(1,3,4)[0]).send_keys(sheet.col_values(1,2,3)[0])
+        self.dr.find_element_by_xpath(search).click()
         self.dr.switch_to.default_content()
         time.sleep(5)
         self.dr.switch_to.frame('iframeb')
-        self.assertEqual(search_value,self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[3]').text,'身份证号条件查询')
-        self.dr.find_element_by_xpath('//*[@id="reset"]').click()
+        paginal_number = self.dr.find_element_by_xpath(sheet_setting.col_values(4, 1, 2)[0]).text
+        column = 3
+        self.pagination_num(paginal_number, sheet.col_values(1, 2, 3)[0], column)
+        self.dr.find_element_by_xpath(reset).click()
         self.dr.implicitly_wait(10)
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
+        self.dr.find_element_by_xpath(search).click()
         time.sleep(5)
-        self.assertNotEqual(search_value, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[3]').text,
-                            '重置功能')
+        self.assertEqual('', self.dr.find_element_by_xpath(sheet.col_values(1, 3, 4)[0]).get_attribute('value'),
+                         '身份证号码-重置功能异常')
         print('人口管理-人员基本信息-暂住人口:身份证号条件查询功能正常')
 
-    def test3_zzrk_search_tempResidPermitNo(self):
+    def test03_zzrk_search_tempResidPermitNo(self):
         self.zzrk_search()
-        search_value = '04303110'
         self.dr.implicitly_wait(30)
-        self.dr.find_element_by_xpath('//*[@id="form"]/div[3]/div/input').send_keys(search_value)
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
+        self.dr.find_element_by_xpath(sheet.col_values(1,5,6)[0]).send_keys(sheet.col_values(1,4,5)[0])
+        self.dr.find_element_by_xpath(search).click()
         self.dr.switch_to.default_content()
         time.sleep(5)
         self.dr.switch_to.frame('iframeb')
-        self.assertEqual(search_value,self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[7]').text,'居住证编号条件查询')
-        self.dr.find_element_by_xpath('//*[@id="reset"]').click()
+        paginal_number = self.dr.find_element_by_xpath(sheet_setting.col_values(4, 1, 2)[0]).text
+        column = 7
+        self.pagination_num(paginal_number, sheet.col_values(1, 4, 5)[0], column)
+        self.dr.find_element_by_xpath(reset).click()
         self.dr.implicitly_wait(10)
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
+        self.dr.find_element_by_xpath(search).click()
         time.sleep(5)
-        self.assertNotEqual(search_value, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[7]').text,
-                            '重置功能')
+        self.assertEqual('', self.dr.find_element_by_xpath(sheet.col_values(1,5,6)[0]).get_attribute('value'),
+                            '居住证编号-重置功能异常')
         print('人口管理-人员基本信息-暂住人口:居住证编号条件查询功能正常')
 
-    def test4_zzrk_search_tempAddrRegDetailAddr(self):
+    def test04_zzrk_search_tempAddrRegDetailAddr(self):
         self.zzrk_search()
-        search_value = '西藏->山南地区->浪卡子县->普玛江塘乡->下索村->下索'
         self.dr.implicitly_wait(30)
-        self.dr.find_element_by_xpath('//*[@id="form"]/div[4]/div/input').send_keys(search_value)
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
+        self.dr.find_element_by_xpath(sheet.col_values(1,7,8)[0]).send_keys(sheet.col_values(1,6,7)[0])
+        self.dr.find_element_by_xpath(search).click()
         self.dr.switch_to.default_content()
         time.sleep(5)
         self.dr.switch_to.frame('iframeb')
-        self.assertEqual(search_value,self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[9]').text,'暂住地址条件查询')
-        self.dr.find_element_by_xpath('//*[@id="reset"]').click()
+        paginal_number = self.dr.find_element_by_xpath(sheet_setting.col_values(4, 1, 2)[0]).text
+        column = 9
+        self.pagination_num(paginal_number, sheet.col_values(1, 6, 7)[0], column)
+        self.dr.find_element_by_xpath(reset).click()
         self.dr.implicitly_wait(10)
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
+        self.dr.find_element_by_xpath(search).click()
         time.sleep(5)
-        self.assertNotEqual(search_value, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[9]').text,
-                            '重置功能')
+        self.assertEqual('', self.dr.find_element_by_xpath(sheet.col_values(1,7,8)[0]).get_attribute('value'),
+                            '暂住地址-重置功能异常')
         print('人口管理-人员基本信息-暂住人口:暂住地址条件查询功能正常')
 
-    def test5_zzrk_search_isProvInOut(self):
+    def test05_zzrk_search_isProvInOut(self):
         self.zzrk_search()
-        search_value = '省内'
         isProvInOut = Select(self.dr.find_element_by_xpath('//*[@id="form"]/div[5]/div/select'))
-        isProvInOut.select_by_visible_text(search_value)
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
-        self.dr.switch_to.default_content()
-        time.sleep(5)
-        self.dr.switch_to.frame('iframeb')
-        self.assertEqual(search_value, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[12]').text, '校验结果')
+        for i in range(1,3):
+            isProvInOut.select_by_index(i)
+            search_value_isProvInOut=isProvInOut.all_selected_options[0].text
+            self.dr.find_element_by_xpath(search).click()
+            self.dr.switch_to.default_content()
+            time.sleep(5)
+            self.dr.switch_to.frame('iframeb')
+            paginal_number = self.dr.find_element_by_xpath(sheet_setting.col_values(4, 1, 2)[0]).text
+            column = 12
+            self.pagination_num(paginal_number,search_value_isProvInOut,column)
+            self.dr.find_element_by_xpath(reset).click()
+            self.dr.implicitly_wait(10)
+            self.dr.find_element_by_xpath(search).click()
+            time.sleep(5)
+            self.assertEqual('--全部--', self.dr.find_element_by_xpath('//*[@id="form"]/div[5]/div/select/option[1]').get_attribute('text'),
+                                 '区域-重置功能异常')
         print('人口管理-人员基本信息-暂住人口:区域条件查询功能正常')
 
-    def test6_zzrk_search_isProvInOut(self):
+    def test06_zzrk_search_liveState(self):
         self.zzrk_search()
-        search_value = '省外'
-        isProvInOut = Select(self.dr.find_element_by_xpath('//*[@id="form"]/div[5]/div/select'))
-        isProvInOut.select_by_visible_text(search_value)
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
-        self.dr.switch_to.default_content()
-        time.sleep(5)
-        self.dr.switch_to.frame('iframeb')
-        self.assertEqual(search_value, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[12]').text, '校验结果')
-        print('人口管理-人员基本信息-暂住人口:区域条件查询功能正常')
-
-    def test7_zzrk_search_liveState(self):
-        self.zzrk_search()
-        search_value = '现住'
-        isProvInOut = Select(self.dr.find_element_by_xpath('//*[@id="form"]/div[6]/div/select'))
-        isProvInOut.select_by_visible_text(search_value)
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
-        self.dr.switch_to.default_content()
-        time.sleep(5)
-        self.dr.switch_to.frame('iframeb')
-        self.assertEqual(search_value, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[13]').text, '校验结果')
+        liveState = Select(self.dr.find_element_by_xpath('//*[@id="form"]/div[6]/div/select'))
+        for i in range(1,3):
+            liveState.select_by_index(i)
+            search_value_liveState=liveState.all_selected_options[0].text
+            # print(search_value_liveState)
+            self.dr.find_element_by_xpath(search).click()
+            self.dr.switch_to.default_content()
+            time.sleep(5)
+            self.dr.switch_to.frame('iframeb')
+            paginal_number = self.dr.find_element_by_xpath(sheet_setting.col_values(4, 1, 2)[0]).text
+            column = 13
+            self.pagination_num(paginal_number,search_value_liveState,column)
+            self.dr.find_element_by_xpath(reset).click()
+            self.dr.implicitly_wait(10)
+            self.dr.find_element_by_xpath(search).click()
+            time.sleep(5)
+            self.assertEqual('--全部--',self.dr.find_element_by_xpath('//*[@id="form"]/div[6]/div/select/option[1]').get_attribute('text'),'居住状态-重置功能异常')
         print('人口管理-人员基本信息-暂住人口:居住状态条件查询功能正常')
 
-    def test8_zzrk_search_liveState(self):
+    def test07_zzrk_search_xiangqing(self):
         self.zzrk_search()
-        search_value = '历史居住'
-        isProvInOut = Select(self.dr.find_element_by_xpath('//*[@id="form"]/div[6]/div/select'))
-        isProvInOut.select_by_visible_text(search_value)
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
-        self.dr.switch_to.default_content()
-        time.sleep(5)
-        self.dr.switch_to.frame('iframeb')
-        self.assertEqual(search_value, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[13]').text, '校验结果')
-        print('人口管理-人员基本信息-暂住人口:居住状态条件查询功能正常')
-
-    def test9_zzrk_search_xiangqing(self):
-        self.zzrk_search()
-        search_value_name='杨东岳'
         self.dr.implicitly_wait(30)
-        self.dr.find_element_by_xpath('//*[@id="form"]/div[1]/div/input').send_keys(search_value_name)
+        self.dr.find_element_by_xpath('//*[@id="form"]/div[1]/div/input').send_keys(sheet.col_values(1,0,1)[0])
         self.dr.find_element_by_xpath('//*[@id="search"]').click()
         self.dr.switch_to.default_content()
         time.sleep(5)
         self.dr.switch_to.frame('iframeb')
         search_value_carid=self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[3]').text
-        self.assertEqual(search_value_name, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[2]').text, '姓名条件查询')
+        self.assertEqual(sheet.col_values(1,0,1)[0], self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[2]').text, '姓名条件查询')
         self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[14]/a').click()
         self.dr.implicitly_wait(30)
-        self.assertEqual(search_value_name,self.dr.find_element_by_xpath('//*[@id="xm"]').text,'详情信息校验')
-        self.assertEqual(search_value_carid,self.dr.find_element_by_xpath('//*[@id="gmsfhm"]').get_attribute('value'),'校验详情')
+        self.assertEqual(sheet.col_values(1,0,1)[0],self.dr.find_element_by_xpath('//*[@id="xm"]').text,'详情信息校验')
+        self.assertEqual(sheet.col_values(1,2,3)[0],self.dr.find_element_by_xpath('//*[@id="gmsfhm"]').get_attribute('value'),'校验详情')
         print('人口管理-人员基本信息-暂住人口:详情功能正常')
 
-    def test10_zzrk_update(self):
+    def test08_zzrk_update(self):
         self.zzrk_search()
-        search_value_name='杨东岳'
+        search_value_name=sheet.col_values(1,0,1)[0]
         self.dr.implicitly_wait(30)
         self.dr.find_element_by_xpath('//*[@id="form"]/div[1]/div/input').send_keys(search_value_name)
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
+        self.dr.find_element_by_xpath(search).click()
         self.dr.switch_to.default_content()
         time.sleep(5)
         self.dr.switch_to.frame('iframeb')
-        search_value_carid=self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[3]').text
+        search_value_carid=sheet.col_values(1,2,3)[0]
         self.assertEqual(search_value_name, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[2]').text, '姓名条件查询')
         self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[14]/a').click()
         self.dr.implicitly_wait(30)
@@ -216,11 +231,10 @@ class TESTCAST_ZZRK(unittest.TestCase):
         time.sleep(5)
         self.dr.find_element_by_xpath('/html/body/a').click()
         self.dr.find_element_by_xpath('//*[@id="form"]/div[1]/div/input').send_keys(search_value_name)
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
+        self.dr.find_element_by_xpath(search).click()
         self.dr.switch_to.default_content()
         time.sleep(5)
         self.dr.switch_to.frame('iframeb')
-        search_value_carid = self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[3]').text
         self.assertEqual(search_value_name, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[2]').text,
                          '姓名条件查询')
         self.assertEqual('长子',self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[8]').text,'校验更新是否正常')

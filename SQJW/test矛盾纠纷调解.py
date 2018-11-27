@@ -48,7 +48,7 @@ class TESTCAST_MDJF(TESTCASE):
         self.assertEqual('矛盾纠纷调处列表', self.dr.find_element_by_xpath('/html/body/div[1]/div').text,
                          '矛盾纠纷调解')
 
-    def test1_mdjf_add(self):
+    def test01_mdjf_add(self):
         self.mdjf_search()
         self.dr.find_element_by_xpath('/html/body/div[3]/div[1]/div[2]/a[2]').click()
         Select(self.dr.find_element_by_xpath('//*[@id="mdjflx"]')).select_by_value('01')
@@ -80,19 +80,27 @@ class TESTCAST_MDJF(TESTCASE):
         self.dr.find_element_by_xpath('//*[@id="treeSelect2_45_span"]').click()
         self.dr.find_element_by_xpath('//*[@id="sspcsName"]').click()
         time.sleep(1)
-        self.dr.find_element_by_xpath('//*[@id="treeSelect3_45_switch"]').click()
+        self.dr.find_element_by_xpath('//*[@id="treeSelect3_1_switch"]').click()
         time.sleep(1)
-        self.dr.find_element_by_xpath('//*[@id="treeSelect3_46_switch"]').click()
+        self.dr.find_element_by_xpath('//*[@id="treeSelect3_43_switch"]').click()
         time.sleep(1)
-        self.dr.find_element_by_xpath('//*[@id="treeSelect3_49_span"]').click()
+        self.dr.find_element_by_xpath('//*[@id="treeSelect3_47_switch"]').click()
+        time.sleep(1)
+        self.dr.find_element_by_xpath('//*[@id="treeSelect3_50_span"]').click()
         time.sleep(1)
         self.dr.find_element_by_xpath('//*[@id="ssjwqName"]').click()
         time.sleep(1)
-        self.dr.find_element_by_xpath('//*[@id="treeSelect4_45_switch"]').click()
+        self.dr.find_element_by_xpath('//*[@id="treeSelect4_1_switch"]').click()
         time.sleep(1)
-        self.dr.find_element_by_xpath('//*[@id="treeSelect4_46_switch"]').click()
+        self.dr.find_element_by_xpath('//*[@id="treeSelect4_2_switch"]').click()
         time.sleep(1)
-        self.dr.find_element_by_xpath('//*[@id="treeSelect4_49_span"]').click()
+        self.dr.find_element_by_xpath('//*[@id="treeSelect4_3_switch"]').click()
+        time.sleep(1)
+        self.dr.find_element_by_xpath('//*[@id="treeSelect4_4_switch"]').click()
+        time.sleep(1)
+        self.dr.find_element_by_xpath('//*[@id="treeSelect4_5_switch"]').click()
+        time.sleep(1)
+        self.dr.find_element_by_xpath('//*[@id="treeSelect4_6_span"]').click()
         self.dr.find_element_by_xpath('//*[@id="saveMadiate"]').click()
         time.sleep(3)
         self.dr.implicitly_wait(3)
@@ -101,7 +109,7 @@ class TESTCAST_MDJF(TESTCASE):
         self.assertEqual('荆帅',self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[9]').text,'校验新增、返回和默认排序')
         print('社区警务-矛盾纠纷调解：新增功能正常')
 
-    def test2_mdjf_search_mdjflx(self):
+    def test02_mdjf_search_mdjflx(self):
         self.mdjf_search()
         option_chioce=Select(self.dr.find_element_by_xpath('//*[@id="mdjflx"]'))
         for i in range(0,3):
@@ -120,7 +128,7 @@ class TESTCAST_MDJF(TESTCASE):
                 self.pagination_num(paginal_number, search_value_mdjflx, column)
         print('社区警务-矛盾纠纷调解：矛盾纠纷类型条件查询功能正常')
 
-    def test3_mdjf_search_mdjfly(self):
+    def test03_mdjf_search_mdjfly(self):
         self.mdjf_search()
         option_chioce=Select(self.dr.find_element_by_xpath('//*[@id="mdjfly"]'))
         for i in range(0,3):
@@ -139,7 +147,7 @@ class TESTCAST_MDJF(TESTCASE):
                 self.pagination_num(paginal_number, search_value_mdjfly, column)
         print('社区警务-矛盾纠纷调解：矛盾纠纷来源条件查询功能正常')
 
-    def test4_mdjf_search_fssjA(self):
+    def test04_mdjf_search_fssjA(self):
         self.mdjf_search()
         search_value_fssjA='2018-09-12'
         self.dr.find_element_by_xpath('//*[@id="fssjA"]').send_keys(search_value_fssjA)
@@ -155,7 +163,7 @@ class TESTCAST_MDJF(TESTCASE):
         self.assertIn(search_value_fssjA,self.dr.find_element_by_xpath('//*[@id="fssjA"]').get_attribute('value'),'校验详情页面发生时间')
         print('社区警务-矛盾纠纷调解：发生时间条件查询功能正常')
 
-    def test5_mdjf_search_tjsjA(self):
+    def test05_mdjf_search_tjsjA(self):
         self.mdjf_search()
         search_value_tjsjA='2018-09-13'
         self.dr.find_element_by_xpath('//*[@id="tjsjA"]').send_keys(search_value_tjsjA)
@@ -172,7 +180,7 @@ class TESTCAST_MDJF(TESTCASE):
         self.assertIn(search_value_tjsjA,self.dr.find_element_by_xpath('//*[@id="tjsjA"]').get_attribute('value'),'校验详情页面调解时间')
         print('社区警务-矛盾纠纷调解：调解时间条件查询功能正常')
 
-    def test6_mdjf_search_tjjg(self):
+    def test06_mdjf_search_tjjg(self):
         self.mdjf_search()
         option_chioce=Select(self.dr.find_element_by_xpath('//*[@id="tjjg"]'))
         for i in range(0,5):
@@ -191,7 +199,7 @@ class TESTCAST_MDJF(TESTCASE):
                 self.pagination_num(paginal_number, search_value_tjjg, column)
         print('社区警务-矛盾纠纷调解：调解结果条件查询功能正常')
 
-    def test7_mdjf_search_tjdw(self):
+    def test07_mdjf_search_tjdw(self):
         self.mdjf_search()
         search_value_tjdw='吉巴派出所'
         self.dr.find_element_by_xpath('//*[@id="tjdwName"]').click()
@@ -213,7 +221,7 @@ class TESTCAST_MDJF(TESTCASE):
         self.assertEqual(search_value_tjdw,self.dr.find_element_by_xpath('//*[@id="tjdwName"]').get_attribute('value'),'校验详情页面调解单位')
         print('社区警务-矛盾纠纷调解：调解单位条件查询功能正常')
 
-    def test8_wdjf_sjry(self):
+    def test08_wdjf_sjry(self):
         self.mdjf_search()
         self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[12]/a').click()
         self.dr.find_element_by_xpath('//*[@id="sjryAdd"]').click()
@@ -231,7 +239,7 @@ class TESTCAST_MDJF(TESTCASE):
         self.assertEqual('没有找到匹配的记录',self.dr.find_element_by_xpath('//*[@id="rel_items_table"]/tbody/tr/td').text,'校验涉及人员删除是否成功')
         print('社区警务-矛盾纠纷调解：涉及人员表单新增和删除功能正常')
 
-    def test9_wdjf_sjdw(self):
+    def test09_wdjf_sjdw(self):
         self.mdjf_search()
         self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[12]/a').click()
         self.dr.find_element_by_xpath('//*[@id="sjdwAdd"]').click()

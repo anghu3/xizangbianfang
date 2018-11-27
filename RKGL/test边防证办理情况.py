@@ -22,14 +22,6 @@ import xlrd
 用例场景：
 用例作者：
 '''
-def findnum(string):
-    comp = re.compile('-?[1-9]\d*')
-    list_str = comp.findall(string)
-    list_num = []
-    for item in list_str:
-        item = int(item)
-        list_num.append(item)
-    return list_num
 
 class TESTCAST_BFZ(TESTCASE):
 

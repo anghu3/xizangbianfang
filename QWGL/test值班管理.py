@@ -51,7 +51,9 @@ class TESTCAST_ZHIBANGUANLI(TESTCASE):
     def test1_zhibanguanli_add(self):
         self.zhibanguanli_search()
         self.dr.find_element_by_xpath('/html/body/div[3]/div[1]/div[2]/a[2]').click()
-        self.dr.find_element_by_xpath('//*[@id="dutyDate"]').send_keys('2018-09-05')
+        time_now=now = time.strftime("%Y-%m-%d", time.localtime(time.time()))
+        self.dr.find_element_by_xpath('//*[@id="dutyDate"]').click()
+
         option_choice=Select(self.dr.find_element_by_xpath('//*[@id="dutyType"]'))
         option_choice.select_by_value('1')
         self.dr.find_element_by_xpath('//*[@id="dutyArea"]').send_keys('拉萨市实验中学')
@@ -67,54 +69,54 @@ class TESTCAST_ZHIBANGUANLI(TESTCASE):
                          '值班管理')
         print('勤务管理-值班管理：新增功能正常')
 
-    def test2_zhibanguanli_search_date(self):
-        self.zhibanguanli_search()
-        search_value_date = '2018-09-05'
-        self.dr.find_element_by_xpath('//*[@id="dutyDates"]').send_keys(search_value_date)
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
-        self.dr.switch_to.default_content()
-        time.sleep(5)
-        self.dr.switch_to.frame('iframeb')
-        paginal_number = self.dr.find_element_by_xpath('/html/body/div[3]/div[2]/div/div[4]/div[1]/span[1]').text
-        column = 4
-        self.pagination_num(paginal_number, search_value_date, column)
-        self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[9]/a').click()
-        self.assertIn(search_value_date,self.dr.find_element_by_xpath('//*[@id="dutyDate"]').get_attribute('value'),'校验详情页的日期')
-        self.dr.find_element_by_xpath('/html/body/a').click()
-        self.dr.implicitly_wait(2)
-        self.assertEqual('值班管理列表', self.dr.find_element_by_xpath('/html/body/div[1]/div').text,'值班管理')
-        print('勤务管理-值班管理：时间条件查询功能正常')
-
-    def test3_zhibanguanli_search_dutyType(self):
-        self.zhibanguanli_search()
-        option_chioce=Select(self.dr.find_element_by_xpath('//*[@id="form"]/div[2]/div/select'))
-        option_chioce.select_by_value('1')
-        option_chioce_value=option_chioce.first_selected_option.text
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
-        self.dr.switch_to.default_content()
-        time.sleep(5)
-        self.dr.switch_to.frame('iframeb')
-        paginal_number = self.dr.find_element_by_xpath('/html/body/div[3]/div[2]/div/div[4]/div[1]/span[1]').text
-        column = 5
-        self.pagination_num(paginal_number, option_chioce_value, column)
-        self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[9]/a').click()
-        self.assertIn(option_chioce_value,self.dr.find_element_by_xpath('//*[@id="dutyType"]/option[2]').text,'校验详情页值班类型')
-        self.dr.find_element_by_xpath('/html/body/a').click()
-        self.dr.implicitly_wait(2)
-        self.assertEqual('值班管理列表', self.dr.find_element_by_xpath('/html/body/div[1]/div').text,'值班管理')
-        print('勤务管理-值班管理：值班类型条件查询功能正常')
-
-    def test4_zhibanguanli_delete(self):
-        self.zhibanguanli_search()
-        self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[1]/input').click()
-        self.dr.find_element_by_xpath('/html/body/div[3]/div[1]/div[2]/a[1]').click()
-        self.dr.switch_to.default_content()
-        time.sleep(2)
-        self.dr.find_element_by_xpath('/html/body/div[3]/div[3]/div/button[2]/span').click()
-        time.sleep(5)
-        self.dr.switch_to.frame('iframeb')
-        self.assertEqual('值班管理列表', self.dr.find_element_by_xpath('/html/body/div[1]/div').text,'值班管理')
-        print('勤务管理-值班管理：新增功能正常')
+    # def test2_zhibanguanli_search_date(self):
+    #     self.zhibanguanli_search()
+    #     search_value_date = '2018-09-05'
+    #     self.dr.find_element_by_xpath('//*[@id="dutyDates"]').send_keys(search_value_date)
+    #     self.dr.find_element_by_xpath('//*[@id="search"]').click()
+    #     self.dr.switch_to.default_content()
+    #     time.sleep(5)
+    #     self.dr.switch_to.frame('iframeb')
+    #     paginal_number = self.dr.find_element_by_xpath('/html/body/div[3]/div[2]/div/div[4]/div[1]/span[1]').text
+    #     column = 4
+    #     self.pagination_num(paginal_number, search_value_date, column)
+    #     self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[9]/a').click()
+    #     self.assertIn(search_value_date,self.dr.find_element_by_xpath('//*[@id="dutyDate"]').get_attribute('value'),'校验详情页的日期')
+    #     self.dr.find_element_by_xpath('/html/body/a').click()
+    #     self.dr.implicitly_wait(2)
+    #     self.assertEqual('值班管理列表', self.dr.find_element_by_xpath('/html/body/div[1]/div').text,'值班管理')
+    #     print('勤务管理-值班管理：时间条件查询功能正常')
+    #
+    # def test3_zhibanguanli_search_dutyType(self):
+    #     self.zhibanguanli_search()
+    #     option_chioce=Select(self.dr.find_element_by_xpath('//*[@id="form"]/div[2]/div/select'))
+    #     option_chioce.select_by_value('1')
+    #     option_chioce_value=option_chioce.first_selected_option.text
+    #     self.dr.find_element_by_xpath('//*[@id="search"]').click()
+    #     self.dr.switch_to.default_content()
+    #     time.sleep(5)
+    #     self.dr.switch_to.frame('iframeb')
+    #     paginal_number = self.dr.find_element_by_xpath('/html/body/div[3]/div[2]/div/div[4]/div[1]/span[1]').text
+    #     column = 5
+    #     self.pagination_num(paginal_number, option_chioce_value, column)
+    #     self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[9]/a').click()
+    #     self.assertIn(option_chioce_value,self.dr.find_element_by_xpath('//*[@id="dutyType"]/option[2]').text,'校验详情页值班类型')
+    #     self.dr.find_element_by_xpath('/html/body/a').click()
+    #     self.dr.implicitly_wait(2)
+    #     self.assertEqual('值班管理列表', self.dr.find_element_by_xpath('/html/body/div[1]/div').text,'值班管理')
+    #     print('勤务管理-值班管理：值班类型条件查询功能正常')
+    #
+    # def test4_zhibanguanli_delete(self):
+    #     self.zhibanguanli_search()
+    #     self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[1]/input').click()
+    #     self.dr.find_element_by_xpath('/html/body/div[3]/div[1]/div[2]/a[1]').click()
+    #     self.dr.switch_to.default_content()
+    #     time.sleep(2)
+    #     self.dr.find_element_by_xpath('/html/body/div[3]/div[3]/div/button[2]/span').click()
+    #     time.sleep(5)
+    #     self.dr.switch_to.frame('iframeb')
+    #     self.assertEqual('值班管理列表', self.dr.find_element_by_xpath('/html/body/div[1]/div').text,'值班管理')
+    #     print('勤务管理-值班管理：新增功能正常')
 
 if __name__=='__main__':
     unittest.main()
