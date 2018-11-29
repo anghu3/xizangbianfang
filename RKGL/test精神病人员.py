@@ -71,7 +71,7 @@ class TESTCAST_JINGSHENBING(TESTCASE):
         self.dr.find_element_by_xpath('//*[@id="zdfbsjd"]').send_keys(sheet.col_values(1,8,9)[0])
         Select(self.dr.find_element_by_xpath('//*[@id="fbswhcd"]')).select_by_value('2')
         self.dr.find_element_by_xpath('//*[@id="zrmj"]').send_keys(sheet.col_values(1,9,10)[0])
-        print(sheet.col_values(1,10,11)[0])
+        # print(sheet.col_values(1,10,11)[0])
         self.dr.find_element_by_xpath('//*[@id="mjdha"]').send_keys(sheet.col_values(1,10,11)[0])
         self.dr.find_element_by_xpath('//*[@id="mjdhb"]').send_keys(sheet.col_values(1,11,12)[0])
         self.dr.find_element_by_xpath('//*[@id="sfccjcz"]').send_keys(sheet.col_values(1,12,13)[0])
@@ -239,14 +239,16 @@ class TESTCAST_JINGSHENBING(TESTCASE):
 
     def test08_jingshengbing_delete(self):
         self.jingshenbing_search()
-        search_value = '540123198506025515'
-        self.dr.find_element_by_xpath('//*[@id="gmsfhm"]').send_keys(search_value)
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
+        search_value_cardid = sheet.col_values(1, 2, 3)[0]
+        cardid_path = sheet.col_values(1, 3, 4)[0]
+        self.dr.find_element_by_xpath(cardid_path).send_keys(search_value_cardid)
+        self.dr.find_element_by_xpath(search).click()
         self.dr.switch_to.default_content()
         time.sleep(5)
         self.dr.switch_to.frame('iframeb')
-        self.assertEqual(search_value, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[3]').text,
-                         '身份证号条件查询')
+        paginal_number = self.dr.find_element_by_xpath(sheet_setting.col_values(4, 1, 2)[0]).text
+        column = 3
+        self.pagination_num(paginal_number, search_value_cardid, column)
         self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[2]/input').click()
         self.dr.find_element_by_xpath('/html/body/div[3]/div[1]/div[2]/a[1]').click()
         time.sleep(2)
