@@ -11,6 +11,8 @@ import time
 import os
 import re
 from public_package.pubilc_package import url,login_name,login_name_test,login_password,login_password_test
+from public_package.pubilc_package import TESTCASE
+import xlrd
 '''
 用例名称：
 用例编号：
@@ -18,17 +20,23 @@ from public_package.pubilc_package import url,login_name,login_name_test,login_p
 用例作者：
 '''
 
-
-def findnum(string):
-    comp = re.compile('-?[1-9]\d*')
-    list_str = comp.findall(string)
-    list_num = []
-    for item in list_str:
-        item = int(item)
-        list_num.append(item)
-    return list_num
-
 class TESTCAST_WFFZRY(unittest.TestCase):
+
+    dir = os.getcwd()
+    xlsfile = dir + '.xls'
+    excel = xlrd.open_workbook(xlsfile)
+    sheet_name = excel.sheet_names()[0]
+    global sheet_menu
+    sheet_menu = excel.sheet_by_name('menu')
+    global sheet
+    sheet = excel.sheet_by_name('违法犯罪人员')
+    global sheet_setting, search, reset, add, delete, currMenupath, page_title
+    sheet_setting = excel.sheet_by_name('setting')
+    search = sheet_setting.col_values(2, 1, 2)[0]
+    reset = sheet_setting.col_values(3, 1, 2)[0]
+    currMenupath = sheet_setting.col_values(0, 1, 2)[0]
+    page_title = sheet_setting.col_values(1, 1, 2)[0]
+
     def setUp(self):
         self.dr = webdriver.Chrome()
         self.dr.maximize_window()
@@ -45,35 +53,49 @@ class TESTCAST_WFFZRY(unittest.TestCase):
 
     def wfzry_search(self):
         self.login(login_name, login_password)
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[1]/a[2]').click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(1,8,9)[0]).click()
         time.sleep(5)
-        self.assertEqual('人口管理',self.dr.find_element_by_xpath('//*[@id="currMenu"]').text, '人口管理')
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div/ul/li[4]/p[2]').click()
-        self.dr.find_element_by_xpath('//*[@id="326"]').click()
+        self.assertEqual('人口管理',self.dr.find_element_by_xpath(currMenupath).text, '人口管理')
+        self.dr.find_element_by_xpath(sheet_menu.col_values(3,8,9)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(4,8,9)[0]).click()
         self.dr.switch_to.frame('iframeb')
         time.sleep(5)
-        self.assertEqual('违法犯罪人员', self.dr.find_element_by_xpath('/html/body/div[1]/div').text,
+        self.assertEqual('违法犯罪人员', self.dr.find_element_by_xpath(page_title).text,
                          '违法犯罪人员')
 
     def test1_wffzry_search_cardid(self):
         self.wfzry_search()
-        search_value = '37012319810702291'
-        self.dr.find_element_by_xpath('//*[@id="form"]/div[1]/div/input').send_keys(search_value)
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
+        search_value_cardid = sheet.col_values(1,2,3)[0]
+        cardid_path=sheet.col_values(1,3,4)[0]
+        self.dr.find_element_by_xpath('//*[@id="form"]/div[1]/div/input').send_keys(search_value_cardid)
+        self.dr.find_element_by_xpath(search).click()
         self.dr.implicitly_wait(240)
-        self.assertIn(search_value, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[3]').text, '校验结果')
+        self.dr.switch_to.default_content()
+        self.dr.switch_to.frame('iframeb')
+        paginal_number = self.dr.find_element_by_xpath(sheet_setting.col_values(4, 1, 2)[0]).text
+        column = 3
+        self.pagination_num(paginal_number, search_value_cardid, column)
+        self.dr.find_element_by_xpath(reset).click()
+        self.dr.implicitly_wait(10)
+        self.dr.find_element_by_xpath(search).click()
+        self.assertEqual('',self.dr.find_element_by_xpath(cardid_path).get_attribute('value'),'身份证号-重置功能异常')
         print('人口管理-违法犯罪人员：身份证号码条件查询功能正常')
 
     def test2_wffzry_search_xiangqing(self):
         self.wfzry_search()
-        carid=self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[3]').text
-        name=self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[4]').text
+        name=sheet.col_values(1,0,1)[0]
+        search_value_cardid = sheet.col_values(1, 2, 3)[0]
+        cardid_path = sheet.col_values(1, 3, 4)[0]
+        self.dr.find_element_by_xpath('//*[@id="form"]/div[1]/div/input').send_keys(search_value_cardid)
+        self.dr.find_element_by_xpath(search).click()
+        self.dr.implicitly_wait(240)
+        self.dr.switch_to.default_content()
+        self.dr.switch_to.frame('iframeb')
         self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[11]/a').click()
         time.sleep(2)
-        self.assertEqual(carid,self.dr.find_element_by_xpath('//*[@id="gmsfhm"]').get_attribute('value'),'校验详情页面身份证号')
+        self.assertEqual(search_value_cardid,self.dr.find_element_by_xpath('//*[@id="gmsfhm"]').get_attribute('value'),'校验详情页面身份证号')
         self.assertEqual(name,self.dr.find_element_by_xpath('//*[@id="xm"]').text,'校验详情页面姓名')
         print('人口管理-违法犯罪人员：详情功能正常')
-
 
 if __name__ == '__main__':
     unittest.main()

@@ -12,6 +12,9 @@ import time
 import os
 import re
 from public_package.pubilc_package import url,login_name,login_name_test,login_password,login_password_test
+from public_package.pubilc_package import TESTCASE
+from public_package.pubilc_package import sheet_setting, search, reset, currMenupath, page_title, goback, saveBtn,sheet_menu,sheet_prompt_message
+import xlrd
 '''
 用例名称：
 用例编号：
@@ -19,17 +22,14 @@ from public_package.pubilc_package import url,login_name,login_name_test,login_p
 用例作者：
 '''
 
+class TESTCAST_JINGSHENBING(TESTCASE):
 
-def findnum(string):
-    comp = re.compile('-?[1-9]\d*')
-    list_str = comp.findall(string)
-    list_num = []
-    for item in list_str:
-        item = int(item)
-        list_num.append(item)
-    return list_num
+    dir = os.getcwd()
+    xlsfile = dir + '.xls'
+    excel = xlrd.open_workbook(xlsfile)
+    global sheet
+    sheet = excel.sheet_by_name('精神病人员')
 
-class TESTCAST_JINGSHENBING(unittest.TestCase):
     def setUp(self):
         self.dr = webdriver.Chrome()
         self.dr.maximize_window()
@@ -44,177 +44,200 @@ class TESTCAST_JINGSHENBING(unittest.TestCase):
         self.dr.find_element_by_xpath('//*[@id="login_ff"]/div[2]/input').send_keys(password)
         self.dr.find_element_by_xpath('//*[@id="login_ff"]/a').click()
 
-    def pagination_num(self, paginal_number, search_value, column):
-        number = findnum(paginal_number)[-1]
-        tens = int(number / 10)
-        single = int(number % 10)
-        if tens == 0:
-            for j in range(1, single + 1):
-                xpath = '//*[@id="list"]/tbody/tr[' + str(j) + ']/td[' + str(column) + ']'
-                self.assertIn(search_value, self.dr.find_element_by_xpath(xpath).text, '校验查询结果')
-        if tens == 1:
-            for j in range(1, 11):
-                xpath = '//*[@id="list"]/tbody/tr[' + str(j) + ']/td[' + str(column) + ']'
-                self.assertIn(search_value, self.dr.find_element_by_xpath(xpath).text, '校验查询结果')
-            page = '/html/body/div[3]/div[2]/div[1]/div/div[4]/div[2]/ul/li[' + str(tens + 3) + ']/a'
-            self.dr.find_element_by_xpath(page).click()
-            if single == 0:
-                print(single)
-            else:
-                for j in range(1, single + 1):
-                    xpath = '//*[@id="list"]/tbody/tr[' + str(j) + ']/td[' + str(column) + ']'
-                    self.assertIn(search_value, self.dr.find_element_by_xpath(xpath).text, '校验查询结果')
-                    time.sleep(5)
-        if tens < 7:
-            for i in range(1, tens + 2):
-                if i < tens + 1:
-                    for j in range(1, 11):
-                        xpath = '//*[@id="list"]/tbody/tr[' + str(j) + ']/td[' + str(column) + ']'
-                        self.assertIn(search_value, self.dr.find_element_by_xpath(xpath).text, '校验查询结果')
-                    page = '/html/body/div[3]/div[2]/div[1]/div/div[4]/div[2]/ul/li[' + str(tens + 3) + ']/a'
-                    self.dr.find_element_by_xpath(page).click()
-                if i == tens + 1:
-                    for j in range(1, single + 1):
-                        if single == 0:
-                            print(single)
-                        else:
-                            for j in range(1, single + 1):
-                                xpath = '//*[@id="list"]/tbody/tr[' + str(j) + ']/td[' + str(column) + ']'
-                                self.assertIn(search_value, self.dr.find_element_by_xpath(xpath).text, '校验查询结果')
-                                time.sleep(5)
-        if tens > 7:
-            for i in range(1, tens + 2):
-                if i < tens + 1:
-                    for j in range(1, 11):
-                        xpath = '//*[@id="list"]/tbody/tr[' + str(j) + ']/td[' + str(column) + ']'
-                        self.assertIn(search_value, self.dr.find_element_by_xpath(xpath).text, '校验查询结果')
-                    self.dr.find_element_by_xpath(
-                        '/html/body/div[3]/div[2]/div[1]/div/div[4]/div[2]/ul/li[9]/a').click()
-                if i == tens + 1:
-                    for j in range(1, single + 1):
-                        if single == 0:
-                            print(single)
-                        else:
-                            for j in range(1, single + 1):
-                                xpath = '//*[@id="list"]/tbody/tr[' + str(j) + ']/td[' + str(column) + ']'
-                                self.assertIn(search_value, self.dr.find_element_by_xpath(xpath).text, '校验查询结果')
-                                time.sleep(5)
-
     def jingshenbing_search(self):
         self.login(login_name, login_password)
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[1]/a[2]').click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(1,13,14)[0]).click()
         time.sleep(5)
-        self.assertEqual('人口管理',self.dr.find_element_by_xpath('//*[@id="currMenu"]').text, '人口管理')
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div/ul/li[6]/p[2]').click()
-        self.dr.find_element_by_xpath('//*[@id="330"]').click()
+        self.assertEqual('人口管理',self.dr.find_element_by_xpath(currMenupath).text, '人口管理')
+        self.dr.find_element_by_xpath(sheet_menu.col_values(3,13,14)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(5,13,14)[0]).click()
         self.dr.switch_to.frame('iframeb')
         time.sleep(5)
-        self.assertEqual('精神病人员', self.dr.find_element_by_xpath('/html/body/div[1]/div').text,
+        self.assertEqual('精神病人员', self.dr.find_element_by_xpath(page_title).text,
                          '精神病人员')
 
-    def test1_jingshenbing_add(self):
+    def test01_jingshenbing_add(self):
         self.jingshenbing_search()
         self.dr.find_element_by_xpath('/html/body/div[3]/div[1]/div[2]/a[2]').click()
         self.dr.switch_to.default_content()
         time.sleep(2)
         self.dr.switch_to.frame('iframeb')
-        add_value = '540123198506025515'
-        self.dr.find_element_by_xpath('//*[@id="gmsfhm"]').send_keys(add_value)
+        add_value_cardid =sheet.col_values(1,2,3)[0]
+        self.dr.find_element_by_xpath('//*[@id="gmsfhm"]').send_keys(add_value_cardid)
         self.dr.find_element_by_xpath('//*[@id="mentForm"]/div[1]/div[2]/div/div[1]/div[2]/a').click()
         time.sleep(2)
         Select(self.dr.find_element_by_xpath('//*[@id="sfyjd"]')).select_by_value('1')
         Select(self.dr.find_element_by_xpath('//*[@id="zl"]')).select_by_value('1')
-        self.dr.find_element_by_xpath('//*[@id="zdfbsjd"]').send_keys('16:00-18:00')
+        self.dr.find_element_by_xpath('//*[@id="zdfbsjd"]').send_keys(sheet.col_values(1,8,9)[0])
         Select(self.dr.find_element_by_xpath('//*[@id="fbswhcd"]')).select_by_value('2')
-        #管辖单位
-        #责任单位
-        self.dr.find_element_by_xpath('//*[@id="zrmj"]').send_keys('马汉')
-        self.dr.find_element_by_xpath('//*[@id="mjdha"]').send_keys('15748574587')
-        self.dr.find_element_by_xpath('//*[@id="mjdhb"]').send_keys('13574587458')
-        self.dr.find_element_by_xpath('//*[@id="sfccjcz"]').send_keys('是')
-        self.dr.find_element_by_xpath('//*[@id="supervIdcardNo"]').send_keys('540123198506025515')
-        self.dr.find_element_by_xpath('//*[@id="supervName"]').send_keys('王朝')
-        self.dr.find_element_by_xpath('//*[@id="reportCycle"]').send_keys('5')
-        self.dr.find_element_by_xpath('//*[@id="supervWx"]').send_keys('15748574587')
-        self.dr.find_element_by_xpath('//*[@id="supervBeWx"]').send_keys('13574587458')
-        self.dr.find_element_by_xpath('//*[@id="jhrXm"]').send_keys('展昭')
-        self.dr.find_element_by_xpath('//*[@id="sqgbXm"]').send_keys('包拯')
-        self.dr.find_element_by_xpath('//*[@id="jhrDh"]').send_keys('15748574587')
-        self.dr.find_element_by_xpath('//*[@id="sqgbDh"]').send_keys('13574587458')
+        self.dr.find_element_by_xpath('//*[@id="zrmj"]').send_keys(sheet.col_values(1,9,10)[0])
+        print(sheet.col_values(1,10,11)[0])
+        self.dr.find_element_by_xpath('//*[@id="mjdha"]').send_keys(sheet.col_values(1,10,11)[0])
+        self.dr.find_element_by_xpath('//*[@id="mjdhb"]').send_keys(sheet.col_values(1,11,12)[0])
+        self.dr.find_element_by_xpath('//*[@id="sfccjcz"]').send_keys(sheet.col_values(1,12,13)[0])
+        self.dr.find_element_by_xpath('//*[@id="supervIdcardNo"]').send_keys(sheet.col_values(1,13,14)[0])
+        self.dr.find_element_by_xpath('//*[@id="supervName"]').send_keys(sheet.col_values(1,14,15)[0])
+        self.dr.find_element_by_xpath('//*[@id="reportCycle"]').send_keys(sheet.col_values(1,15,16)[0])
+        self.dr.find_element_by_xpath('//*[@id="supervWx"]').send_keys(sheet.col_values(1,16,17)[0])
+        self.dr.find_element_by_xpath('//*[@id="supervBeWx"]').send_keys(sheet.col_values(1,17,18)[0])
+        self.dr.find_element_by_xpath('//*[@id="jhrXm"]').send_keys(sheet.col_values(1,18,19)[0])
+        self.dr.find_element_by_xpath('//*[@id="sqgbXm"]').send_keys(sheet.col_values(1,19,20)[0])
+        self.dr.find_element_by_xpath('//*[@id="jhrDh"]').send_keys(sheet.col_values(1,20,21)[0])
+        self.dr.find_element_by_xpath('//*[@id="sqgbDh"]').send_keys(sheet.col_values(1,21,22)[0])
         self.dr.find_element_by_xpath('//*[@id="saveBtn"]').click()
-        time.sleep(5)
-        self.dr.find_element_by_xpath('/html/body/a').click()
-        self.assertEqual('精神病人员', self.dr.find_element_by_xpath('/html/body/div[1]/div').text,
-                         '精神病人员')
+        self.dr.switch_to.default_content()
+        self.dr.switch_to.frame('iframeb')
+        time.sleep(2)
+        self.assertEqual(sheet_prompt_message.col_values(1, 0, 1)[0],
+                         self.dr.find_element_by_xpath('//*[@id="gritter-item-1"]/div[2]/div[2]/p').text, '新增成功提示信息校验')
         print('人口管理-部局七类库-精神病人员：新增功能正常')
 
-    def test2_jingshenbing_search_name(self):
+    def test02_jingshenbing_search_name(self):
         self.jingshenbing_search()
-        search_value = '索朗旺堆'
-        self.dr.find_element_by_xpath('//*[@id="xm"]').send_keys(search_value)
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
+        search_value_name = sheet.col_values(1,0,1)[0]
+        name_path=sheet.col_values(1,1,2)[0]
+        self.dr.find_element_by_xpath(name_path).send_keys(search_value_name)
+        self.dr.find_element_by_xpath(search).click()
         self.dr.switch_to.default_content()
         time.sleep(5)
         self.dr.switch_to.frame('iframeb')
-        self.assertEqual(search_value,self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[4]').text,'姓名条件查询')
-        # self.dr.find_element_by_xpath('//*[@id="reset"]').click()
-        # self.dr.implicitly_wait(10)
-        # self.dr.find_element_by_xpath('//*[@id="search"]').click()
-        # time.sleep(5)
-        # self.assertNotEqual(search_value, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[2]').text, '重置功能')
+        paginal_number = self.dr.find_element_by_xpath(sheet_setting.col_values(4, 1, 2)[0]).text
+        column = 4
+        self.pagination_num(paginal_number, search_value_name, column)
+        self.dr.find_element_by_xpath(reset).click()
+        self.dr.implicitly_wait(10)
+        self.dr.find_element_by_xpath(search).click()
+        time.sleep(5)
+        self.assertEqual('', self.dr.find_element_by_xpath(name_path).get_attribute('value'), '姓名-重置功能异常')
         print('人口管理-部局七类库-精神病人员：姓名条件查询功能正常')
 
-    def test3_jingshenbing_search_cardid(self):
+    def test03_jingshenbing_search_cardid(self):
         self.jingshenbing_search()
-        search_value = '540123198506025515'
-        self.dr.find_element_by_xpath('//*[@id="gmsfhm"]').send_keys(search_value)
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
+        search_value_cardid =sheet.col_values(1,2,3)[0]
+        cardid_path=sheet.col_values(1,3,4)[0]
+        self.dr.find_element_by_xpath(cardid_path).send_keys(search_value_cardid)
+        self.dr.find_element_by_xpath(search).click()
         self.dr.switch_to.default_content()
         time.sleep(5)
         self.dr.switch_to.frame('iframeb')
-        self.assertEqual(search_value,self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[3]').text,'身份证号条件查询')
-        # self.dr.find_element_by_xpath('//*[@id="reset"]').click()
-        # self.dr.implicitly_wait(10)
-        # self.dr.find_element_by_xpath('//*[@id="search"]').click()
-        # time.sleep(5)
-        # self.assertNotEqual(search_value, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[2]').text, '重置功能')
-        print('人口管理-部局七类库-涉枪人员：身份证号条件查询功能正常')
+        paginal_number = self.dr.find_element_by_xpath(sheet_setting.col_values(4, 1, 2)[0]).text
+        column = 3
+        self.pagination_num(paginal_number, search_value_cardid, column)
+        self.dr.find_element_by_xpath(reset).click()
+        self.dr.implicitly_wait(10)
+        self.dr.find_element_by_xpath(search).click()
+        time.sleep(5)
+        self.assertEqual('', self.dr.find_element_by_xpath(cardid_path).get_attribute('value'), '身份证号-重置功能异常')
+        print('人口管理-部局七类库-精神病人员：身份证号条件查询功能正常')
 
-    def test4_jingshenbing_search_zyzbh(self):
+    def test04_jingshenbing_search_age(self):
         self.jingshenbing_search()
-        search_value_1 = '33'
-        self.dr.find_element_by_xpath('//*[@id="start"]').send_keys(search_value_1)
-        self.dr.find_element_by_xpath('//*[@id="end"]').send_keys(search_value_1)
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
+        search_value_1 = sheet.col_values(1,4,5)[0]
+        search_value_2=sheet.col_values(1,6,7)[0]
+        self.dr.find_element_by_xpath(sheet.col_values(1,5,6)[0]).send_keys(search_value_1)
+        self.dr.find_element_by_xpath(sheet.col_values(1,7,8)[0]).send_keys(search_value_2)
+        self.dr.find_element_by_xpath(search).click()
         self.dr.switch_to.default_content()
         time.sleep(5)
         self.dr.switch_to.frame('iframeb')
-        self.assertEqual(search_value_1,self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[7]').text,'持枪证编号条件查询')
-        # self.dr.find_element_by_xpath('//*[@id="reset"]').click()
-        # self.dr.implicitly_wait(10)
-        # self.dr.find_element_by_xpath('//*[@id="search"]').click()
-        # time.sleep(5)
-        # self.assertNotEqual(search_value_1, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[2]').text, '重置功能')
-        print('人口管理-部局七类库-涉枪人员：持枪证编号条件查询功能正常')
+        paginal_number = self.dr.find_element_by_xpath(sheet_setting.col_values(4, 1, 2)[0]).text
+        column = 7
+        self.pagination_num(paginal_number, search_value_1, column)
+        self.dr.find_element_by_xpath(reset).click()
+        self.dr.implicitly_wait(10)
+        self.dr.find_element_by_xpath(search).click()
+        time.sleep(5)
+        self.assertEqual('', self.dr.find_element_by_xpath(sheet.col_values(1,5,6)[0]).get_attribute('value'), '重置功能')
+        self.assertEqual('', self.dr.find_element_by_xpath(sheet.col_values(1, 7, 8)[0]).get_attribute('value'), '重置功能')
+        print('人口管理-部局七类库-精神病人员：年龄段条件查询功能正常')
 
-    def test5_jingshengbing_xiangqing(self):
+    def test05_jingshengbing_type(self):
         self.jingshenbing_search()
-        search_value = '540123198506025515'
-        self.dr.find_element_by_xpath('//*[@id="gmsfhm"]').send_keys(search_value)
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
+        option_chioce=Select(self.dr.find_element_by_xpath('//*[@id="zl"]'))
+        for i in range(1,3):
+            option_chioce.select_by_index(i)
+            search_value_type=option_chioce.all_selected_options[0].text
+            self.dr.find_element_by_xpath(search).click()
+            self.dr.switch_to.default_content()
+            time.sleep(2)
+            self.dr.switch_to.frame('iframeb')
+            self.dr.find_element_by_xpath(reset).click()
+            self.dr.implicitly_wait(10)
+            self.dr.find_element_by_xpath(search).click()
+            self.assertEqual('--全部--',self.dr.find_element_by_xpath('//*[@id="zl"]/option[1]').get_attribute('text'),'种类-重置功能异常')
+        print('人口管理-部局七类库-精神病人员：种类条件查询功能正常')
+
+    def test06_jingshengbing_details(self):
+        self.jingshenbing_search()
+        search_value_cardid = sheet.col_values(1, 2, 3)[0]
+        cardid_path = sheet.col_values(1, 3, 4)[0]
+        self.dr.find_element_by_xpath(cardid_path).send_keys(search_value_cardid)
+        self.dr.find_element_by_xpath(search).click()
         self.dr.switch_to.default_content()
         time.sleep(5)
         self.dr.switch_to.frame('iframeb')
-        name=self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[4]').text
-        age=self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[7]').text
-        self.assertEqual(search_value, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[3]').text,
-                         '身份证号条件查询')
+        paginal_number = self.dr.find_element_by_xpath(sheet_setting.col_values(4, 1, 2)[0]).text
+        column = 3
+        self.pagination_num(paginal_number, search_value_cardid, column)
         self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[11]/a').click()
-        self.assertEqual(search_value, self.dr.find_element_by_xpath('//*[@id="gmsfhm"]').get_attribute('value'), '详情校验')
-        self.assertEqual(name,self.dr.find_element_by_xpath('//*[@id="xm"]').text,'详情校验')
+        self.assertEqual(search_value_cardid, self.dr.find_element_by_xpath('//*[@id="gmsfhm"]').get_attribute('value'), '详情校验')
+        self.assertEqual(sheet.col_values(1,0,1)[0],self.dr.find_element_by_xpath('//*[@id="xm"]').text,'详情校验')
+        time.sleep(2)
+        self.dr.find_element_by_xpath(goback).click()
+        self.assertEqual('精神病人员', self.dr.find_element_by_xpath(page_title).text,'精神病人员')
         print('人口管理-部局七类库-精神病人员：详情功能正常')
 
-    def test6_jingshengbing_delete(self):
+    def test07_jingshengbing_edit(self):
+        self.jingshenbing_search()
+        search_value_cardid = sheet.col_values(1, 2, 3)[0]
+        cardid_path = sheet.col_values(1, 3, 4)[0]
+        self.dr.find_element_by_xpath(cardid_path).send_keys(search_value_cardid)
+        self.dr.find_element_by_xpath(search).click()
+        self.dr.switch_to.default_content()
+        time.sleep(5)
+        self.dr.switch_to.frame('iframeb')
+        paginal_number = self.dr.find_element_by_xpath(sheet_setting.col_values(4, 1, 2)[0]).text
+        column = 3
+        self.pagination_num(paginal_number, search_value_cardid, column)
+        self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[11]/a').click()
+        self.dr.find_element_by_xpath('//*[@id="zdfbsjd"]').clear()
+        self.dr.find_element_by_xpath('//*[@id="zdfbsjd"]').send_keys(sheet.col_values(2, 8, 9)[0])
+        Select(self.dr.find_element_by_xpath('//*[@id="fbswhcd"]')).select_by_value('1')
+        self.dr.find_element_by_xpath('//*[@id="zrmj"]').clear()
+        self.dr.find_element_by_xpath('//*[@id="zrmj"]').send_keys(sheet.col_values(2, 9, 10)[0])
+        self.dr.find_element_by_xpath('//*[@id="mjdha"]').clear()
+        self.dr.find_element_by_xpath('//*[@id="mjdha"]').send_keys(sheet.col_values(2, 10, 11)[0])
+        self.dr.find_element_by_xpath('//*[@id="mjdhb"]').clear()
+        self.dr.find_element_by_xpath('//*[@id="mjdhb"]').send_keys(sheet.col_values(2, 11, 12)[0])
+        self.dr.find_element_by_xpath('//*[@id="sfccjcz"]').clear()
+        self.dr.find_element_by_xpath('//*[@id="sfccjcz"]').send_keys(sheet.col_values(2, 12, 13)[0])
+        self.dr.find_element_by_xpath('//*[@id="supervIdcardNo"]').clear()
+        self.dr.find_element_by_xpath('//*[@id="supervIdcardNo"]').send_keys(sheet.col_values(2, 13, 14)[0])
+        self.dr.find_element_by_xpath('//*[@id="supervName"]').clear()
+        self.dr.find_element_by_xpath('//*[@id="supervName"]').send_keys(sheet.col_values(2, 14, 15)[0])
+        self.dr.find_element_by_xpath('//*[@id="reportCycle"]').clear()
+        self.dr.find_element_by_xpath('//*[@id="reportCycle"]').send_keys(sheet.col_values(2, 15, 16)[0])
+        self.dr.find_element_by_xpath('//*[@id="supervWx"]').clear()
+        self.dr.find_element_by_xpath('//*[@id="supervWx"]').send_keys(sheet.col_values(2, 16, 17)[0])
+        self.dr.find_element_by_xpath('//*[@id="supervBeWx"]').clear()
+        self.dr.find_element_by_xpath('//*[@id="supervBeWx"]').send_keys(sheet.col_values(2, 17, 18)[0])
+        self.dr.find_element_by_xpath('//*[@id="jhrXm"]').clear()
+        self.dr.find_element_by_xpath('//*[@id="jhrXm"]').send_keys(sheet.col_values(2, 18, 19)[0])
+        self.dr.find_element_by_xpath('//*[@id="sqgbXm"]').clear()
+        self.dr.find_element_by_xpath('//*[@id="sqgbXm"]').send_keys(sheet.col_values(2, 19, 20)[0])
+        self.dr.find_element_by_xpath('//*[@id="jhrDh"]').clear()
+        self.dr.find_element_by_xpath('//*[@id="jhrDh"]').send_keys(sheet.col_values(2, 20, 21)[0])
+        self.dr.find_element_by_xpath('//*[@id="sqgbDh"]').clear()
+        self.dr.find_element_by_xpath('//*[@id="sqgbDh"]').send_keys(sheet.col_values(2, 21, 22)[0])
+        self.dr.find_element_by_xpath(saveBtn).click()
+        self.dr.switch_to.default_content()
+        self.dr.switch_to.frame('iframeb')
+        time.sleep(2)
+        self.assertEqual(sheet_prompt_message.col_values(1, 0, 1)[0],
+                         self.dr.find_element_by_xpath('//*[@id="gritter-item-1"]/div[2]/div[2]/p').text, '编辑修改成功提示信息校验')
+        print('人口管理-部局七类库-精神病人员：编辑修改功能正常')
+
+    def test08_jingshengbing_delete(self):
         self.jingshenbing_search()
         search_value = '540123198506025515'
         self.dr.find_element_by_xpath('//*[@id="gmsfhm"]').send_keys(search_value)
@@ -230,6 +253,11 @@ class TESTCAST_JINGSHENBING(unittest.TestCase):
         self.dr.switch_to.default_content()
         time.sleep(1)
         self.dr.find_element_by_xpath('/html/body/div[3]/div[3]/div/button[2]/span').click()
+        self.dr.switch_to.default_content()
+        self.dr.switch_to.frame('iframeb')
+        time.sleep(1)
+        self.assertEqual(sheet_prompt_message.col_values(1, 3, 4)[0],
+                         self.dr.find_element_by_xpath('//*[@id="gritter-item-1"]/div[2]/div[2]/p').text, '校验删除成功提示信息')
         print('人口管理-部局七类库-涉枪人员：删除功能正常')
 
 if __name__ == '__main__':
