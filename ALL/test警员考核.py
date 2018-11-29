@@ -14,6 +14,7 @@ import re
 from public_package.pubilc_package import url,login_name,login_name_test,login_password,login_password_test
 from public_package.pubilc_package import TESTCASE
 import HTMLTestRunner
+import xlrd
 '''
 用例名称：
 用例编号：
@@ -22,6 +23,21 @@ import HTMLTestRunner
 '''
 
 class TESTCAST_JYKH(TESTCASE):
+
+    dir = os.getcwd()
+    xlsfile = dir + '.xlsx'
+    excel = xlrd.open_workbook(xlsfile)
+    global sheet_menu
+    sheet_menu = excel.sheet_by_name('menu')
+    global sheet
+    sheet = excel.sheet_by_name('警员考核')
+    global sheet_setting, search, reset, add, delete, currMenupath, page_title
+    sheet_setting = excel.sheet_by_name('setting')
+    search = sheet_setting.col_values(2, 1, 2)[0]
+    reset = sheet_setting.col_values(3, 1, 2)[0]
+    currMenupath = sheet_setting.col_values(0, 1, 2)[0]
+    page_title = sheet_setting.col_values(1, 1, 2)[0]
+
     def setUp(self):
         self.dr = webdriver.Chrome()
         self.dr.maximize_window()
@@ -38,29 +54,29 @@ class TESTCAST_JYKH(TESTCASE):
 
     def jykh_search(self):
         self.login(login_name, login_password)
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[2]/div/div/div/div/div/div/a[3]/div[2]/img[2]').click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(1,63,64)[0]).click()
         time.sleep(5)
-        self.assertEqual('社区警务',self.dr.find_element_by_xpath('//*[@id="currMenu"]').text, '社区警务')
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div/ul/li[1]/p[2]').click()
-        self.dr.find_element_by_xpath('//*[@id="1884"]').click()
+        self.assertEqual('警员绩效考核',self.dr.find_element_by_xpath(currMenupath).text, '警员绩效考核')
+        self.dr.find_element_by_xpath(sheet_menu.col_values(3,63,64)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(5,63,64)[0]).click()
         self.dr.switch_to.frame('iframeb')
         time.sleep(5)
-        self.assertEqual('警员考核列表', self.dr.find_element_by_xpath('/html/body/div[1]/div').text,
-                         '警员考核')
+        self.assertEqual('考核指标模板周期列表', self.dr.find_element_by_xpath(page_title).text,
+                         '考核指标模板周期列表')
 
     def test1_jykh_add(self):
         self.jykh_search()
         self.dr.find_element_by_xpath('/html/body/div[3]/div[1]/div[2]/a[2]').click()
-        self.dr.find_element_by_xpath('//*[@id="templateName"]').send_keys('执勤人员考核模板')
-        self.dr.find_element_by_xpath('//*[@id="assesmentRange"]').send_keys('各派出所执勤人员')
-        self.dr.find_element_by_xpath('//*[@id="assesmentPeriod"]').send_keys('季度考核')
-        self.dr.find_element_by_xpath('//*[@id="templateCompactor"]').send_keys('包拯')
+        self.dr.find_element_by_xpath('//*[@id="templateName"]').send_keys(sheet.col_values(1,0,1)[0])
+        self.dr.find_element_by_xpath('//*[@id="assesmentRange"]').send_keys(sheet.col_values(1,2,3)[0])
+        self.dr.find_element_by_xpath('//*[@id="assesmentPeriod"]').send_keys(sheet.col_values(1,3,4)[0])
+        self.dr.find_element_by_xpath('//*[@id="templateCompactor"]').send_keys(sheet.col_values(1,1,2)[0])
         self.dr.find_element_by_xpath('//*[@id="templateTime"]').click()
         self.dr.find_element_by_xpath('//*[@id="templateTime"]').clear()
-        self.dr.find_element_by_xpath('//*[@id="templateTime"]').send_keys('2018-09-13 09:30:00')
+        self.dr.find_element_by_xpath('//*[@id="templateTime"]').send_keys(sheet.col_values(1,5,6)[0])
         self.dr.find_element_by_xpath('//*[@id="templateCompactor"]').click()
         Select(self.dr.find_element_by_xpath('//*[@id="available"]')).select_by_value('1')
-        self.dr.find_element_by_xpath('//*[@id="targetStandard"]').send_keys('按照执勤时长、执勤事故率、执勤问题处理率进行考核！')
+        self.dr.find_element_by_xpath('//*[@id="targetStandard"]').send_keys(sheet.col_values(1,4,5)[0])
         self.dr.find_element_by_xpath('//*[@id="save"]').click()
         time.sleep(3)
         self.dr.find_element_by_xpath('/html/body/a').click()

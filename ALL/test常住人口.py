@@ -7,6 +7,9 @@ Created on Thu Jun 21 14:11:17 2018
 
 import unittest
 from selenium import webdriver
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 import selenium.webdriver.support.ui as ui
 from selenium.webdriver.support.ui import Select
 import time
@@ -23,7 +26,7 @@ import xlrd
 用例作者：
 '''
 
-class TESTCAST_BFZ(TESTCASE):
+class TESTCAST_CZRK(TESTCASE):
 
     dir = os.getcwd()
     xlsfile = dir + '.xls'
@@ -32,11 +35,13 @@ class TESTCAST_BFZ(TESTCASE):
     global sheet_menu
     sheet_menu = excel.sheet_by_name('menu')
     global sheet
-    sheet = excel.sheet_by_name('边防证办理情况')
-    global sheet_setting, search, reset, add, delete
+    sheet = excel.sheet_by_name('常住人口')
+    global sheet_setting, search, reset, add, delete,currMenupath,page_title
     sheet_setting = excel.sheet_by_name('setting')
     search = sheet_setting.col_values(2, 1, 2)[0]
     reset = sheet_setting.col_values(3, 1, 2)[0]
+    currMenupath=sheet_setting.col_values(0,1,2)[0]
+    page_title=sheet_setting.col_values(1,1,2)[0]
 
     def setUp(self):
         self.dr = webdriver.Chrome()
@@ -46,129 +51,128 @@ class TESTCAST_BFZ(TESTCASE):
         # print("脚本执行完成")
         self.dr.quit()
 
+    def bj(self,x,y):
+        if x==y:
+            return True
+        else:
+            return False
+
     def login(self, username, password):
         self.dr.get(url)
         self.dr.find_element_by_id('vv').send_keys(username)
         self.dr.find_element_by_xpath('//*[@id="login_ff"]/div[2]/input').send_keys(password)
         self.dr.find_element_by_xpath('//*[@id="login_ff"]/a').click()
 
-    def bfz_search(self):
-        self.login(login_name, login_password)
+    def czrk_search(self):
+        self.login(login_name,login_password)
         time.sleep(5)
-        self.dr.find_element_by_xpath(sheet_menu.col_values(1,2,3)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(1,3,4)[0]).click()
         time.sleep(2)
-        self.assertEqual('人口管理', self.dr.find_element_by_xpath(sheet_setting.col_values(0,1,2)[0]).text, '人口管理')
-        self.dr.find_element_by_xpath(sheet_menu.col_values(3,2,3)[0]).click()
+        self.assertEqual('人口管理', self.dr.find_element_by_xpath(currMenupath).text, '人口管理')
+        self.dr.find_element_by_xpath(sheet_menu.col_values(3,3,4)[0]).click()
         time.sleep(2)
-        self.dr.find_element_by_xpath(sheet_menu.col_values(5,2,3)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(5,3,4)[0]).click()
         time.sleep(2)
         self.dr.switch_to.frame('iframeb')
-        self.assertEqual('边防证列表', self.dr.find_element_by_xpath(sheet_setting.col_values(1,1,2)[0]).text,
-                         '边防证办理情况')
+        self.assertEqual('常住人口', self.dr.find_element_by_xpath(page_title).text,
+                         '常住人口')
 
-    def test01_bfz_search_name(self):
-        self.bfz_search()
+    def test01_czrk_search_name(self):
+        self.czrk_search()
         self.dr.implicitly_wait(30)
         self.dr.find_element_by_xpath(sheet.col_values(1,1,2)[0]).send_keys(sheet.col_values(1,0,1)[0])
         self.dr.find_element_by_xpath(search).click()
-        time.sleep(5)
         self.dr.switch_to.default_content()
+        time.sleep(20)
         self.dr.switch_to.frame('iframeb')
         paginal_number = self.dr.find_element_by_xpath(sheet_setting.col_values(4, 1, 2)[0]).text
-        column = 2
+        column = 3
         self.pagination_num(paginal_number,sheet.col_values(1,0,1)[0],column)
         self.dr.find_element_by_xpath(reset).click()
-        self.dr.implicitly_wait(10)
+        time.sleep(5)
         self.dr.find_element_by_xpath(search).click()
         time.sleep(5)
         self.assertEqual('', self.dr.find_element_by_xpath(sheet.col_values(1, 1, 2)[0]).get_attribute('value'),
                          '姓名-重置功能异常')
-        print('人口管理-边防证办理情况：姓名条件查询功能正常')
+        print('人口管理-人员基本信息-常住人口:姓名条件查询功能正常')
 
-    def test02_bfz_search_cardid(self):
-        self.bfz_search()
+    def test02_czrk_search_cardid(self):
+        self.czrk_search()
         self.dr.implicitly_wait(30)
         self.dr.find_element_by_xpath(sheet.col_values(1,3,4)[0]).send_keys(sheet.col_values(1,2,3)[0])
         self.dr.find_element_by_xpath(search).click()
-        time.sleep(5)
+        time.sleep(240)
+        # WebDriverWait(self.dr, 240).until(
+        #     self.bj(sheet.col_values(1, 2, 3)[0], self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[2]').text))
         self.dr.switch_to.default_content()
         self.dr.switch_to.frame('iframeb')
         paginal_number = self.dr.find_element_by_xpath(sheet_setting.col_values(4, 1, 2)[0]).text
-        column = 3
-        self.pagination_num(paginal_number, sheet.col_values(1, 2, 3)[0], column)
+        column = 2
+        self.pagination_num(paginal_number,sheet.col_values(1,2,3)[0],column)
         self.dr.find_element_by_xpath(reset).click()
         self.dr.implicitly_wait(10)
         self.dr.find_element_by_xpath(search).click()
         time.sleep(5)
         self.assertEqual('', self.dr.find_element_by_xpath(sheet.col_values(1, 3, 4)[0]).get_attribute('value'),
                          '身份证号码-重置功能异常')
-        print('人口管理-边防证办理情况：身份证号条件查询功能正常')
+        print('人口管理-人员基本信息-常住人口:身份证号条件查询功能正常')
 
-    def test03_bfz_search_passportCode(self):
-        self.bfz_search()
+    def test03_czrk_search_hh(self):
+        self.czrk_search()
+        self.dr.implicitly_wait(30)
         self.dr.find_element_by_xpath(sheet.col_values(1,5,6)[0]).send_keys(sheet.col_values(1,4,5)[0])
         self.dr.find_element_by_xpath(search).click()
         time.sleep(5)
         self.dr.switch_to.default_content()
         self.dr.switch_to.frame('iframeb')
         paginal_number = self.dr.find_element_by_xpath(sheet_setting.col_values(4, 1, 2)[0]).text
-        column = 4
-        self.pagination_num(paginal_number, sheet.col_values(1, 4, 5)[0], column)
+        column = 7
+        self.pagination_num(paginal_number,sheet.col_values(1,4,5)[0],column)
         self.dr.find_element_by_xpath(reset).click()
         self.dr.implicitly_wait(10)
         self.dr.find_element_by_xpath(search).click()
         time.sleep(5)
         self.assertEqual('', self.dr.find_element_by_xpath(sheet.col_values(1, 5, 6)[0]).get_attribute('value'),
-                         '姓名-重置功能异常')
-        print('人口管理-边防证办理情况：通行证编号条件查询功能正常')
+                         '户号-重置功能异常')
+        print('人口管理-人员基本信息-常住人口:户号条件查询功能正常')
 
-    def test04_bfz_search_orgName(self):
-        self.bfz_search()
-        option_chioce = Select(self.dr.find_element_by_xpath(sheet.col_values(1,7,8)[0]))
-        for i in range(0, 28):
-            option_chioce.select_by_index(i)
-            self.dr.find_element_by_xpath(search).click()
-            time.sleep(2)
-        print('人口管理-边防证办理情况：办理单位条件查询功能正常')
-
-    def test05_bfz_search_time(self):
-        self.bfz_search()
-        self.dr.find_element_by_xpath(sheet.col_values(1,9,10)[0]).send_keys(sheet.col_values(1,8,9)[0])
-        self.dr.find_element_by_xpath(sheet.col_values(1,11,12)[0]).send_keys(sheet.col_values(1,10,11)[0])
+    def test04_czrk_search_hjdz(self):
+        self.czrk_search()
+        self.dr.implicitly_wait(30)
+        self.dr.find_element_by_xpath(sheet.col_values(1,7,8)[0]).send_keys(sheet.col_values(1,6,7)[0])
         self.dr.find_element_by_xpath(search).click()
-        self.dr.switch_to.default_content()
         time.sleep(5)
+        self.dr.switch_to.default_content()
         self.dr.switch_to.frame('iframeb')
         paginal_number = self.dr.find_element_by_xpath(sheet_setting.col_values(4, 1, 2)[0]).text
-        column = 8
-        self.pagination_num(paginal_number, sheet.col_values(1, 8, 9)[0], column)
+        column = 9
+        self.pagination_num(paginal_number, sheet.col_values(1, 6, 7)[0], column)
         self.dr.find_element_by_xpath(reset).click()
         self.dr.implicitly_wait(10)
         self.dr.find_element_by_xpath(search).click()
         time.sleep(5)
-        self.assertEqual('', self.dr.find_element_by_xpath(sheet.col_values(1, 9, 10)[0]).get_attribute('value'),
-                         '开始日期-重置功能异常')
-        self.assertEqual('', self.dr.find_element_by_xpath(sheet.col_values(1, 11, 12)[0]).get_attribute('value'),
-                         '结束日期-重置功能异常')
-        print('人口管理-边防证办理情况：时间条件查询功能正常')
+        self.assertEqual('', self.dr.find_element_by_xpath(sheet.col_values(1, 7, 8)[0]).get_attribute('value'),
+                         '户籍地址-重置功能异常')
+        print('人口管理-人员基本信息-常住人口:户籍地址条件查询功能正常')
 
-    def test06_bfz_search_all(self):
-        self.bfz_search()
+    def test05_czrk_search_all(self):
+        self.czrk_search()
+        self.dr.implicitly_wait(30)
         self.dr.find_element_by_xpath(sheet.col_values(1, 1, 2)[0]).send_keys(sheet.col_values(1, 0, 1)[0])
         self.dr.find_element_by_xpath(sheet.col_values(1, 3, 4)[0]).send_keys(sheet.col_values(1, 2, 3)[0])
         self.dr.find_element_by_xpath(sheet.col_values(1, 5, 6)[0]).send_keys(sheet.col_values(1, 4, 5)[0])
-        self.dr.find_element_by_xpath(sheet.col_values(1, 9, 10)[0]).send_keys(sheet.col_values(1, 8, 9)[0])
-        self.dr.find_element_by_xpath(sheet.col_values(1, 11, 12)[0]).send_keys(sheet.col_values(1, 10, 11)[0])
+        self.dr.find_element_by_xpath(sheet.col_values(1, 7, 8)[0]).send_keys(sheet.col_values(1, 6, 7)[0])
         self.dr.find_element_by_xpath(search).click()
+        f=lambda a,b:a==b
+        time.sleep(240)
+        # WebDriverWait(self.dr,240).until(f(sheet.col_values(1,2,3)[0],self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[2]').text))
         self.dr.switch_to.default_content()
-        time.sleep(5)
         self.dr.switch_to.frame('iframeb')
         paginal_number = self.dr.find_element_by_xpath(sheet_setting.col_values(4, 1, 2)[0]).text
-        self.pagination_num(paginal_number, sheet.col_values(1, 0, 1)[0], 2)
-        self.pagination_num(paginal_number, sheet.col_values(1, 2, 3)[0], 3)
-        self.pagination_num(paginal_number, sheet.col_values(1, 4, 5)[0], 4)
-        self.pagination_num(paginal_number, sheet.col_values(1, 8, 9)[0], 8)
-        self.pagination_num(paginal_number, sheet.col_values(1, 10, 11)[0], 8)
+        self.pagination_num(paginal_number, sheet.col_values(1, 0, 1)[0], 3)
+        self.pagination_num(paginal_number, sheet.col_values(1, 2, 3)[0], 2)
+        self.pagination_num(paginal_number, sheet.col_values(1, 4, 5)[0], 7)
+        self.pagination_num(paginal_number, sheet.col_values(1, 6, 7)[0], 9)
         self.dr.find_element_by_xpath(reset).click()
         self.dr.implicitly_wait(10)
         self.dr.find_element_by_xpath(search).click()
@@ -178,11 +182,28 @@ class TESTCAST_BFZ(TESTCASE):
         self.assertEqual('', self.dr.find_element_by_xpath(sheet.col_values(1, 3, 4)[0]).get_attribute('value'),
                          '身份证号码-重置功能异常')
         self.assertEqual('', self.dr.find_element_by_xpath(sheet.col_values(1, 5, 6)[0]).get_attribute('value'),
-                         '姓名-重置功能异常')
-        self.assertEqual('', self.dr.find_element_by_xpath(sheet.col_values(1, 9, 10)[0]).get_attribute('value'),
-                         '开始日期-重置功能异常')
-        self.assertEqual('', self.dr.find_element_by_xpath(sheet.col_values(1, 11, 12)[0]).get_attribute('value'),
-                         '结束日期-重置功能异常')
+                         '户号-重置功能异常')
+        self.assertEqual('', self.dr.find_element_by_xpath(sheet.col_values(1, 7, 8)[0]).get_attribute('value'),
+                         '户籍地址-重置功能异常')
+        print('人口管理-人员基本信息-常住人口:条件查询功能正常')
 
-if __name__=='__main__':
+    def test06_czrk_xiangqing(self):
+        self.czrk_search()
+        self.dr.implicitly_wait(30)
+        self.dr.find_element_by_xpath(sheet.col_values(1, 1, 2)[0]).send_keys(sheet.col_values(1, 0, 1)[0])
+        self.dr.find_element_by_xpath(search).click()
+        time.sleep(5)
+        self.dr.switch_to.default_content()
+        self.dr.switch_to.frame('iframeb')
+        name=self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[3]').text
+        carid=self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[2]').text
+        self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[11]/a').click()
+        self.dr.implicitly_wait(30)
+        self.assertEqual(name,self.dr.find_element_by_xpath('/html/body/div[1]/div[1]/div/div/div[2]/div/div[4]/div/div[2]').text,'详情信息校验')
+        self.assertEqual(carid, self.dr.find_element_by_xpath(
+            '/html/body/div[1]/div[1]/div/div/div[2]/div/div[9]/div/div[2]').text, '详情信息校验')
+        print('人口管理-人员基本信息-常住人口:详情功能正常')
+
+if __name__ == '__main__':
     unittest.main()
+

@@ -66,6 +66,7 @@ class TESTCAST_HANGYECHANGSUO(TESTCASE):
         '''选择行业类型'''
         self.dr.find_element_by_xpath('//*[@id="zprxm2"]').click()
         self.dr.find_element_by_xpath('//*[@id="treeSelect2_52_switch"]').click()
+        time.sleep(2)
         self.dr.find_element_by_xpath('//*[@id="treeSelect2_53_span"]').click()
         '''选择企业性质'''
         Select(self.dr.find_element_by_xpath('//*[@id="character"]')).select_by_value('16')

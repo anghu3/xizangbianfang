@@ -14,6 +14,7 @@ import re
 from public_package.pubilc_package import url,login_name,login_name_test,login_password,login_password_test
 from public_package.pubilc_package import TESTCASE
 import HTMLTestRunner
+import xlrd
 '''
 用例名称：
 用例编号：
@@ -22,6 +23,21 @@ import HTMLTestRunner
 '''
 
 class TESTCAST_JYZP(TESTCASE):
+
+    dir = os.getcwd()
+    xlsfile = dir + '.xlsx'
+    excel = xlrd.open_workbook(xlsfile)
+    global sheet_menu
+    sheet_menu = excel.sheet_by_name('menu')
+    global sheet
+    sheet = excel.sheet_by_name('考核结果')
+    global sheet_setting, search, reset, add, delete, currMenupath, page_title
+    sheet_setting = excel.sheet_by_name('setting')
+    search = sheet_setting.col_values(2, 1, 2)[0]
+    reset = sheet_setting.col_values(3, 1, 2)[0]
+    currMenupath = sheet_setting.col_values(0, 1, 2)[0]
+    page_title = sheet_setting.col_values(1, 1, 2)[0]
+
     def setUp(self):
         self.dr = webdriver.Chrome()
         self.dr.maximize_window()
@@ -38,11 +54,11 @@ class TESTCAST_JYZP(TESTCASE):
 
     def jyzp_search(self):
         self.login(login_name, login_password)
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[2]/div/div/div/div/div/div/a[3]/div[2]/img[2]').click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(1, 64, 65)[0]).click()
         time.sleep(5)
-        self.assertEqual('社区警务',self.dr.find_element_by_xpath('//*[@id="currMenu"]').text, '社区警务')
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div/ul/li[1]/p[2]').click()
-        self.dr.find_element_by_xpath('//*[@id="1863"]').click()
+        self.assertEqual('警员绩效考核', self.dr.find_element_by_xpath(currMenupath).text, '警员绩效考核')
+        self.dr.find_element_by_xpath(sheet_menu.col_values(3, 64, 65)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(5, 64, 65)[0]).click()
         self.dr.switch_to.frame('iframeb')
         time.sleep(5)
         self.assertEqual('警员自评及上级评价列表', self.dr.find_element_by_xpath('/html/body/div[1]/div').text,
