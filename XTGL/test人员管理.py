@@ -12,8 +12,10 @@ import time
 import os
 import re
 from public_package.pubilc_package import url,login_name,login_name_test,login_password,login_password_test,login_password_test2
+from public_package.pubilc_package import sheet_setting, search, reset, currMenupath, page_title, goback, saveBtn,sheet_menu,sheet_prompt_message
 from public_package.pubilc_package import TESTCASE
 import HTMLTestRunner
+import xlrd
 '''
 用例名称：
 用例编号：
@@ -38,11 +40,13 @@ class TESTCAST_RKGL(TESTCASE):
 
     def rkgl_search(self):
         self.login(login_name, login_password)
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[2]/div/div/div/div/div/div/a[6]/div[2]/img[2]').click()
+        self.dr.find_element_by_xpath('//*[@id="next"]').click()
+        time.sleep(2)
+        self.dr.find_element_by_xpath(sheet_menu.col_values(1,64,65)[0]).click()
         time.sleep(5)
-        self.assertEqual('系统管理',self.dr.find_element_by_xpath('//*[@id="currMenu"]').text, '系统管理')
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div/ul/li[1]/p[2]').click()
-        self.dr.find_element_by_xpath('//*[@id="5"]').click()
+        self.assertEqual('系统管理',self.dr.find_element_by_xpath(currMenupath).text, '系统管理')
+        self.dr.find_element_by_xpath(sheet_menu.col_values(3,64,65)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(5,64,65)[0]).click()
         self.dr.switch_to.frame('iframeb')
         time.sleep(5)
         self.assertEqual('人员列表', self.dr.find_element_by_xpath('/html/body/div[1]/div').text,
@@ -50,11 +54,13 @@ class TESTCAST_RKGL(TESTCASE):
 
     def rkgl_search_test(self):
         self.login(login_name_test, login_password_test)
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[2]/div/div/div/div/div/div/a[6]/div[2]/img[2]').click()
+        self.dr.find_element_by_xpath('//*[@id="next"]').click()
+        time.sleep(2)
+        self.dr.find_element_by_xpath(sheet_menu.col_values(1,64,65)[0]).click()
         time.sleep(5)
-        self.assertEqual('系统管理',self.dr.find_element_by_xpath('//*[@id="currMenu"]').text, '系统管理')
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div/ul/li[1]/p[2]').click()
-        self.dr.find_element_by_xpath('//*[@id="5"]').click()
+        self.assertEqual('系统管理',self.dr.find_element_by_xpath(currMenupath).text, '系统管理')
+        self.dr.find_element_by_xpath(sheet_menu.col_values(3,64,65)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(5,64,65)[0]).click()
         self.dr.switch_to.frame('iframeb')
         time.sleep(5)
         self.assertEqual('人员列表', self.dr.find_element_by_xpath('/html/body/div[1]/div').text,
@@ -69,9 +75,9 @@ class TESTCAST_RKGL(TESTCASE):
         time.sleep(5)
         self.dr.switch_to.frame('iframeb')
         paginal_number = self.dr.find_element_by_xpath('/html/body/div[3]/div[2]/div/div[4]/div[1]/span[1]').text
-        column = 1
+        column = 2
         self.pagination_num(paginal_number, search_value_name, column)
-        self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[6]/a[1]').click()
+        self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[8]/a[2]').click()
         self.assertEqual(search_value_name,self.dr.find_element_by_xpath('//*[@id="name"]').get_attribute('value'),'校验详情页面姓名')
         self.dr.implicitly_wait(5)
         self.dr.find_element_by_xpath('/html/body/a').click()
@@ -89,7 +95,7 @@ class TESTCAST_RKGL(TESTCASE):
         time.sleep(5)
         self.dr.switch_to.frame('iframeb')
         paginal_number = self.dr.find_element_by_xpath('/html/body/div[3]/div[2]/div/div[4]/div[1]/span[1]').text
-        column = 2
+        column = 3
         self.pagination_num(paginal_number, search_value_loginId, column)
         self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[6]/a[1]').click()
         self.assertEqual(search_value_loginId,self.dr.find_element_by_xpath('//*[@id="loginId"]').get_attribute('value'),'校验详情页面登录账户')
@@ -116,7 +122,7 @@ class TESTCAST_RKGL(TESTCASE):
         time.sleep(5)
         self.dr.switch_to.frame('iframeb')
         paginal_number = self.dr.find_element_by_xpath('/html/body/div[3]/div[2]/div/div[4]/div[1]/span[1]').text
-        column = 4
+        column = 5
         self.pagination_num(paginal_number, search_value_orgName, column)
         self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[6]/a[1]').click()
         self.assertEqual(search_value_orgName,self.dr.find_element_by_xpath('//*[@id="orgName"]').get_attribute('value'),'校验详情页面组织机构')
@@ -136,7 +142,7 @@ class TESTCAST_RKGL(TESTCASE):
         time.sleep(5)
         self.dr.switch_to.frame('iframeb')
         paginal_number = self.dr.find_element_by_xpath('/html/body/div[3]/div[2]/div/div[4]/div[1]/span[1]').text
-        column = 5
+        column = 6
         self.pagination_num(paginal_number, search_value_duty, column)
         self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[6]/a[1]').click()
         self.assertEqual(search_value_duty,self.dr.find_element_by_xpath('//*[@id="duty"]').get_attribute('value'),'校验详情页面登录账户')
@@ -156,7 +162,7 @@ class TESTCAST_RKGL(TESTCASE):
         time.sleep(5)
         self.dr.switch_to.frame('iframeb')
         paginal_number = self.dr.find_element_by_xpath('/html/body/div[3]/div[2]/div/div[4]/div[1]/span[1]').text
-        column = 2
+        column = 3
         self.pagination_num(paginal_number, search_value_loginId, column)
         self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[6]/a[1]').click()
         self.dr.find_element_by_xpath('//*[@id="phone"]').clear()
@@ -179,7 +185,7 @@ class TESTCAST_RKGL(TESTCASE):
         time.sleep(5)
         self.dr.switch_to.frame('iframeb')
         paginal_number = self.dr.find_element_by_xpath('/html/body/div[3]/div[2]/div/div[4]/div[1]/span[1]').text
-        column = 2
+        column = 3
         self.pagination_num(paginal_number, search_value_loginId, column)
         self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[6]/a[1]').click()
         self.dr.find_element_by_xpath('//*[@id="phone"]').clear()
@@ -203,7 +209,7 @@ class TESTCAST_RKGL(TESTCASE):
         time.sleep(3)
         self.dr.switch_to.frame('iframeb')
         paginal_number = self.dr.find_element_by_xpath('/html/body/div[3]/div[2]/div/div[4]/div[1]/span[1]').text
-        column = 2
+        column = 3
         self.pagination_num(paginal_number, search_value_loginId, column)
         self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[6]/a[2]').click()
         self.dr.switch_to.default_content()
@@ -227,7 +233,7 @@ class TESTCAST_RKGL(TESTCASE):
         time.sleep(3)
         self.dr.switch_to.frame('iframeb')
         paginal_number = self.dr.find_element_by_xpath('/html/body/div[3]/div[2]/div/div[4]/div[1]/span[1]').text
-        column = 2
+        column = 3
         self.pagination_num(paginal_number, search_value_loginId, column)
         self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[6]/a[2]').click()
         self.dr.switch_to.default_content()
@@ -242,9 +248,9 @@ class TESTCAST_RKGL(TESTCASE):
         self.assertEqual('用户：test',self.dr.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/div[1]').text,'校验修改密码后登录')
         print('系统管理-人员管理：修改密码功能')
 
-    # def test9_rkgl_add_juese(self):
-    #     # self.rkgl_search()
-    #     print('待角色管理中查询功能正常后完成')
+    def test9_rkgl_add_juese(self):
+        # self.rkgl_search()
+        print('待角色管理中查询功能正常后完成')
 
 
 

@@ -12,8 +12,10 @@ import time
 import os
 import re
 from public_package.pubilc_package import url,login_name,login_name_test,login_password,login_password_test
+from public_package.pubilc_package import sheet_setting, search, reset, currMenupath, page_title, goback, saveBtn,sheet_menu,sheet_prompt_message
 from public_package.pubilc_package import TESTCASE
 import HTMLTestRunner
+import xlrd
 '''
 用例名称：
 用例编号：
@@ -21,13 +23,17 @@ import HTMLTestRunner
 用例作者：
 '''
 
+xlsfile = r'F:\pythonkeys\自动化测试\lasa\RKGL.xls'
+excel = xlrd.open_workbook(xlsfile)
+global sheet
+sheet = excel.sheet_by_name('工作对象人员')
+
 class TESTCAST_SANFEI(TESTCASE):
     def setUp(self):
         self.dr = webdriver.Chrome()
         self.dr.maximize_window()
 
     def tearDown(self):
-        # print("脚本执行完成")
         self.dr.quit()
 
     def login(self, username, password):
@@ -38,14 +44,14 @@ class TESTCAST_SANFEI(TESTCASE):
 
     def gongzuoduixiang_search(self):
         self.login(login_name, login_password)
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[1]/a[2]').click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(1,20,21)[0]).click()
         time.sleep(5)
-        self.assertEqual('人口管理',self.dr.find_element_by_xpath('//*[@id="currMenu"]').text, '人口管理')
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div/ul/li[6]/p[2]').click()
-        self.dr.find_element_by_xpath('//*[@id="325"]').click()
+        self.assertEqual('人口管理',self.dr.find_element_by_xpath(currMenupath).text, '人口管理')
+        self.dr.find_element_by_xpath(sheet_menu.col_values(3,20,21)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(5,20,21)[0]).click()
         self.dr.switch_to.frame('iframeb')
         time.sleep(5)
-        self.assertEqual('工作对象人员', self.dr.find_element_by_xpath('/html/body/div[1]/div').text,
+        self.assertEqual('工作对象人员', self.dr.find_element_by_xpath(page_title).text,
                          '工作对象人员')
 
     def test1_gongzuoduixiang_add(self):

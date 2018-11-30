@@ -12,6 +12,7 @@ import time
 import os
 import re
 from public_package.pubilc_package import url,login_name,login_name_test,login_password,login_password_test,login_password_test2
+from public_package.pubilc_package import sheet_setting, search, reset, currMenupath, page_title, goback, saveBtn,sheet_menu,sheet_prompt_message
 from public_package.pubilc_package import TESTCASE
 import HTMLTestRunner
 '''
@@ -38,11 +39,13 @@ class TESTCAST_ZZJGGL(TESTCASE):
 
     def zzjggl_search(self):
         self.login(login_name, login_password)
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[2]/div/div/div/div/div/div/a[6]/div[2]/img[2]').click()
+        self.dr.find_element_by_xpath('//*[@id="next"]').click()
+        time.sleep(2)
+        self.dr.find_element_by_xpath(sheet_menu.col_values(1,65,66)[0]).click()
         time.sleep(5)
-        self.assertEqual('系统管理',self.dr.find_element_by_xpath('//*[@id="currMenu"]').text, '系统管理')
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div/ul/li[1]/p[2]').click()
-        self.dr.find_element_by_xpath('//*[@id="6"]').click()
+        self.assertEqual('系统管理',self.dr.find_element_by_xpath(currMenupath).text, '系统管理')
+        self.dr.find_element_by_xpath(sheet_menu.col_values(3,65,66)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(5,65,66)[0]).click()
         self.dr.switch_to.frame('iframeb')
         time.sleep(5)
         self.assertEqual('组织机构人员列表', self.dr.find_element_by_xpath('/html/body/div[1]/div[2]/div/div/p').text,
