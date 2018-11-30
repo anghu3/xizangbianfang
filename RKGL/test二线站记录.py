@@ -13,6 +13,7 @@ import time
 import os
 import re
 from public_package.pubilc_package import url,login_name,login_name_test,login_password,login_password_test
+from public_package.pubilc_package import sheet_setting, search, reset, currMenupath, page_title, goback, saveBtn,sheet_menu,sheet_prompt_message
 from public_package.pubilc_package import TESTCASE
 import xlrd
 '''
@@ -22,29 +23,12 @@ import xlrd
 用例作者：
 '''
 
-def findnum(string):
-    comp = re.compile('-?[1-9]\d*')
-    list_str = comp.findall(string)
-    list_num = []
-    for item in list_str:
-        item = int(item)
-        list_num.append(item)
-    return list_num
+xlsfile = r'F:\pythonkeys\自动化测试\lasa\RKGL.xls'
+excel = xlrd.open_workbook(xlsfile)
+global sheet
+sheet=excel.sheet_by_name('二线站过往记录')
 
 class TESTCAST_EXZ(TESTCASE):
-
-    dir = os.getcwd()
-    xlsfile = dir + '.xls'
-    excel = xlrd.open_workbook(xlsfile)
-    sheet_name = excel.sheet_names()[0]
-    global sheet_menu
-    sheet_menu=excel.sheet_by_name('menu')
-    global sheet
-    sheet=excel.sheet_by_name('二线站过往记录')
-    global sheet_setting,search,reset,add,delete
-    sheet_setting = excel.sheet_by_name('setting')
-    search=sheet_setting.col_values(2,1,2)[0]
-    reset=sheet_setting.col_values(3,1,2)[0]
 
     def setUp(self):
         self.dr = webdriver.Chrome()

@@ -23,13 +23,12 @@ from selenium.webdriver.common.alert import Alert
 用例作者：
 '''
 
-class TESTCAST_SHEBIANSHEKONG(TESTCASE):
+xlsfile = r'F:\pythonkeys\自动化测试\lasa\RKGL.xls'
+excel = xlrd.open_workbook(xlsfile)
+global sheet
+sheet = excel.sheet_by_name('涉边')
 
-    dir = os.getcwd()
-    xlsfile = dir + '.xls'
-    excel = xlrd.open_workbook(xlsfile)
-    global sheet
-    sheet = excel.sheet_by_name('涉边')
+class TESTCAST_SHEBIANSHEKONG(TESTCASE):
 
     def setUp(self):
         self.dr = webdriver.Chrome()

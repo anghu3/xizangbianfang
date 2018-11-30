@@ -22,13 +22,12 @@ import xlrd
 用例作者：
 '''
 
-class TESTCAST_JINGSHENBING(TESTCASE):
+xlsfile = r'F:\pythonkeys\自动化测试\lasa\RKGL.xls'
+excel = xlrd.open_workbook(xlsfile)
+global sheet
+sheet = excel.sheet_by_name('精神病人员')
 
-    dir = os.getcwd()
-    xlsfile = dir + '.xls'
-    excel = xlrd.open_workbook(xlsfile)
-    global sheet
-    sheet = excel.sheet_by_name('精神病人员')
+class TESTCAST_JINGSHENBING(TESTCASE):
 
     def setUp(self):
         self.dr = webdriver.Chrome()

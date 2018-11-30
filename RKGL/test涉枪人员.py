@@ -23,14 +23,12 @@ import HTMLTestRunner
 用例作者：
 '''
 
+xlsfile = r'F:\pythonkeys\自动化测试\lasa\RKGL.xls'
+excel = xlrd.open_workbook(xlsfile)
+global sheet
+sheet = excel.sheet_by_name('涉枪人员')
 
 class TESTCAST_SHEQIANG(TESTCASE):
-
-    dir = os.getcwd()
-    xlsfile = dir + '.xls'
-    excel = xlrd.open_workbook(xlsfile)
-    global sheet
-    sheet = excel.sheet_by_name('涉枪人员')
 
     def setUp(self):
         self.dr = webdriver.Chrome()

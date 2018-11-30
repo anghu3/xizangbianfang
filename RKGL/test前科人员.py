@@ -12,6 +12,9 @@ import time
 import os
 import re
 from public_package.pubilc_package import url,login_name,login_name_test,login_password,login_password_test
+from public_package.pubilc_package import TESTCASE
+from public_package.pubilc_package import sheet_setting, search, reset, currMenupath, page_title, goback, saveBtn,sheet_menu,sheet_prompt_message
+import xlrd
 '''
 用例名称：
 用例编号：
@@ -19,17 +22,13 @@ from public_package.pubilc_package import url,login_name,login_name_test,login_p
 用例作者：
 '''
 
+xlsfile = r'F:\pythonkeys\自动化测试\lasa\RKGL.xls'
+excel = xlrd.open_workbook(xlsfile)
+global sheet
+sheet = excel.sheet_by_name('前科人员')
 
-def findnum(string):
-    comp = re.compile('-?[1-9]\d*')
-    list_str = comp.findall(string)
-    list_num = []
-    for item in list_str:
-        item = int(item)
-        list_num.append(item)
-    return list_num
+class TESTCAST_QIANKE(TESTCASE):
 
-class TESTCAST_QIANKE(unittest.TestCase):
     def setUp(self):
         self.dr = webdriver.Chrome()
         self.dr.maximize_window()
@@ -46,47 +45,83 @@ class TESTCAST_QIANKE(unittest.TestCase):
 
     def qianke_search(self):
         self.login(login_name, login_password)
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[1]/a[2]').click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(1,15,16)[0]).click()
         time.sleep(5)
-        self.assertEqual('人口管理',self.dr.find_element_by_xpath('//*[@id="currMenu"]').text, '人口管理')
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div/ul/li[6]/p[2]').click()
-        self.dr.find_element_by_xpath('//*[@id="844"]').click()
+        self.assertEqual('人口管理',self.dr.find_element_by_xpath(currMenupath).text, '人口管理')
+        self.dr.find_element_by_xpath(sheet_menu.col_values(3,15,16)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(5,15,16)[0]).click()
         time.sleep(5)
         self.dr.switch_to.frame('iframeb')
-        self.assertEqual('前科人员', self.dr.find_element_by_xpath('/html/body/div[1]/div').text,
+        self.assertEqual('前科人员', self.dr.find_element_by_xpath(page_title).text,
                          '前科人员')
 
-    def test1_qianke_search_name(self):
+    def test01_qianke_search_name(self):
         self.qianke_search()
-        search_value = '次仁穷达'
-        self.dr.find_element_by_xpath('//*[@id="xm"]').send_keys(search_value)
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
+        search_value_name = sheet.col_values(1,0,1)[0]
+        name_path=sheet.col_values(1,1,2)[0]
+        self.dr.find_element_by_xpath(name_path).send_keys(search_value_name)
+        self.dr.find_element_by_xpath(search).click()
         self.dr.switch_to.default_content()
         time.sleep(10)
         self.dr.switch_to.frame('iframeb')
-
-        self.dr.find_element_by_xpath('//*[@id="reset"]').click()
+        paginal_number = self.dr.find_element_by_xpath(sheet_setting.col_values(4,1,2)[0]).text
+        column = 2
+        self.pagination_num(paginal_number, search_value_name, column)
+        self.dr.find_element_by_xpath(reset).click()
         self.dr.implicitly_wait(10)
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
+        self.dr.find_element_by_xpath(search).click()
         time.sleep(5)
-        self.assertNotEqual(search_value, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[2]').text, '重置功能')
-        print('人口管理-部局七类库-前科人员：姓名条件查询')
+        self.assertEqual('', self.dr.find_element_by_xpath(name_path).text, '姓名-重置功能异常')
+        print('人口管理-部局七类库-前科人员：姓名条件查询功能正常')
 
-    def test2_qianke_search_cardid(self):
+    def test02_qianke_search_cardid(self):
         self.qianke_search()
-        search_value = '542334199308132527'
-        self.dr.find_element_by_xpath('//*[@id="sfzh"]').send_keys(search_value)
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
+        search_value_cardid = sheet.col_values(1,2,3)[0]
+        cardid_path=sheet.col_values(1,3,4)[0]
+        self.dr.find_element_by_xpath(cardid_path).send_keys(search_value_cardid)
+        self.dr.find_element_by_xpath(search).click()
         self.dr.switch_to.default_content()
         time.sleep(10)
         self.dr.switch_to.frame('iframeb')
-
-        self.dr.find_element_by_xpath('//*[@id="reset"]').click()
+        paginal_number = self.dr.find_element_by_xpath(sheet_setting.col_values(4,1,2)[0]).text
+        column = 1
+        self.pagination_num(paginal_number, search_value_cardid, column)
+        self.dr.find_element_by_xpath(reset).click()
         self.dr.implicitly_wait(10)
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
+        self.dr.find_element_by_xpath(search).click()
         time.sleep(5)
-        self.assertNotEqual(search_value, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[2]').text, '重置功能')
-        print('人口管理-部局七类库-前科人员：身份证号条件查询')
+        self.assertEqual('', self.dr.find_element_by_xpath(cardid_path).text, '身份证号码-重置功能异常')
+        print('人口管理-部局七类库-前科人员：身份证号条件查询功能正常')
+
+    def test03_qianke_search_all(self):
+        self.qianke_search()
+        search_value_name = sheet.col_values(1, 0, 1)[0]
+        name_path = sheet.col_values(1, 1, 2)[0]
+        self.dr.find_element_by_xpath(name_path).send_keys(search_value_name)
+        search_value_cardid = sheet.col_values(1, 2, 3)[0]
+        cardid_path = sheet.col_values(1, 3, 4)[0]
+        self.dr.find_element_by_xpath(cardid_path).send_keys(search_value_cardid)
+        self.dr.find_element_by_xpath(search).click()
+        self.dr.switch_to.default_content()
+        time.sleep(10)
+        self.dr.switch_to.frame('iframeb')
+        paginal_number = self.dr.find_element_by_xpath(sheet_setting.col_values(4,1,2)[0]).text
+        self.pagination_num(paginal_number, search_value_cardid, 1)
+        self.pagination_num(paginal_number, search_value_name, 2)
+        self.dr.find_element_by_xpath(reset).click()
+        self.dr.implicitly_wait(10)
+        self.dr.find_element_by_xpath(search).click()
+        time.sleep(5)
+        self.assertEqual('', self.dr.find_element_by_xpath(cardid_path).text, '身份证号码-重置功能异常')
+        self.assertEqual('', self.dr.find_element_by_xpath(name_path).text, '姓名-重置功能异常')
+        print('人口管理-部局七类库-前科人员：条件查询功能正常')
 
 if __name__ == '__main__':
     unittest.main()
+    # suit=unittest.TestSuite()
+    # suit.addTest(TESTCAST_QIANKE('test01_qianke_search_name'))
+    # suit.addTest(TESTCAST_QIANKE('test02_qianke_search_cardid'))
+    # suit.addTest(TESTCAST_QIANKE('test03_qianke_search_all'))
+    # print(suit)
+    # runner=unittest.TextTestRunner()
+    # runner.run(suit)
