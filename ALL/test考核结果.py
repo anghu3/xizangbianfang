@@ -47,11 +47,11 @@ class TESTCAST_KHJG(TESTCASE):
 
     def khjg_search(self):
         self.login(login_name, login_password)
-        self.dr.find_element_by_xpath(sheet_menu.col_values(1,65,66)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(1,81,82)[0]).click()
         time.sleep(5)
         self.assertEqual('警员绩效考核',self.dr.find_element_by_xpath(currMenupath).text, '警员绩效考核')
-        self.dr.find_element_by_xpath(sheet_menu.col_values(3,65,66)[0]).click()
-        self.dr.find_element_by_xpath(sheet_menu.col_values(5,65,66)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(3,81,82)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(5,81,82)[0]).click()
         self.dr.switch_to.frame('iframeb')
         time.sleep(5)
         self.assertEqual('考核结果', self.dr.find_element_by_xpath(page_title).text,

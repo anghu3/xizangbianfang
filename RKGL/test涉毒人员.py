@@ -29,11 +29,22 @@ sheet = excel.sheet_by_name('涉毒人员')
 
 class TESTCAST_SHEDU(TESTCASE):
 
-
-
     def setUp(self):
         self.dr = webdriver.Chrome()
         self.dr.maximize_window()
+
+    # @classmethod
+    # def setUpClass(cls):
+    #     cls.dr = webdriver.Chrome()
+    #     cls.dr.maximize_window()
+    #     cls.dr.get(url)
+    #     cls.login(cls,login_name,login_password)
+    #     cls.shedu_search(cls)
+    #
+    # @classmethod
+    # def tearDownClass(cls):
+    #     cls.dr.quit()
+
 
     def tearDown(self):
         self.dr.quit()
@@ -65,7 +76,7 @@ class TESTCAST_SHEDU(TESTCASE):
         self.dr.switch_to.default_content()
         time.sleep(5)
         self.dr.switch_to.frame('iframeb')
-        paginal_number=self.dr.find_element_by_xpath(sheet_menu.col_values(4,1,2)[0]).text
+        paginal_number=self.dr.find_element_by_xpath(sheet_setting.col_values(4,1,2)[0]).text
         column=2
         self.pagination_num(paginal_number, search_value_name, column)
         self.dr.find_element_by_xpath(reset).click()

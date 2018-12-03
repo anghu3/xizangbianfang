@@ -53,7 +53,8 @@ class TESTCAST_JCJDJ(TESTCASE):
         self.dr.find_element_by_xpath('/html/body/div[3]/div[1]/div[2]/a[2]').click()
         self.dr.find_element_by_xpath('//*[@id="alarmTimeA"]').click()
         self.dr.find_element_by_xpath('//*[@id="alarmTimeA"]').clear()
-        self.dr.find_element_by_xpath('//*[@id="alarmTimeA"]').send_keys('2018-09-15 09:30:00')
+        times=time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime(time.time()))
+        self.dr.find_element_by_xpath('//*[@id="alarmTimeA"]').send_keys(times)
         self.dr.find_element_by_xpath('//*[@id="alarmpeopleTel"]').send_keys('15874587458')
         Select(self.dr.find_element_by_xpath('//*[@id="reportalarmType"]')).select_by_value('2')
         self.dr.find_element_by_xpath('//*[@id="alarmpeople"]').send_keys('马腾')
@@ -65,7 +66,7 @@ class TESTCAST_JCJDJ(TESTCASE):
         self.dr.find_element_by_xpath('//*[@id="disposePerson"]').send_keys('马辰')
         self.dr.find_element_by_xpath('//*[@id="disposeTimeA"]').click()
         self.dr.find_element_by_xpath('//*[@id="disposeTimeA"]').clear()
-        self.dr.find_element_by_xpath('//*[@id="disposeTimeA"]').send_keys('2018-09-15 09:40:00')
+        self.dr.find_element_by_xpath('//*[@id="disposeTimeA"]').send_keys(times)
         self.dr.find_element_by_xpath('//*[@id="dutyLeader"]').click()
         self.dr.find_element_by_xpath('//*[@id="dutyLeader"]').send_keys('包拯')
         Select(self.dr.find_element_by_xpath('//*[@id="result"]')).select_by_value('1')
@@ -82,7 +83,7 @@ class TESTCAST_JCJDJ(TESTCASE):
 
     def test02_jcjdj_search_alarmTimeA(self):
         self.jcjdj_search()
-        search_value_alarmTimeA='2018-09-15'
+        search_value_alarmTimeA=time.strftime("%Y-%m-%d", time.localtime(time.time()))
         self.dr.find_element_by_xpath('//*[@id="alarmTimeA"]').send_keys(search_value_alarmTimeA)
         self.dr.find_element_by_xpath('//*[@id="search"]').click()
         self.dr.switch_to.default_content()
@@ -175,7 +176,7 @@ class TESTCAST_JCJDJ(TESTCASE):
 
     def test08_jcjdj_search_disposeTimeA(self):
         self.jcjdj_search()
-        search_value_disposeTimeA='2018-09-15'
+        search_value_disposeTimeA=time.strftime("%Y-%m-%d", time.localtime(time.time()))
         self.dr.find_element_by_xpath('//*[@id="disposeTimeA"]').send_keys(search_value_disposeTimeA)
         self.dr.find_element_by_xpath('//*[@id="search"]').click()
         self.dr.switch_to.default_content()

@@ -60,8 +60,9 @@ class TESTCAST_SANFEI(TESTCASE):
         # self.dr.switch_to.default_content()
         # time.sleep(2)
         # self.dr.switch_to.frame('iframeb')
-        add_value_carid='500107198901218926'
-        self.dr.find_element_by_xpath('//*[@id="gmsfhm"]').send_keys(add_value_carid)
+        add_value_cardid=sheet.col_values(1,2,3)[0]
+        cardid_path=sheet.col_values(1,3,4)[0]
+        self.dr.find_element_by_xpath(cardid_path).send_keys(add_value_cardid)
         self.dr.find_element_by_xpath('//*[@id="workForm"]/div[1]/div[2]/a').click()
         self.dr.implicitly_wait(2)
         self.dr.find_element_by_xpath('//*[@id="bmch"]').send_keys('萱子')

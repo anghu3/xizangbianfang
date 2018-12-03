@@ -50,13 +50,14 @@ class TESTCAST_QZGZ(TESTCASE):
 
     def test1_qzgz_add(self):
         self.qzgz_search()
+        times = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime(time.time()))
         self.dr.find_element_by_xpath('/html/body/div[3]/div[1]/div[2]/a[2]').click()
         self.dr.find_element_by_xpath('//*[@id="kzrqkssjA"]').click()
         self.dr.find_element_by_xpath('//*[@id="kzrqkssjA"]').clear()
-        self.dr.find_element_by_xpath('//*[@id="kzrqkssjA"]').send_keys('2018-09-15 08:00')
+        self.dr.find_element_by_xpath('//*[@id="kzrqkssjA"]').send_keys(times)
         self.dr.find_element_by_xpath('//*[@id="kzrqjssjA"]').click()
         self.dr.find_element_by_xpath('//*[@id="kzrqjssjA"]').clear()
-        self.dr.find_element_by_xpath('//*[@id="kzrqjssjA"]').send_keys('2018-09-15 18:00')
+        self.dr.find_element_by_xpath('//*[@id="kzrqjssjA"]').send_keys(times)
         Select(self.dr.find_element_by_xpath('//*[@id="gzlb"]')).select_by_value('01')
         self.dr.find_element_by_xpath('//*[@id="gzkzqk"]').send_keys(
             '健全完善党员干部直接联系群众制度。先后组织开展了“放下架子进万家门、沉下身子知万家情、'
@@ -82,7 +83,7 @@ class TESTCAST_QZGZ(TESTCASE):
 
     def test2_qzgz_search_date(self):
         self.qzgz_search()
-        search_value_date='2018-09-15'
+        search_value_date=time.strftime("%Y-%m-%d", time.localtime(time.time()))
         self.dr.find_element_by_xpath('//*[@id="kzrqkssjA"]').send_keys(search_value_date)
         self.dr.find_element_by_xpath('//*[@id="search"]').click()
         self.dr.switch_to.default_content()

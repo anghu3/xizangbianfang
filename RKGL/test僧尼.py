@@ -47,7 +47,7 @@ class TESTCAST_sengni(TESTCASE):
         self.assertEqual('僧尼信息列表', self.dr.find_element_by_xpath('/html/body/div[1]/div').text,
                          '僧尼信息')
 
-    def test1_sengni_add(self):
+    def test01_sengni_add(self):
         self.sengni_search()
         add_value_carid='500107198901218926'
         self.dr.find_element_by_xpath('/html/body/div[3]/div[1]/div[2]/a[2]').click()
@@ -78,6 +78,7 @@ class TESTCAST_sengni(TESTCASE):
         time.sleep(1)
         self.dr.find_element_by_xpath('//*[@id="treeSelect3_50_span"]').click()
         self.dr.find_element_by_xpath('//*[@id="templeName"]').send_keys('大昭寺')
+
         self.dr.find_element_by_xpath('//*[@id="religionCertificateNo"]').send_keys('54745874')
         self.dr.find_element_by_xpath('//*[@id="saveBtn"]').click()
         self.dr.implicitly_wait(5)
@@ -87,7 +88,7 @@ class TESTCAST_sengni(TESTCASE):
                          '僧尼信息')
         print('人口管理-701数据库-僧尼：新增功能正常')
 
-    def test2_sengni_search_name(self):
+    def test02_sengni_search_name(self):
         self.sengni_search()
         search_value_name='刘钰萱'
         self.dr.find_element_by_xpath('//*[@id="monkName"]').send_keys(search_value_name)
@@ -107,7 +108,7 @@ class TESTCAST_sengni(TESTCASE):
                          '僧尼信息')
         print('人口管理-701数据库-僧尼：姓名条件查询功能正常')
 
-    def test3_sengni_search_faming(self):
+    def test03_sengni_search_faming(self):
         self.sengni_search()
         search_value_faming='萱玄'
         self.dr.find_element_by_xpath('//*[@id="priestName"]').send_keys(search_value_faming)
@@ -127,7 +128,7 @@ class TESTCAST_sengni(TESTCASE):
                          '僧尼信息')
         print('人口管理-701数据库-僧尼：法名条件查询功能正常')
 
-    def test4_sengni_search_carid(self):
+    def test04_sengni_search_carid(self):
         self.sengni_search()
         search_value_carid='500107198901218926'
         self.dr.find_element_by_xpath('//*[@id="idCard"]').send_keys(search_value_carid)
@@ -147,7 +148,7 @@ class TESTCAST_sengni(TESTCASE):
                          '僧尼信息')
         print('人口管理-701数据库-僧尼：身份证条件查询功能正常')
 
-    def test5_sengni_search_templeName(self):
+    def test05_sengni_search_templeName(self):
         self.sengni_search()
         search_value_templeName='大昭寺'
         self.dr.find_element_by_xpath('//*[@id="templeName"]').send_keys(search_value_templeName)
@@ -167,7 +168,7 @@ class TESTCAST_sengni(TESTCASE):
                          '僧尼信息')
         print('人口管理-701数据库-僧尼：寺庙名称条件查询功能正常')
 
-    def test6_sengni_delete(self):
+    def test06_sengni_delete(self):
         self.sengni_search()
         search_value_carid = '500107198901218926'
         self.dr.find_element_by_xpath('//*[@id="idCard"]').send_keys(search_value_carid)
