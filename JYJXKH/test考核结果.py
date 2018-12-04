@@ -59,11 +59,11 @@ class TESTCAST_KHJG(TESTCASE):
 
     def jyzp_search(self):
         self.login(login_name, login_password)
-        self.dr.find_element_by_xpath(sheet_menu.col_values(1,64,65)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(1,80,81)[0]).click()
         time.sleep(5)
         self.assertEqual('警员绩效考核',self.dr.find_element_by_xpath(currMenupath).text, '警员绩效考核')
-        self.dr.find_element_by_xpath(sheet_menu.col_values(3,64,65)[0]).click()
-        self.dr.find_element_by_xpath(sheet_menu.col_values(5,64,65)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(3,80,81)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(5,80,81)[0]).click()
         self.dr.switch_to.frame('iframeb')
         time.sleep(5)
         self.assertEqual('警员自评及上级评价列表', self.dr.find_element_by_xpath('/html/body/div[1]/div').text,

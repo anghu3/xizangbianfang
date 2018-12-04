@@ -46,17 +46,17 @@ class TESTCAST_JYZP(TESTCASE):
 
     def jyzp_search(self):
         self.login(login_name, login_password)
-        self.dr.find_element_by_xpath(sheet_menu.col_values(1, 81, 82)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(1, 80, 81)[0]).click()
         time.sleep(5)
         self.assertEqual('警员绩效考核', self.dr.find_element_by_xpath(currMenupath).text, '警员绩效考核')
-        self.dr.find_element_by_xpath(sheet_menu.col_values(3, 81, 82)[0]).click()
-        self.dr.find_element_by_xpath(sheet_menu.col_values(5, 81, 82)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(3, 80, 81)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(5, 80, 81)[0]).click()
         self.dr.switch_to.frame('iframeb')
         time.sleep(5)
         self.assertEqual('警员自评及上级评价列表', self.dr.find_element_by_xpath('/html/body/div[1]/div').text,
                          '警员自评及上级评价')
 
-    def test1_jyzp_add(self):
+    def test01_jyzp_add(self):
         self.jyzp_search()
         self.dr.find_element_by_xpath('/html/body/div[3]/div[1]/div[2]/a[2]').click()
         self.dr.find_element_by_xpath('//*[@id="policeName"]').send_keys('包涵')
@@ -90,7 +90,7 @@ class TESTCAST_JYZP(TESTCASE):
         self.assertEqual('包涵',self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[3]').text,'校验新增、返回和默认排序')
         print('社区警务-警员自评及上级评价：新增功能正常')
 
-    def test2_jyzp_search_policeName(self):
+    def test02_jyzp_search_policeName(self):
         self.jyzp_search()
         search_value_policeName = '包涵'
         self.dr.find_element_by_xpath('//*[@id="policeName"]').send_keys(search_value_policeName)
@@ -106,7 +106,7 @@ class TESTCAST_JYZP(TESTCASE):
                          self.dr.find_element_by_xpath('//*[@id="policeName"]').get_attribute('value'), '校验详情页面中警员名称')
         print('社区警务-警员自评及上级评价：警员姓名条件功能正常')
 
-    def test3_jyzp_search_policeNumber(self):
+    def test03_jyzp_search_policeNumber(self):
         self.jyzp_search()
         search_value_policeNumber='0375325'
         self.dr.find_element_by_xpath('//*[@id="policeNumber"]').send_keys(search_value_policeNumber)
@@ -121,7 +121,7 @@ class TESTCAST_JYZP(TESTCASE):
         self.assertEqual(search_value_policeNumber,self.dr.find_element_by_xpath('//*[@id="policeNumber"]').get_attribute('value'),'校验详情页面中警员编号')
         print('社区警务-警员自评及上级评价：警员编号条件功能正常')
 
-    def test4_jyzp_edit(self):
+    def test04_jyzp_edit(self):
         self.jyzp_search()
         search_value_policeNumber='0375325'
         self.dr.find_element_by_xpath('//*[@id="policeNumber"]').send_keys(search_value_policeNumber)
@@ -144,7 +144,7 @@ class TESTCAST_JYZP(TESTCASE):
         self.assertEqual(edit_value_policeName, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[3]').text, '校验新增、返回和默认排序')
         print('社区警务-警员自评及上级评价：编辑功能正常')
 
-    def test5_jyzp_delete(self):
+    def test05_jyzp_delete(self):
         self.jyzp_search()
         search_value_policeNumber='0375325'
         self.dr.find_element_by_xpath('//*[@id="policeNumber"]').send_keys(search_value_policeNumber)
