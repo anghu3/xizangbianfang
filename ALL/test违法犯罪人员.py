@@ -26,7 +26,7 @@ excel = xlrd.open_workbook(xlsfile)
 global sheet
 sheet = excel.sheet_by_name('违法犯罪人员')
 
-class TESTCAST_WFFZRY(unittest.TestCase):
+class TESTCAST_WFFZRY(TESTCASE):
 
     def setUp(self):
         self.dr = webdriver.Chrome()
@@ -48,19 +48,19 @@ class TESTCAST_WFFZRY(unittest.TestCase):
         time.sleep(5)
         self.assertEqual('人口管理',self.dr.find_element_by_xpath(currMenupath).text, '人口管理')
         self.dr.find_element_by_xpath(sheet_menu.col_values(3,8,9)[0]).click()
-        self.dr.find_element_by_xpath(sheet_menu.col_values(4,8,9)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(5,8,9)[0]).click()
         self.dr.switch_to.frame('iframeb')
         time.sleep(5)
         self.assertEqual('违法犯罪人员', self.dr.find_element_by_xpath(page_title).text,
                          '违法犯罪人员')
 
-    def test1_wffzry_search_cardid(self):
+    def test01_wffzry_search_cardid(self):
         self.wfzry_search()
         search_value_cardid = sheet.col_values(1,2,3)[0]
         cardid_path=sheet.col_values(1,3,4)[0]
         self.dr.find_element_by_xpath('//*[@id="form"]/div[1]/div/input').send_keys(search_value_cardid)
         self.dr.find_element_by_xpath(search).click()
-        self.dr.implicitly_wait(240)
+        time.sleep(300)
         self.dr.switch_to.default_content()
         self.dr.switch_to.frame('iframeb')
         paginal_number = self.dr.find_element_by_xpath(sheet_setting.col_values(4, 1, 2)[0]).text
@@ -72,14 +72,14 @@ class TESTCAST_WFFZRY(unittest.TestCase):
         self.assertEqual('',self.dr.find_element_by_xpath(cardid_path).get_attribute('value'),'身份证号-重置功能异常')
         print('人口管理-违法犯罪人员：身份证号码条件查询功能正常')
 
-    def test2_wffzry_search_xiangqing(self):
+    def test02_wffzry_search_xiangqing(self):
         self.wfzry_search()
         name=sheet.col_values(1,0,1)[0]
         search_value_cardid = sheet.col_values(1, 2, 3)[0]
         cardid_path = sheet.col_values(1, 3, 4)[0]
         self.dr.find_element_by_xpath('//*[@id="form"]/div[1]/div/input').send_keys(search_value_cardid)
         self.dr.find_element_by_xpath(search).click()
-        self.dr.implicitly_wait(240)
+        time.sleep(300)
         self.dr.switch_to.default_content()
         self.dr.switch_to.frame('iframeb')
         self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[11]/a').click()

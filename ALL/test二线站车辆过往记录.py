@@ -12,14 +12,21 @@ import time
 import os
 import re
 from public_package.pubilc_package import url,login_name,login_name_test,login_password,login_password_test
+from public_package.pubilc_package import sheet_setting, search, reset, currMenupath, page_title, goback, saveBtn,sheet_menu,sheet_prompt_message
 from public_package.pubilc_package import TESTCASE
 import HTMLTestRunner
+import xlrd
 '''
 用例名称：
 用例编号：
 用例场景：
 用例作者：
 '''
+
+xlsfile = r'F:\pythonkeys\自动化测试\lasa\CLGL.xlsx'
+excel = xlrd.open_workbook(xlsfile)
+global sheet
+sheet = excel.sheet_by_name('二线站车辆过往记录')
 
 class TESTCAST_ERXIANZHANCHELIANG(TESTCASE):
     def setUp(self):
@@ -38,18 +45,18 @@ class TESTCAST_ERXIANZHANCHELIANG(TESTCASE):
 
     def erxianzhancheliang_search(self):
         self.login(login_name, login_password)
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[1]/a[3]').click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(1,36,37)[0]).click()
         time.sleep(2)
-        self.assertEqual('车辆管理',self.dr.find_element_by_xpath('//*[@id="currMenu"]').text,'校验车辆管理菜单')
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div/ul/li[4]/p[2]').click()
-        self.dr.find_element_by_xpath('//*[@id="941"]').click()
+        self.assertEqual('车辆管理',self.dr.find_element_by_xpath(currMenupath).text,'校验车辆管理菜单')
+        self.dr.find_element_by_xpath(sheet_menu.col_values(3,36,37)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(5,36,37)[0]).click()
         self.dr.switch_to.frame('iframeb')
         time.sleep(3)
-        self.assertEqual('二线站过往记录列表',self.dr.find_element_by_xpath('/html/body/div[1]/div').text,'二线站车辆过往记录')
+        self.assertEqual('二线站过往记录列表',self.dr.find_element_by_xpath(page_title).text,'二线站车辆过往记录')
 
     def test1_erxianzhancheliang_search_cphm(self):
         self.erxianzhancheliang_search()
-        time.sleep(3)
+        time.sleep(30)
         search_vale_cphm='青A7S171'
         self.dr.find_element_by_xpath('//*[@id="form"]/div[1]/div/input').send_keys(search_vale_cphm)
         self.dr.find_element_by_xpath('//*[@id="search"]').click()
@@ -63,7 +70,7 @@ class TESTCAST_ERXIANZHANCHELIANG(TESTCASE):
 
     def test2_erxianzhancheliang_jcz(self):
         self.erxianzhancheliang_search()
-        time.sleep(3)
+        time.sleep(30)
         option_chioce=Select(self.dr.find_element_by_xpath('//*[@id="form"]/div[2]/div/select'))
         for i in range(0, 8):
             if i == 0:
@@ -88,7 +95,7 @@ class TESTCAST_ERXIANZHANCHELIANG(TESTCASE):
 
     def test3_erxianzhancheliang_search_date(self):
         self.erxianzhancheliang_search()
-        time.sleep(3)
+        time.sleep(30)
         search_vale_date='2018-04-02'
         self.dr.find_element_by_xpath('//*[@id="startDate"]').clear()
         self.dr.find_element_by_xpath('//*[@id="endDate"]').clear()

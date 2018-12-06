@@ -12,6 +12,7 @@ import time
 import os
 import re
 from public_package.pubilc_package import url,login_name,login_name_test,login_password,login_password_test
+from public_package.pubilc_package import sheet_setting, search, reset, currMenupath, page_title, goback, saveBtn,sheet_menu,sheet_prompt_message
 from public_package.pubilc_package import TESTCASE
 import HTMLTestRunner
 '''
@@ -38,29 +39,29 @@ class TESTCAST_QJGL(TESTCASE):
 
     def qjgl_search(self):
         self.login(login_name, login_password)
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[2]/div/div/div/div/div/div/a[2]/div[2]/img[2]').click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(1,63,64)[0]).click()
         time.sleep(5)
-        self.assertEqual('勤务管理',self.dr.find_element_by_xpath('//*[@id="currMenu"]').text, '勤务管理')
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div/ul/li/p[2]').click()
-        self.dr.find_element_by_xpath('//*[@id="621"]').click()
+        self.assertEqual('勤务管理',self.dr.find_element_by_xpath(currMenupath).text, '勤务管理')
+        self.dr.find_element_by_xpath(sheet_menu.col_values(3,63,64)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(5,63,64)[0]).click()
         self.dr.switch_to.frame('iframeb')
         time.sleep(5)
-        self.assertEqual('人员请假条列表', self.dr.find_element_by_xpath('/html/body/div[1]/div').text,
+        self.assertEqual('人员请假条列表', self.dr.find_element_by_xpath(page_title).text,
                          '人员请假管理')
 
     def qjgl_search_test(self):
         self.login(login_name_test, login_password_test)
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[2]/div/div/div/div/div/div/a[2]/div[2]/img[2]').click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(1, 63, 64)[0]).click()
         time.sleep(5)
-        self.assertEqual('勤务管理',self.dr.find_element_by_xpath('//*[@id="currMenu"]').text, '勤务管理')
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div/ul/li/p[2]').click()
-        self.dr.find_element_by_xpath('//*[@id="621"]').click()
+        self.assertEqual('勤务管理', self.dr.find_element_by_xpath(currMenupath).text, '勤务管理')
+        self.dr.find_element_by_xpath(sheet_menu.col_values(3, 63, 64)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(5, 63, 64)[0]).click()
         self.dr.switch_to.frame('iframeb')
         time.sleep(5)
-        self.assertEqual('人员请假条列表', self.dr.find_element_by_xpath('/html/body/div[1]/div').text,
+        self.assertEqual('人员请假条列表', self.dr.find_element_by_xpath(page_title).text,
                          '人员请假管理')
 
-    def test1_qjgl_add(self):
+    def test01_qjgl_add(self):
         self.qjgl_search()
         self.dr.find_element_by_xpath('/html/body/div[3]/div[1]/div[2]/a[2]').click()
         global add_value_user
@@ -82,16 +83,14 @@ class TESTCAST_QJGL(TESTCASE):
         self.dr.find_element_by_xpath('//*[@id="approvalTime"]').click()
         Select(self.dr.find_element_by_xpath('//*[@id="approvalResult"]')).select_by_value('1')
         self.dr.find_element_by_xpath('//*[@id="save"]').click()
-        time.sleep(3)
-        self.dr.find_element_by_xpath('/html/body/a').click()
-        self.dr.implicitly_wait(2)
-        self.assertEqual(add_value_user,self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[3]').text,'校验新增、返回和默认排序')
-        self.assertEqual('15874574587', self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[7]').text,
-                         '校验新增、返回和默认排序')
+        self.dr.switch_to.default_content()
+        self.dr.switch_to.frame('iframeb')
+        time.sleep(1)
+        self.assertEqual(sheet_prompt_message.col_values(1, 4, 5)[0],
+                         self.dr.find_element_by_xpath('//*[@id="gritter-item-1"]/div[2]/div[2]/p').text, '新增成功提示信息校验')
         print('勤务管理-人员请假管理：新增功能正常')
 
-
-    def test2_qjgl_add_test(self):
+    def test02_qjgl_add_test(self):
         self.qjgl_search_test()
         self.dr.find_element_by_xpath('/html/body/div[3]/div[1]/div[2]/a[2]').click()
         global add_value_user_test
@@ -113,16 +112,14 @@ class TESTCAST_QJGL(TESTCASE):
         self.dr.find_element_by_xpath('//*[@id="approvalTime"]').click()
         Select(self.dr.find_element_by_xpath('//*[@id="approvalResult"]')).select_by_value('1')
         self.dr.find_element_by_xpath('//*[@id="save"]').click()
-        time.sleep(3)
-        self.dr.find_element_by_xpath('/html/body/a').click()
-        self.dr.implicitly_wait(2)
-        self.assertEqual(add_value_user_test, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[3]').text,
-                         '校验新增、返回和默认排序')
-        self.assertEqual('15874574587', self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[7]').text,
-                         '校验新增、返回和默认排序')
+        self.dr.switch_to.default_content()
+        self.dr.switch_to.frame('iframeb')
+        time.sleep(1)
+        self.assertEqual(sheet_prompt_message.col_values(1, 4, 5)[0],
+                         self.dr.find_element_by_xpath('//*[@id="gritter-item-1"]/div[2]/div[2]/p').text, '新增成功提示信息校验')
         print('勤务管理-人员请假管理：新增功能正常')
 
-    def test3_qjgl_search_proposer(self):
+    def test03_qjgl_search_proposer(self):
         self.qjgl_search()
         search_value_proposer='test'
         self.dr.find_element_by_xpath('//*[@id="proposer"]').send_keys(search_value_proposer)
@@ -142,7 +139,7 @@ class TESTCAST_QJGL(TESTCASE):
                          '人员请假管理')
         print('勤务管理-人员请假管理：申请人条件查询功能正常')
 
-    def test4_qjgl_search_urgentTel(self):
+    def test04_qjgl_search_urgentTel(self):
         self.qjgl_search()
         search_value_urgentTel='15874574587'
         self.dr.find_element_by_xpath('//*[@id="urgentTel"]').send_keys(search_value_urgentTel)
@@ -162,7 +159,7 @@ class TESTCAST_QJGL(TESTCASE):
                          '人员请假管理')
         print('勤务管理-人员请假管理：紧急联系电话条件查询功能正常')
 
-    def test5_qjgl_search_approvalOpinion(self):
+    def test05_qjgl_search_approvalOpinion(self):
         self.qjgl_search()
         search_value_approvalOpinion='包拯'
         '''审批人'''
@@ -185,7 +182,7 @@ class TESTCAST_QJGL(TESTCASE):
 
     '''请假开始时间和结束时间查询由于不是精准查询并且时间对比支撑函数尚未完成，脚本暂时搁置！'''
 
-    def test6_qjgl_search_approvalTime1(self):
+    def test06_qjgl_search_approvalTime1(self):
         self.qjgl_search()
         search_value_approvalTime1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
         '''审批时间'''
@@ -206,7 +203,7 @@ class TESTCAST_QJGL(TESTCASE):
                          '人员请假管理')
         print('勤务管理-人员请假管理：审批时间条件查询功能正常')
 
-    def test7_qjgl_search_totalTime(self):
+    def test07_qjgl_search_totalTime(self):
         self.qjgl_search()
         search_value_totalTime='8'
         self.dr.find_element_by_xpath('//*[@id="totalTime"]').send_keys(search_value_totalTime)
@@ -226,7 +223,7 @@ class TESTCAST_QJGL(TESTCASE):
                          '人员请假管理')
         print('勤务管理-人员请假管理：合计小时数条件查询功能正常')
 
-    def test8_qjgl_edit(self):
+    def test08_qjgl_edit(self):
         self.qjgl_search()
         search_value_proposer='test'
         self.dr.find_element_by_xpath('//*[@id="proposer"]').send_keys(search_value_proposer)
@@ -253,7 +250,7 @@ class TESTCAST_QJGL(TESTCASE):
         self.assertEqual(edit_value_totalTime,self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[6]').text,'校验编辑功能')
         print('勤务管理-人员请假管理：编辑功能正常')
 
-    def test9_qjgl_delete(self):
+    def test09_qjgl_delete(self):
         self.qjgl_search()
         search_value_proposer='test'
         self.dr.find_element_by_xpath('//*[@id="proposer"]').send_keys(search_value_proposer)

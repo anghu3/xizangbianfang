@@ -93,6 +93,10 @@ class TESTCAST_SHEBIANSHEKONG(TESTCASE):
         self.dr.find_element_by_xpath('//*[@id="supervBeWx"]').send_keys(sheet.col_values(1,27,28)[0])
         time.sleep(2)
         self.dr.find_element_by_xpath(saveBtn).click()
+        # self.dr.find_element_by_xpath(saveBtn).click()
+        # self.dr.find_element_by_xpath(saveBtn).click()
+        # self.dr.find_element_by_xpath(saveBtn).click()
+        # self.dr.find_element_by_xpath(saveBtn).click()
         self.dr.switch_to.default_content()
         self.dr.switch_to.frame('iframeb')
         time.sleep(1)
@@ -268,7 +272,6 @@ class TESTCAST_SHEBIANSHEKONG(TESTCASE):
         self.assertEqual(sheet_prompt_message.col_values(1, 0, 1)[0],
                          self.dr.find_element_by_xpath('//*[@id="gritter-item-1"]/div[2]/div[2]/p').text, '校验删除成功提示信息')
         print('人口管理-局部七类库-涉爆人员：涉边|涉恐|涉稳|涉外人员编辑功能正常')
-
 
     def test08_shebian_delete(self):
         self.shebian_search()
