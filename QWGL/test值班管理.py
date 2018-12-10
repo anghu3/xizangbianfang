@@ -12,14 +12,21 @@ import time
 import os
 import re
 from public_package.pubilc_package import url,login_name,login_name_test,login_password,login_password_test
+from public_package.pubilc_package import sheet_setting, search, reset, currMenupath, page_title, goback, saveBtn,sheet_menu,sheet_prompt_message
 from public_package.pubilc_package import TESTCASE
 import HTMLTestRunner
+import xlrd
 '''
 用例名称：
 用例编号：
 用例场景：
 用例作者：
 '''
+
+# xlsfile = r'F:\pythonkeys\自动化测试\lasa\QWGL.xlsx'
+# excel = xlrd.open_workbook(xlsfile)
+# global sheet
+# sheet = excel.sheet_by_name('值班管理')
 
 class TESTCAST_ZHIBANGUANLI(TESTCASE):
     def setUp(self):
@@ -38,22 +45,23 @@ class TESTCAST_ZHIBANGUANLI(TESTCASE):
 
     def zhibanguanli_search(self):
         self.login(login_name, login_password)
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[2]/div/div/div/div/div/div/a[2]/div[2]/img[2]').click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(1,62,63)[0]).click()
         time.sleep(5)
-        self.assertEqual('勤务管理',self.dr.find_element_by_xpath('//*[@id="currMenu"]').text, '勤务管理')
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div/ul/li/p[2]').click()
-        self.dr.find_element_by_xpath('//*[@id="537"]').click()
+        self.assertEqual('勤务管理',self.dr.find_element_by_xpath(currMenupath).text, '勤务管理')
+        self.dr.find_element_by_xpath(sheet_menu.col_values(3,62,63)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(5,62,63)[0]).click()
         self.dr.switch_to.frame('iframeb')
         time.sleep(5)
-        self.assertEqual('值班管理列表', self.dr.find_element_by_xpath('/html/body/div[1]/div').text,
+        self.assertEqual('值班管理列表', self.dr.find_element_by_xpath(page_title).text,
                          '值班管理')
 
-    def test1_zhibanguanli_add(self):
+    def test01_zhibanguanli_add(self):
         self.zhibanguanli_search()
         self.dr.find_element_by_xpath('/html/body/div[3]/div[1]/div[2]/a[2]').click()
         time_now=now = time.strftime("%Y-%m-%d", time.localtime(time.time()))
         self.dr.find_element_by_xpath('//*[@id="dutyDate"]').click()
-
+        self.dr.find_element_by_xpath('//*[@id="dutyDate"]').send_keys(time_now)
+        self.dr.find_element_by_xpath('//*[@id="dutyArea"]').click()
         option_choice=Select(self.dr.find_element_by_xpath('//*[@id="dutyType"]'))
         option_choice.select_by_value('1')
         self.dr.find_element_by_xpath('//*[@id="dutyArea"]').send_keys('拉萨市实验中学')
@@ -69,25 +77,25 @@ class TESTCAST_ZHIBANGUANLI(TESTCASE):
                          '值班管理')
         print('勤务管理-值班管理：新增功能正常')
 
-    def test2_zhibanguanli_search_date(self):
+    def test02_zhibanguanli_search_date(self):
         self.zhibanguanli_search()
-        search_value_date = '2018-09-05'
-        self.dr.find_element_by_xpath('//*[@id="dutyDates"]').send_keys(search_value_date)
+        time_now = now = time.strftime("%Y-%m-%d", time.localtime(time.time()))
+        self.dr.find_element_by_xpath('//*[@id="dutyDates"]').send_keys(time_now)
         self.dr.find_element_by_xpath('//*[@id="search"]').click()
         self.dr.switch_to.default_content()
         time.sleep(5)
         self.dr.switch_to.frame('iframeb')
         paginal_number = self.dr.find_element_by_xpath('/html/body/div[3]/div[2]/div/div[4]/div[1]/span[1]').text
         column = 4
-        self.pagination_num(paginal_number, search_value_date, column)
+        self.pagination_num(paginal_number, time_now, column)
         self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[9]/a').click()
-        self.assertIn(search_value_date,self.dr.find_element_by_xpath('//*[@id="dutyDate"]').get_attribute('value'),'校验详情页的日期')
+        self.assertIn(time_now,self.dr.find_element_by_xpath('//*[@id="dutyDate"]').get_attribute('value'),'校验详情页的日期')
         self.dr.find_element_by_xpath('/html/body/a').click()
         self.dr.implicitly_wait(2)
         self.assertEqual('值班管理列表', self.dr.find_element_by_xpath('/html/body/div[1]/div').text,'值班管理')
         print('勤务管理-值班管理：时间条件查询功能正常')
 
-    def test3_zhibanguanli_search_dutyType(self):
+    def test03_zhibanguanli_search_dutyType(self):
         self.zhibanguanli_search()
         option_chioce=Select(self.dr.find_element_by_xpath('//*[@id="form"]/div[2]/div/select'))
         option_chioce.select_by_value('1')
@@ -106,7 +114,28 @@ class TESTCAST_ZHIBANGUANLI(TESTCASE):
         self.assertEqual('值班管理列表', self.dr.find_element_by_xpath('/html/body/div[1]/div').text,'值班管理')
         print('勤务管理-值班管理：值班类型条件查询功能正常')
 
-    def test4_zhibanguanli_delete(self):
+    def test04_zhibanguanli_search_all(self):
+        self.zhibanguanli_search()
+        option_chioce = Select(self.dr.find_element_by_xpath('//*[@id="form"]/div[2]/div/select'))
+        option_chioce.select_by_value('1')
+        option_chioce_value = option_chioce.first_selected_option.text
+        time_now = now = time.strftime("%Y-%m-%d", time.localtime(time.time()))
+        self.dr.find_element_by_xpath('//*[@id="dutyDates"]').send_keys(time_now)
+        self.dr.find_element_by_xpath('//*[@id="search"]').click()
+        self.dr.switch_to.default_content()
+        time.sleep(5)
+        self.dr.switch_to.frame('iframeb')
+        paginal_number = self.dr.find_element_by_xpath(sheet_setting.col_values(4,1,2)[0]).text
+        self.pagination_num(paginal_number, option_chioce_value, 5)
+        self.pagination_num(paginal_number, time_now, 4)
+        self.dr.find_element_by_xpath(reset).click()
+        time.sleep(1)
+        self.dr.find_element_by_xpath(search).click()
+        self.assertEqual('',self.dr.find_element_by_xpath('//*[@id="dutyDates"]').get_attribute('value'),'日期-重置功能异常')
+        self.assertEqual('全部',self.dr.find_element_by_xpath('//*[@id="form"]/div[2]/div/select/option[1]').text,'值班类型-重置功能异常')
+        print('勤务管理-值班管理：查询功能正常')
+
+    def test05_zhibanguanli_delete(self):
         self.zhibanguanli_search()
         self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[1]/input').click()
         self.dr.find_element_by_xpath('/html/body/div[3]/div[1]/div[2]/a[1]').click()

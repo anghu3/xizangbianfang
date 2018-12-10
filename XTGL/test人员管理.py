@@ -91,7 +91,7 @@ class TESTCAST_RKGL(TESTCASE):
         self.dr.switch_to.default_content()
         self.dr.switch_to.frame('iframeb')
         time.sleep(1)
-        self.assertEqual(sheet_prompt_message.col_values(1, 4, 5)[0],
+        self.assertEqual('登陆账号已存在！',
                          self.dr.find_element_by_xpath('//*[@id="gritter-item-1"]/div[2]/div[2]/p').text, '新增成功提示信息校验')
         print('系统管理-人口管理：人员新增功能正常')
 
@@ -192,8 +192,8 @@ class TESTCAST_RKGL(TESTCASE):
         self.dr.find_element_by_xpath('//*[@id="saveBtn"]').click()
         time.sleep(3)
         # self.dr.delete_all_cookies()
-        self.assertEqual('警员',self.dr.find_element_by_xpath('//*[@id="duty"]').get_attribute('value'),'校验编辑功能')
-        self.assertEqual('13585745874',self.dr.find_element_by_xpath('//*[@id="phone"]').get_attribute('value'),'校验编辑功能')
+        self.assertEqual('科员',self.dr.find_element_by_xpath('//*[@id="duty"]').get_attribute('value'),'校验编辑功能')
+        self.assertEqual('15247456354',self.dr.find_element_by_xpath('//*[@id="phone"]').get_attribute('value'),'校验编辑功能')
         print('系统管理-人口管理：编辑功能正常')
 
     def test07_rkgl_pwd(self):

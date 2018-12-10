@@ -15,12 +15,18 @@ from public_package.pubilc_package import url,login_name,login_name_test,login_p
 from public_package.pubilc_package import sheet_setting, search, reset, currMenupath, page_title, goback, saveBtn,sheet_menu,sheet_prompt_message
 from public_package.pubilc_package import TESTCASE
 import HTMLTestRunner
+import xlrd
 '''
 用例名称：
 用例编号：
 用例场景：
 用例作者：
 '''
+
+# xlsfile = r'F:\pythonkeys\自动化测试\lasa\QWGL.xlsx'
+# excel = xlrd.open_workbook(xlsfile)
+# global sheet
+# sheet = excel.sheet_by_name('人员请假管理')
 
 class TESTCAST_QJGL(TESTCASE):
     def setUp(self):

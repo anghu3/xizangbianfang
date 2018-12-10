@@ -12,14 +12,21 @@ import time
 import os
 import re
 from public_package.pubilc_package import url,login_name,login_name_test,login_password,login_password_test
+from public_package.pubilc_package import sheet_setting, search, reset, currMenupath, page_title, goback, saveBtn,sheet_menu,sheet_prompt_message
 from public_package.pubilc_package import TESTCASE
 import HTMLTestRunner
+import xlrd
 '''
 用例名称：
 用例编号：
 用例场景：
 用例作者：
 '''
+
+# xlsfile = r'F:\pythonkeys\自动化测试\lasa\QWGL.xlsx'
+# excel = xlrd.open_workbook(xlsfile)
+# global sheet
+# sheet = excel.sheet_by_name('处突勤务行动纪要')
 
 class TESTCAST_CTQWXDJY(TESTCASE):
     def setUp(self):
@@ -38,17 +45,17 @@ class TESTCAST_CTQWXDJY(TESTCASE):
 
     def ctqwxdjy_search(self):
         self.login(login_name, login_password)
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[2]/div/div/div/div/div/div/a[2]/div[2]/img[2]').click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(1,56,57)[0]).click()
         time.sleep(3)
-        self.assertEqual('勤务管理',self.dr.find_element_by_xpath('//*[@id="currMenu"]').text, '勤务管理')
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div/ul/li/p[2]').click()
-        self.dr.find_element_by_xpath('//*[@id="536"]').click()
+        self.assertEqual('勤务管理',self.dr.find_element_by_xpath(currMenupath).text, '勤务管理')
+        self.dr.find_element_by_xpath(sheet_menu.col_values(3,56,57)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(5,56,57)[0]).click()
         self.dr.switch_to.frame('iframeb')
         time.sleep(3)
-        self.assertEqual('处突勤务行动纪要列表', self.dr.find_element_by_xpath('/html/body/div[1]/div').text,
+        self.assertEqual('处突勤务行动纪要列表', self.dr.find_element_by_xpath(page_title).text,
                          '处突勤务行动纪要')
 
-    def test1_ctqwxdjy_add(self):
+    def test01_ctqwxdjy_add(self):
         self.ctqwxdjy_search()
         self.dr.find_element_by_xpath('/html/body/div[3]/div[1]/div[2]/a[2]').click()
         global codeid
@@ -88,7 +95,7 @@ class TESTCAST_CTQWXDJY(TESTCASE):
                          '校验新增，返回和默认排序')
         print('勤务管理-处突勤务计划管理：新增功能正常')
 
-    def test2_ctqwxdjy_search_date(self):
+    def test02_ctqwxdjy_search_date(self):
         self.ctqwxdjy_search()
         search_value_date='2018-09-10'
         self.dr.find_element_by_xpath('//*[@id="zqrq"]').send_keys(search_value_date)
@@ -108,7 +115,7 @@ class TESTCAST_CTQWXDJY(TESTCASE):
         self.assertEqual('米林县聚众赌博案件',self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[7]').text,'校验返回和默认排序')
         print('勤务管理-处突勤务计划管理：日期条件查询功能正常')
 
-    def test3_ctqwxdjy_search_codeid(self):
+    def test03_ctqwxdjy_search_codeid(self):
         self.ctqwxdjy_search()
         search_value_codeid=codeid
         self.dr.find_element_by_xpath('//*[@id="taskNo"]').send_keys(search_value_codeid)
@@ -128,7 +135,7 @@ class TESTCAST_CTQWXDJY(TESTCASE):
         self.assertEqual('米林县聚众赌博案件',self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[7]').text,'校验返回和默认排序')
         print('勤务管理-处突勤务计划管理：任务编号条件查询功能正常')
 
-    def test4_ctqwxdjy_search_safetyLevel(self):
+    def test04_ctqwxdjy_search_safetyLevel(self):
         self.ctqwxdjy_search()
         option_chioce=Select(self.dr.find_element_by_xpath('//*[@id="safetyLevel"]'))
         option_chioce.select_by_value('1')
@@ -149,7 +156,7 @@ class TESTCAST_CTQWXDJY(TESTCASE):
         self.assertEqual('米林县聚众赌博案件',self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[7]').text,'校验返回和默认排序')
         print('勤务管理-处突勤务计划管理：安全等级条件查询功能正常')
 
-    def test5_ctqwxdjy_search_taskname(self):
+    def test05_ctqwxdjy_search_taskname(self):
         self.ctqwxdjy_search()
         search_value_taskname='米林县聚众赌博案件'
         self.dr.find_element_by_xpath('//*[@id="taskName"]').send_keys(search_value_taskname)
@@ -168,7 +175,7 @@ class TESTCAST_CTQWXDJY(TESTCASE):
         self.assertEqual(search_value_taskname, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[7]').text,'校验返回和默认排序')
         print('勤务管理-处突勤务计划管理：任务名称条件查询功能正常')
 
-    def test6_ctqwxdjy_search_dutyGroupName(self):
+    def test06_ctqwxdjy_search_dutyGroupName(self):
         self.ctqwxdjy_search()
         search_value_dutyGroupName='边防1组'
         self.dr.find_element_by_xpath('//*[@id="dutyGroupName"]').click()
@@ -194,7 +201,7 @@ class TESTCAST_CTQWXDJY(TESTCASE):
         self.assertEqual(search_value_dutyGroupName, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[8]').text,'校验返回和默认排序')
         print('勤务管理-处突勤务计划管理：执勤编组条件查询功能正常')
 
-    def test7_ctqwxdjy_edit(self):
+    def test07_ctqwxdjy_edit(self):
         self.ctqwxdjy_search()
         search_value_codeid=codeid
         self.dr.find_element_by_xpath('//*[@id="taskNo"]').send_keys(search_value_codeid)
@@ -218,7 +225,7 @@ class TESTCAST_CTQWXDJY(TESTCASE):
         self.assertEqual(edit_value_taskname,self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[7]').text,'校验编辑、返回和默认排序')
         print('勤务管理-处突勤务计划管理：编辑功能正常')
 
-    def test8_ctqwxdjy_delete(self):
+    def test08_ctqwxdjy_delete(self):
         self.ctqwxdjy_search()
         search_value_codeid=codeid
         self.dr.find_element_by_xpath('//*[@id="taskNo"]').send_keys(search_value_codeid)
