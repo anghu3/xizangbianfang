@@ -14,6 +14,8 @@ import re
 from public_package.pubilc_package import url,login_name,login_name_test,login_password,login_password_test
 from public_package.pubilc_package import TESTCASE
 import HTMLTestRunner
+from public_package.pubilc_package import sheet_setting, search, reset, currMenupath, page_title, goback, saveBtn , sheet_menu,sheet_prompt_message,work_space
+import xlrd
 '''
 用例名称：
 用例编号：
@@ -40,17 +42,17 @@ class TESTCAST_WEIBAO(TESTCASE):
 
     def weibao_search(self):
         self.login(login_name, login_password)
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[2]/div/div/div/div/div/div/a[1]/div[2]/img[2]').click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(1,44,45)[0]).click()
         time.sleep(5)
-        self.assertEqual('管理防范',self.dr.find_element_by_xpath('//*[@id="currMenu"]').text, '管理防范')
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div/ul/li/p[2]').click()
-        self.dr.find_element_by_xpath('//*[@id="955"]').click()
+        self.assertEqual('管理防范',self.dr.find_element_by_xpath(currMenupath).text, '管理防范')
+        self.dr.find_element_by_xpath(sheet_menu.col_values(3,44,45)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(5,44,45)[0]).click()
         self.dr.switch_to.frame('iframeb')
         time.sleep(5)
         self.assertEqual('危爆场所列表', self.dr.find_element_by_xpath('/html/body/div[1]/p').text,
                          '危爆场所管理')
 
-    def test1_weibao_add(self):
+    def test01_weibao_add(self):
         self.weibao_search()
         add_value_name='米林烟火爆竹工厂'
         self.dr.find_element_by_xpath('/html/body/div[4]/div[1]/div[2]/a[2]').click()
@@ -76,7 +78,7 @@ class TESTCAST_WEIBAO(TESTCASE):
         self.assertEqual(add_value_name,self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[4]').text,'校验新增、返回和默认排序')
         print('管理防范-危爆场所管理：新增功能正常')
 
-    def test2_weibao_search_frdb(self):
+    def test02_weibao_search_frdb(self):
         self.weibao_search()
         search_value_frdb='王小波'
         self.dr.find_element_by_xpath('//*[@id="legalRepresentative"]').send_keys(search_value_frdb)
@@ -95,7 +97,7 @@ class TESTCAST_WEIBAO(TESTCASE):
         self.assertEqual(search_value_frdb,self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[3]').text,'校验返回和默认排序')
         print('管理防范-危爆场所管理：法人代表条件查询功能正常')
 
-    def test3_weibao_search_name(self):
+    def test03_weibao_search_name(self):
         self.weibao_search()
         search_value_name='米林烟火爆竹工厂'
         self.dr.find_element_by_xpath('//*[@id="compName"]').send_keys(search_value_name)
@@ -114,7 +116,7 @@ class TESTCAST_WEIBAO(TESTCASE):
         self.assertEqual(search_value_name,self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[4]').text,'校验返回和默认排序')
         print('管理防范-危爆场所管理：单位名称条件查询功能正常')
 
-    def test4_weibao_search_comptype(self):
+    def test04_weibao_search_comptype(self):
         self.weibao_search()
         option_chioce=Select(self.dr.find_element_by_xpath('//*[@id="compType"]'))
         option_chioce.select_by_value('01')
@@ -128,7 +130,7 @@ class TESTCAST_WEIBAO(TESTCASE):
         self.pagination_num(paginal_number, search_value_comptype, column)
         print('管理防范-危爆场所管理：单位类型条件查询功能正常')
 
-    def test5_weibao_search_adress(self):
+    def test05_weibao_search_adress(self):
         self.weibao_search()
         search_value_address='林廓西路21号'
         self.dr.find_element_by_xpath('//*[@id="detailAddress"]').send_keys(search_value_address)
@@ -147,7 +149,7 @@ class TESTCAST_WEIBAO(TESTCASE):
         self.assertEqual(search_value_address,self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[10]').text,'校验返回和默认排序')
         print('管理防范-危爆场所管理：单位详址条件查询功能正常')
 
-    def test6_weibao_edit(self):
+    def test06_weibao_edit(self):
         self.weibao_search()
         search_value_name='米林烟火爆竹工厂'
         self.dr.find_element_by_xpath('//*[@id="compName"]').send_keys(search_value_name)
@@ -169,7 +171,7 @@ class TESTCAST_WEIBAO(TESTCASE):
         self.assertEqual(edit_value_name, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[4]').text,'校验返回和默认排序')
         print('管理防范-危爆场所管理：编辑功能正常')
 
-    def test7_weibao_delete(self):
+    def test07_weibao_delete(self):
         self.weibao_search()
         search_value_name='米林烟火爆竹有限公司'
         self.dr.find_element_by_xpath('//*[@id="compName"]').send_keys(search_value_name)

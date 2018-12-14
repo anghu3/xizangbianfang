@@ -1,90 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AutoTestManager">
-    <enabled-run-configurations>
-      <run-configuration type="tests" name="Unittests in test四黑人员.py" />
-    </enabled-run-configurations>
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="1bae42d2-efdb-4895-ba83-67a3cd097a5a" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test_群防力量_人员管理.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test_群防力量_人员管理.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test三非人员.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test三非人员.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test上访人员.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test上访人员.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test二线站记录.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test二线站记录.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test二线站车辆过往记录.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test二线站车辆过往记录.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test人口房屋.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test人口房屋.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test人员管理.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test人员管理.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test前科人员.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test前科人员.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ALL/test四黑人员.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test四黑人员.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test在逃人员.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test在逃人员.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test外籍人口.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test外籍人口.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test寺庙.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test寺庙.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test工作对象人员.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test工作对象人员.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test常住人口.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test常住人口.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test暂住人口.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test暂住人口.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test法会.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test法会.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test涉枪人员.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test涉枪人员.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test涉毒人员.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test涉毒人员.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test涉爆人员.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test涉爆人员.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test涉边涉恐涉稳涉外人员.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test涉边涉恐涉稳涉外人员.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test精神病人员.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test精神病人员.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test群防信息管理.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test群防信息管理.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test群防信息采集.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test群防信息采集.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test考核结果.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test考核结果.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test肇事肇祸人员.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test肇事肇祸人员.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test自定义人员.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test自定义人员.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test自定义车辆.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test自定义车辆.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test被盗车辆信息.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test被盗车辆信息.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test警员考核.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test警员考核.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test警员自评及上级评价.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test警员自评及上级评价.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test车辆基本信息.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test车辆基本信息.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test边防证办理情况.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test边防证办理情况.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test违法犯罪人员.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test违法犯罪人员.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALL/test驾驶员信息.py" beforeDir="false" afterPath="$PROJECT_DIR$/ALL/test驾驶员信息.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test_case/CLGL/test二线站车辆过往记录.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/CLGL/test二线站车辆过往记录.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/CLGL/test自定义车辆.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/CLGL/test自定义车辆.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/CLGL/test被盗车辆信息.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/CLGL/test被盗车辆信息.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/CLGL/test车辆基本信息.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/CLGL/test车辆基本信息.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/JYJXKH/test考核结果.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/JYJXKH/test考核结果.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/JYJXKH/test警员考核.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/JYJXKH/test警员考核.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/JYJXKH/test警员自评及上级评价.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/JYJXKH/test警员自评及上级评价.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/QWGL/test人员请假管理.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/QWGL/test人员请假管理.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/RKGL/test_群防力量_人员管理.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/RKGL/test_群防力量_人员管理.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/RKGL/test三非人员.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/RKGL/test三非人员.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/RKGL/test上访人员.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/RKGL/test上访人员.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/RKGL/test二线站记录.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/RKGL/test二线站记录.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/RKGL/test人口房屋.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/RKGL/test人口房屋.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/RKGL/test前科人员.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/RKGL/test前科人员.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test_case/GLGF/test交通场所.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test_case/GLGF/test危爆场所管理.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test_case/GLGF/test执勤点管理.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test_case/GLGF/test摄像头基本信息管理.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test_case/GLGF/test界碑界桩管理.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test_case/GLGF/test行业场所管理.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test_case/GLGF/test边贸点管理.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test_case/GLGF/test通道便道管理.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Test_case/RKGL/test四黑人员.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/RKGL/test四黑人员.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/RKGL/test在逃人员.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/RKGL/test在逃人员.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/RKGL/test外籍人口.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/RKGL/test外籍人口.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/RKGL/test寺庙.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/RKGL/test寺庙.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/RKGL/test工作对象人员.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/RKGL/test工作对象人员.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/RKGL/test常住人口.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/RKGL/test常住人口.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/RKGL/test暂住人口.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/RKGL/test暂住人口.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/RKGL/test法会.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/RKGL/test法会.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/RKGL/test涉枪人员.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/RKGL/test涉枪人员.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/RKGL/test涉毒人员.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/RKGL/test涉毒人员.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/RKGL/test涉爆人员.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/RKGL/test涉爆人员.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/RKGL/test涉边涉恐涉稳涉外人员.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/RKGL/test涉边涉恐涉稳涉外人员.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/RKGL/test精神病人员.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/RKGL/test精神病人员.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/RKGL/test群防信息管理.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/RKGL/test群防信息管理.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/RKGL/test群防信息采集.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/RKGL/test群防信息采集.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/RKGL/test肇事肇祸人员.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/RKGL/test肇事肇祸人员.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/RKGL/test自定义人员.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/RKGL/test自定义人员.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/RKGL/test边防证办理情况.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/RKGL/test边防证办理情况.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/RKGL/test违法犯罪人员.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/RKGL/test违法犯罪人员.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test_case/RKGL/test驾驶员信息.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/RKGL/test驾驶员信息.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/XTGL/test人员登录日志.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/XTGL/test人员管理.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/XTGL/test组织结构管理.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/XTGL/test警务消息.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test_case/SQJW/test接处警登记.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/SQJW/test接处警登记.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test_case/SQJW/test盘问检查.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/SQJW/test盘问检查.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test_case/SQJW/test矛盾纠纷调解.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/SQJW/test矛盾纠纷调解.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test_case/SQJW/test线索登记.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/SQJW/test线索登记.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test_case/SQJW/test群众工作.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_case/SQJW/test群众工作.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/running_test/RUN_CLGL.py" beforeDir="false" afterPath="$PROJECT_DIR$/running_test/RUN_CLGL.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/running_test/Run_ALL.py" beforeDir="false" afterPath="$PROJECT_DIR$/running_test/Run_ALL.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/running_test/Run_GLGF.py" beforeDir="false" afterPath="$PROJECT_DIR$/running_test/Run_GLGF.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/running_test/Run_QWGL.py" beforeDir="false" afterPath="$PROJECT_DIR$/running_test/Run_QWGL.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/running_test/Run_RKGL.py" beforeDir="false" afterPath="$PROJECT_DIR$/running_test/Run_RKGL.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setting/RKGL.xls" beforeDir="false" afterPath="$PROJECT_DIR$/setting/RKGL.xls" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setting/menu.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/setting/menu.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/running_test/Run_SQJW.py" beforeDir="false" afterPath="$PROJECT_DIR$/running_test/Run_SQJW.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/running_test/Run_XTGL.py" beforeDir="false" afterPath="$PROJECT_DIR$/running_test/Run_XTGL.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setting/CLGL.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/setting/CLGL.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setting/SQJW.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/setting/SQJW.xlsx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -94,21 +37,23 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/xizangbianfang$RUN_CLGL.coverage" NAME="RUN_CLGL Coverage Results" MODIFIED="1544690375091" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/running_test" />
+    <SUITE FILE_PATH="coverage/xizangbianfang$RUN_CLGL.coverage" NAME="RUN_CLGL Coverage Results" MODIFIED="1544750005082" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/running_test" />
     <SUITE FILE_PATH="coverage/xizangbianfang$test.coverage" NAME="test人口房屋 Coverage Results" MODIFIED="1544693075639" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test_case/RKGL" />
     <SUITE FILE_PATH="coverage/xizangbianfang$Unittests_in_test___py.coverage" NAME="Unittests in test_群防力量_人员管理.py Coverage Results" MODIFIED="1544684664014" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test_case/RKGL" />
-    <SUITE FILE_PATH="coverage/xizangbianfang$Unittests_in_test_py.coverage" NAME="Unittests in test四黑人员.py Coverage Results" MODIFIED="1544748518919" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test_case/RKGL" />
+    <SUITE FILE_PATH="coverage/xizangbianfang$Unittests_in_test_py.coverage" NAME="Unittests in test通道便道管理.py Coverage Results" MODIFIED="1544772610750" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test_case/GLFF" />
+    <SUITE FILE_PATH="coverage/xizangbianfang$Run_SQJW.coverage" NAME="Run_SQJW Coverage Results" MODIFIED="1544758004055" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/running_test" />
     <SUITE FILE_PATH="coverage/xizangbianfang$Unittests_in_login_py.coverage" NAME="Unittests in login.py Coverage Results" MODIFIED="1544491908181" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/login" />
     <SUITE FILE_PATH="coverage/xizangbianfang$Run_RKGL.coverage" NAME="Run_RKGL Coverage Results" MODIFIED="1544695177022" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/running_test" />
     <SUITE FILE_PATH="coverage/xizangbianfang$Run_ALL.coverage" NAME="Run_ALL Coverage Results" MODIFIED="1544695988741" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/running_test" />
+    <SUITE FILE_PATH="coverage/xizangbianfang$Run_GLGF.coverage" NAME="Run_GLGF Coverage Results" MODIFIED="1544759458969" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/running_test" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="Run_ALL.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/running_test/Run_ALL.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
-              <caret line="23" column="64" lean-forward="true" selection-start-line="23" selection-start-column="64" selection-end-line="23" selection-end-column="64" />
+            <state relative-caret-position="122">
+              <caret line="15" column="69" lean-forward="true" selection-start-line="15" selection-start-column="69" selection-end-line="15" selection-end-column="69" />
               <folding>
                 <element signature="e#84#99#0" expanded="true" />
               </folding>
@@ -117,17 +62,58 @@
         </entry>
       </file>
       <file leaf-file-name="test四黑人员.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ALL/test四黑人员.py">
+        <entry file="file://$PROJECT_DIR$/Test_case/RKGL/test四黑人员.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1386" />
+            <state relative-caret-position="319">
+              <caret line="93" column="27" lean-forward="true" selection-start-line="93" selection-start-column="27" selection-end-line="93" selection-end-column="27" />
+              <folding>
+                <element signature="e#83#98#0" expanded="true" />
+              </folding>
+            </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test四黑人员.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Test_case/RKGL/test四黑人员.py">
+      <file leaf-file-name="Run_GLGF.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/running_test/Run_GLGF.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1012">
-              <caret line="129" lean-forward="true" selection-start-line="129" selection-end-line="129" />
+            <state relative-caret-position="153">
+              <caret line="12" column="26" lean-forward="true" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test界碑界桩管理.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Test_case/GLFF/test界碑界桩管理.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="15" selection-start-line="15" selection-end-line="16" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test行业场所管理.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Test_case/GLFF/test行业场所管理.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="263">
+              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="16" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test边贸点管理.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Test_case/GLFF/test边贸点管理.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="15" selection-start-line="15" selection-end-line="16" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test通道便道管理.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Test_case/GLFF/test通道便道管理.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="107">
+              <caret line="210" column="13" selection-start-line="210" selection-start-column="13" selection-end-line="210" selection-end-column="13" />
               <folding>
                 <element signature="e#83#98#0" expanded="true" />
               </folding>
@@ -155,16 +141,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/CLGL/test自定义车辆.py" />
-        <option value="$PROJECT_DIR$/RKGL/test三非人员.py" />
-        <option value="$PROJECT_DIR$/Test_case/RKGL/test_群防力量_人员管理.py" />
-        <option value="$PROJECT_DIR$/Test_case/QWGL/test人员请假管理.py" />
-        <option value="$PROJECT_DIR$/running_test/RUN_CLGL.py" />
-        <option value="$PROJECT_DIR$/running_test/Run_ALL.py" />
-        <option value="E:/python/Lib/public_package/pubilc_package.py" />
-        <option value="$PROJECT_DIR$/Test_case/RKGL/test人口房屋.py" />
-        <option value="$PROJECT_DIR$/running_test/Run_RKGL.py" />
-        <option value="$PROJECT_DIR$/Test_case/test_群防力量_人员管理.py" />
         <option value="$PROJECT_DIR$/Test_case/RKGL/test三非人员.py" />
         <option value="$PROJECT_DIR$/Test_case/RKGL/test上访人员.py" />
         <option value="$PROJECT_DIR$/Test_case/RKGL/test二线站记录.py" />
@@ -188,7 +164,6 @@
         <option value="$PROJECT_DIR$/Test_case/RKGL/test边防证办理情况.py" />
         <option value="$PROJECT_DIR$/Test_case/RKGL/test违法犯罪人员.py" />
         <option value="$PROJECT_DIR$/Test_case/RKGL/test驾驶员信息.py" />
-        <option value="$PROJECT_DIR$/Test_case/CLGL/test二线站车辆过往记录.py" />
         <option value="$PROJECT_DIR$/Test_case/CLGL/test自定义车辆.py" />
         <option value="$PROJECT_DIR$/Test_case/CLGL/test被盗车辆信息.py" />
         <option value="$PROJECT_DIR$/Test_case/CLGL/test车辆基本信息.py" />
@@ -196,7 +171,27 @@
         <option value="$PROJECT_DIR$/Test_case/JYJXKH/test警员考核.py" />
         <option value="$PROJECT_DIR$/Test_case/JYJXKH/test警员自评及上级评价.py" />
         <option value="$PROJECT_DIR$/Test_case/XTGL/test人员管理.py" />
+        <option value="$PROJECT_DIR$/running_test/RUN_CLGL.py" />
+        <option value="$PROJECT_DIR$/running_test/Run_ALL.py" />
+        <option value="$PROJECT_DIR$/Test_case/CLGL/test二线站车辆过往记录.py" />
         <option value="$PROJECT_DIR$/Test_case/RKGL/test四黑人员.py" />
+        <option value="$PROJECT_DIR$/running_test/Run_RKGL.py" />
+        <option value="$PROJECT_DIR$/running_test/Run_SQJW.py" />
+        <option value="$PROJECT_DIR$/running_test/Run_GLGF.py" />
+        <option value="$PROJECT_DIR$/running_test/Run_QWGL.py" />
+        <option value="$PROJECT_DIR$/running_test/Run_XTGL.py" />
+        <option value="$PROJECT_DIR$/Test_case/SQJW/test群众工作.py" />
+        <option value="$PROJECT_DIR$/Test_case/SQJW/test线索登记.py" />
+        <option value="$PROJECT_DIR$/Test_case/SQJW/test矛盾纠纷调解.py" />
+        <option value="$PROJECT_DIR$/Test_case/SQJW/test接处警登记.py" />
+        <option value="$PROJECT_DIR$/Test_case/SQJW/test盘问检查.py" />
+        <option value="$PROJECT_DIR$/Test_case/GLFF/test执勤点管理.py" />
+        <option value="$PROJECT_DIR$/Test_case/GLFF/test危爆场所管理.py" />
+        <option value="$PROJECT_DIR$/Test_case/GLFF/test摄像头基本信息管理.py" />
+        <option value="$PROJECT_DIR$/Test_case/GLFF/test界碑界桩管理.py" />
+        <option value="$PROJECT_DIR$/Test_case/GLFF/test行业场所管理.py" />
+        <option value="$PROJECT_DIR$/Test_case/GLFF/test边贸点管理.py" />
+        <option value="$PROJECT_DIR$/Test_case/GLFF/test通道便道管理.py" />
       </list>
     </option>
   </component>
@@ -237,7 +232,13 @@
               <item name="xizangbianfang" type="b2602c69:ProjectViewProjectNode" />
               <item name="xizangbianfang" type="462c0819:PsiDirectoryNode" />
               <item name="Test_case" type="462c0819:PsiDirectoryNode" />
-              <item name="RKGL" type="462c0819:PsiDirectoryNode" />
+              <item name="CLGL" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xizangbianfang" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xizangbianfang" type="462c0819:PsiDirectoryNode" />
+              <item name="Test_case" type="462c0819:PsiDirectoryNode" />
+              <item name="GLFF" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -269,76 +270,75 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests in test四黑人员.py">
-    <configuration name="Run_ALL" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="xizangbianfang" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/running_test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/running_test/Run_ALL.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
-    <configuration name="Run_RKGL" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="xizangbianfang" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/running_test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/running_test/Run_RKGL.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
-    <configuration name="test人口房屋" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="xizangbianfang" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test_case/RKGL" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Test_case/RKGL/test人口房屋.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
-    <configuration name="Unittests in test人口房屋.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python tests.Unittests in test通道便道管理.py">
+    <configuration name="Unittests in test通道便道管理.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="xizangbianfang" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test_case/RKGL" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test_case/GLFF" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/Test_case/RKGL/test人口房屋.py&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/Test_case/GLFF/test通道便道管理.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+    </configuration>
+    <configuration name="Unittests in test摄像头基本信息管理.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="xizangbianfang" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test_case/GLFF" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/Test_case/GLFF/test摄像头基本信息管理.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+    </configuration>
+    <configuration name="Unittests in test边贸点管理.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="xizangbianfang" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test_case/GLFF" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/Test_case/GLFF/test边贸点管理.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+    </configuration>
+    <configuration name="Unittests in test界碑界桩管理.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="xizangbianfang" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test_case/GLFF" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/Test_case/GLFF/test界碑界桩管理.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+    </configuration>
+    <configuration name="Unittests in test行业场所管理.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="xizangbianfang" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test_case/GLFF" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/Test_case/GLFF/test行业场所管理.py&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
     </configuration>
     <configuration name="Unittests in test四黑人员.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
@@ -384,19 +384,19 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
     </configuration>
     <list>
-      <item itemvalue="Python.Run_ALL" />
-      <item itemvalue="Python.Run_RKGL" />
-      <item itemvalue="Python tests.Unittests in test人口房屋.py" />
-      <item itemvalue="Python.test人口房屋" />
-      <item itemvalue="Python tests.Unittests in test四黑人员.py" />
+      <item itemvalue="Python tests.Unittests in test摄像头基本信息管理.py" />
+      <item itemvalue="Python tests.Unittests in test界碑界桩管理.py" />
+      <item itemvalue="Python tests.Unittests in test行业场所管理.py" />
+      <item itemvalue="Python tests.Unittests in test边贸点管理.py" />
+      <item itemvalue="Python tests.Unittests in test通道便道管理.py" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Unittests in test四黑人员.py" />
-        <item itemvalue="Python.Run_ALL" />
-        <item itemvalue="Python.Run_RKGL" />
-        <item itemvalue="Python tests.Unittests in test人口房屋.py" />
-        <item itemvalue="Python.test人口房屋" />
+        <item itemvalue="Python tests.Unittests in test通道便道管理.py" />
+        <item itemvalue="Python tests.Unittests in test边贸点管理.py" />
+        <item itemvalue="Python tests.Unittests in test行业场所管理.py" />
+        <item itemvalue="Python tests.Unittests in test界碑界桩管理.py" />
+        <item itemvalue="Python tests.Unittests in test摄像头基本信息管理.py" />
       </list>
     </recent_temporary>
   </component>
@@ -414,35 +414,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_test人口房屋_py - 2018.12.13 at 17h 36m 12s.xml">
-      <configuration name="Unittests in test人口房屋.py" configurationId="tests" />
+    <history-entry file="Unittests_in_test执勤点管理_py - 2018.12.14 at 13h 52m 23s.xml">
+      <configuration name="Unittests in test执勤点管理.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test人口房屋_py - 2018.12.13 at 17h 38m 38s.xml">
-      <configuration name="Unittests in test人口房屋.py" configurationId="tests" />
+    <history-entry file="Unittests_in_test危爆场所管理_py - 2018.12.14 at 13h 57m 20s.xml">
+      <configuration name="Unittests in test危爆场所管理.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test人口房屋_py - 2018.12.13 at 17h 39m 03s.xml">
-      <configuration name="Unittests in test人口房屋.py" configurationId="tests" />
+    <history-entry file="Unittests_in_test摄像头基本信息管理_py - 2018.12.14 at 14h 07m 20s.xml">
+      <configuration name="Unittests in test摄像头基本信息管理.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test人口房屋_py - 2018.12.13 at 17h 39m 56s.xml">
-      <configuration name="Unittests in test人口房屋.py" configurationId="tests" />
+    <history-entry file="Unittests_in_test界碑界桩管理_py - 2018.12.14 at 14h 49m 37s.xml">
+      <configuration name="Unittests in test界碑界桩管理.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test人口房屋_py - 2018.12.13 at 17h 58m 57s.xml">
-      <configuration name="Unittests in test人口房屋.py" configurationId="tests" />
+    <history-entry file="Unittests_in_test界碑界桩管理_py - 2018.12.14 at 14h 51m 10s.xml">
+      <configuration name="Unittests in test界碑界桩管理.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test四黑人员_py - 2018.12.14 at 08h 33m 25s.xml">
-      <configuration name="Unittests in test四黑人员.py" configurationId="tests" />
+    <history-entry file="Unittests_in_test界碑界桩管理_py - 2018.12.14 at 14h 56m 53s.xml">
+      <configuration name="Unittests in test界碑界桩管理.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test四黑人员_py - 2018.12.14 at 08h 35m 18s.xml">
-      <configuration name="Unittests in test四黑人员.py" configurationId="tests" />
+    <history-entry file="Unittests_in_test行业场所管理_py - 2018.12.14 at 15h 02m 46s.xml">
+      <configuration name="Unittests in test行业场所管理.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test四黑人员_py - 2018.12.14 at 08h 38m 15s.xml">
-      <configuration name="Unittests in test四黑人员.py" configurationId="tests" />
+    <history-entry file="Unittests_in_test行业场所管理_py - 2018.12.14 at 15h 07m 58s.xml">
+      <configuration name="Unittests in test行业场所管理.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test四黑人员_py - 2018.12.14 at 08h 41m 19s.xml">
-      <configuration name="Unittests in test四黑人员.py" configurationId="tests" />
+    <history-entry file="Unittests_in_test边贸点管理_py - 2018.12.14 at 15h 14m 02s.xml">
+      <configuration name="Unittests in test边贸点管理.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test四黑人员_py - 2018.12.14 at 08h 45m 54s.xml">
-      <configuration name="Unittests in test四黑人员.py" configurationId="tests" />
+    <history-entry file="Unittests_in_test通道便道管理_py - 2018.12.14 at 15h 20m 35s.xml">
+      <configuration name="Unittests in test通道便道管理.py" configurationId="tests" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
@@ -453,9 +453,9 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.32936078" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.5124594" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.37378114" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18283582" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26439232" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -487,155 +487,20 @@
           <line>7</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Test_case/SQJW/test矛盾纠纷调解.py</url>
+          <line>6</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="5" />
+      <option name="time" value="6" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/login/login.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="43" column="36" lean-forward="true" selection-start-line="43" selection-start-column="36" selection-end-line="43" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RKGL/test三非人员.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="741">
-          <caret line="54" lean-forward="true" selection-start-line="53" selection-start-column="32" selection-end-line="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test_case/RKGL/test僧尼.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test_case/QWGL/test人员请假管理.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="15" column="50" selection-start-line="15" selection-start-column="50" selection-end-line="15" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test_case/login/login.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#84#99#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test_case/XTGL/test组织结构管理.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test_case/XTGL/test警务消息.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test_case/XTGL/test人员登录日志.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test_case/SQJW/test接处警登记.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-198" />
-      </provider>
-    </entry>
-    <entry file="file://E:/python/Lib/xlrd/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="117" column="42" lean-forward="true" selection-start-line="117" selection-start-column="42" selection-end-line="117" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/running_test/RUN_CLGL.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="13" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test_case/test_群防力量_人员管理.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="20" column="5" lean-forward="true" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
-          <folding>
-            <element signature="e#83#98#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test_case/RKGL/test_群防力量_人员管理.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="26" column="12" lean-forward="true" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test_case/RKGL/test三非人员.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="23" column="18" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
-          <folding>
-            <element signature="e#83#98#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test_case/RKGL/test上访人员.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
-          <folding>
-            <element signature="e#83#98#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://E:/python/Lib/public_package/pubilc_package.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="26" column="77" lean-forward="true" selection-start-line="26" selection-start-column="77" selection-end-line="26" selection-end-column="77" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test_case/RKGL/test二线站记录.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="25" column="18" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
-          <folding>
-            <element signature="e#84#99#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test_case/RKGL/test人口房屋.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="20" column="5" lean-forward="true" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
-          <folding>
-            <element signature="e#83#98#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/running_test/Run_RKGL.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-          <folding>
-            <element signature="e#83#135#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Test_case/RKGL/test前科人员.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="259">
           <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
-          <folding>
-            <element signature="e#83#98#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -643,9 +508,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
           <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
-          <folding>
-            <element signature="e#83#98#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -660,9 +522,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
           <caret line="23" selection-start-line="23" selection-end-line="23" />
-          <folding>
-            <element signature="e#83#98#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -670,9 +529,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
           <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
-          <folding>
-            <element signature="e#83#98#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -680,9 +536,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22">
           <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
-          <folding>
-            <element signature="e#84#99#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -690,9 +543,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
           <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
-          <folding>
-            <element signature="e#83#98#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -703,9 +553,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
-          <folding>
-            <element signature="e#83#98#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -713,9 +560,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
           <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
-          <folding>
-            <element signature="e#83#98#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -723,9 +567,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
-          <folding>
-            <element signature="e#83#98#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -733,9 +574,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="30" column="6" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="6" />
-          <folding>
-            <element signature="e#83#98#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -743,9 +581,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="269">
           <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
-          <folding>
-            <element signature="e#83#98#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -753,9 +588,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
           <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
-          <folding>
-            <element signature="e#83#98#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -763,9 +595,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
-          <folding>
-            <element signature="e#83#98#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -783,9 +612,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-22">
           <caret line="23" column="18" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
-          <folding>
-            <element signature="e#83#98#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -793,9 +619,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="251">
           <caret line="23" column="18" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
-          <folding>
-            <element signature="e#83#98#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -803,9 +626,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
           <caret line="26" column="18" selection-start-line="26" selection-start-column="18" selection-end-line="26" selection-end-column="18" />
-          <folding>
-            <element signature="e#84#99#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -813,9 +633,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="179">
           <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
-          <folding>
-            <element signature="e#83#98#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -823,9 +640,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="283">
           <caret line="25" column="18" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
-          <folding>
-            <element signature="e#83#98#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -833,9 +647,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="282">
           <caret line="25" column="45" selection-start-line="25" selection-start-column="45" selection-end-line="25" selection-end-column="45" />
-          <folding>
-            <element signature="e#83#98#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -843,9 +654,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="64">
           <caret line="24" selection-start-line="24" selection-end-line="24" />
-          <folding>
-            <element signature="e#83#98#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -853,9 +661,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="24" selection-start-line="24" selection-end-line="24" />
-          <folding>
-            <element signature="e#83#98#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -863,25 +668,141 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="263">
           <caret line="24" selection-start-line="24" selection-end-line="24" />
-          <folding>
-            <element signature="e#83#98#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test_case/CLGL/test车辆基本信息.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="25" column="18" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
-          <folding>
-            <element signature="e#83#98#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Test_case/CLGL/test被盗车辆信息.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
+          <caret line="25" column="18" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ALL/test四黑人员.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="80" column="21" lean-forward="true" selection-start-line="80" selection-start-column="21" selection-end-line="80" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test_case/CLGL/test二线站车辆过往记录.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1185">
+          <caret line="91" column="33" lean-forward="true" selection-start-line="91" selection-start-column="33" selection-end-line="91" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/running_test/RUN_CLGL.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="16" column="19" lean-forward="true" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/running_test/Run_QWGL.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="20" column="46" selection-start-line="20" selection-start-column="46" selection-end-line="20" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/running_test/Run_RKGL.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="22" column="45" selection-start-line="22" selection-start-column="45" selection-end-line="22" selection-end-column="45" />
+          <folding>
+            <element signature="e#83#135#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/running_test/Run_XTGL.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="20" column="42" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test_case/SQJW/test群众工作.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="395">
+          <caret line="30" column="14" selection-start-line="30" selection-start-column="14" selection-end-line="30" selection-end-column="14" />
+          <folding>
+            <element signature="e#83#98#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test_case/SQJW/test线索登记.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="30" column="14" selection-start-line="30" selection-start-column="14" selection-end-line="30" selection-end-column="14" />
+          <folding>
+            <element signature="e#83#98#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test_case/SQJW/test矛盾纠纷调解.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="30" column="14" selection-start-line="30" selection-start-column="14" selection-end-line="30" selection-end-column="14" />
+          <folding>
+            <element signature="e#83#98#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test_case/SQJW/test盘问检查.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="30" column="14" selection-start-line="30" selection-start-column="14" selection-end-line="30" selection-end-column="14" />
+          <folding>
+            <element signature="e#83#98#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test_case/SQJW/test接处警登记.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="30" column="14" selection-start-line="30" selection-start-column="14" selection-end-line="30" selection-end-column="14" />
+          <folding>
+            <element signature="e#83#98#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/running_test/Run_SQJW.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="349">
+          <caret line="22" column="74" lean-forward="true" selection-start-line="22" selection-start-column="74" selection-end-line="22" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/running_test/Run_ALL.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="122">
+          <caret line="15" column="69" lean-forward="true" selection-start-line="15" selection-start-column="69" selection-end-line="15" selection-end-column="69" />
+          <folding>
+            <element signature="e#84#99#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/running_test/Run_GLGF.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="12" column="26" lean-forward="true" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test_case/CLGL/test车辆基本信息.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
           <caret line="25" column="18" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
           <folding>
             <element signature="e#83#98#0" expanded="true" />
@@ -891,43 +812,67 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Test_case/CLGL/test自定义车辆.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
-          <folding>
-            <element signature="e#83#98#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-459">
+          <caret line="13" column="1" selection-start-line="13" selection-end-line="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Test_case/CLGL/test二线站车辆过往记录.py">
+    <entry file="file://$PROJECT_DIR$/Test_case/GLFF/test执勤点管理.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="24" selection-start-line="24" selection-end-line="24" />
-          <folding>
-            <element signature="e#83#98#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="132">
+          <caret line="15" selection-start-line="15" selection-end-line="16" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/running_test/Run_ALL.py">
+    <entry file="file://$PROJECT_DIR$/Test_case/GLFF/test危爆场所管理.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="23" column="64" lean-forward="true" selection-start-line="23" selection-start-column="64" selection-end-line="23" selection-end-column="64" />
-          <folding>
-            <element signature="e#84#99#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="85">
+          <caret line="16" selection-start-line="16" selection-end-line="17" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ALL/test四黑人员.py">
+    <entry file="file://$PROJECT_DIR$/Test_case/GLFF/test摄像头基本信息管理.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1386" />
+        <state relative-caret-position="352">
+          <caret line="16" selection-start-line="16" selection-end-line="17" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test_case/GLFF/test界碑界桩管理.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="15" selection-start-line="15" selection-end-line="16" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test_case/GLFF/test行业场所管理.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="16" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test_case/GLFF/test边贸点管理.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="15" selection-start-line="15" selection-end-line="16" selection-end-column="11" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Test_case/RKGL/test四黑人员.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1012">
-          <caret line="129" lean-forward="true" selection-start-line="129" selection-end-line="129" />
+        <state relative-caret-position="319">
+          <caret line="93" column="27" lean-forward="true" selection-start-line="93" selection-start-column="27" selection-end-line="93" selection-end-column="27" />
+          <folding>
+            <element signature="e#83#98#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test_case/GLFF/test通道便道管理.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="107">
+          <caret line="210" column="13" selection-start-line="210" selection-start-column="13" selection-end-line="210" selection-end-column="13" />
           <folding>
             <element signature="e#83#98#0" expanded="true" />
           </folding>

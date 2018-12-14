@@ -13,7 +13,8 @@ import os
 import re
 from public_package.pubilc_package import url,login_name,login_name_test,login_password,login_password_test
 from public_package.pubilc_package import TESTCASE
-import HTMLTestRunner
+from public_package.pubilc_package import sheet_setting, search, reset, currMenupath, page_title, goback, saveBtn , sheet_menu,sheet_prompt_message,work_space
+import xlrd
 '''
 用例名称：
 用例编号：
@@ -40,17 +41,17 @@ class TESTCAST_ZHIQINDIAN(TESTCASE):
 
     def zhiqindian_search(self):
         self.login(login_name, login_password)
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[2]/div/div/div/div/div/div/a[1]/div[2]/img[2]').click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(1,41,42)[0]).click()
         time.sleep(5)
-        self.assertEqual('管理防范',self.dr.find_element_by_xpath('//*[@id="currMenu"]').text, '管理防范')
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div/ul/li/p[2]').click()
-        self.dr.find_element_by_xpath('//*[@id="959"]').click()
+        self.assertEqual('管理防范',self.dr.find_element_by_xpath(currMenupath).text, '管理防范')
+        self.dr.find_element_by_xpath(sheet_menu.col_values(3,41,42)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(5,41,42)[0]).click()
         self.dr.switch_to.frame('iframeb')
         time.sleep(5)
         self.assertEqual('执勤点列表', self.dr.find_element_by_xpath('/html/body/div[1]/p').text,
                          '执勤点管理')
 
-    def test1_zhiqindian_add(self):
+    def test01_zhiqindian_add(self):
         self.zhiqindian_search()
         self.dr.find_element_by_xpath('/html/body/div[4]/div[1]/div[2]/a[2]').click()
         add_value_name='色拉崩坚执勤任务'
@@ -82,14 +83,16 @@ class TESTCAST_ZHIQINDIAN(TESTCASE):
         self.dr.find_element_by_xpath('//*[@id="gxtreeSelect_45_switch"]').click()
         time.sleep(1)
         self.dr.find_element_by_xpath('//*[@id="gxtreeSelect_46_span"]').click()
+        time.sleep(2)
         self.dr.find_element_by_xpath('//*[@id="saveDuty"]').click()
-        time.sleep(3)
-        self.dr.find_element_by_xpath('/html/body/a').click()
-        self.dr.implicitly_wait(2)
-        self.assertEqual(add_value_name,self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[4]').text,'校验返回功能和默认排序')
+        self.dr.switch_to.default_content()
+        self.dr.switch_to.frame('iframeb')
+        time.sleep(1)
+        self.assertEqual(sheet_prompt_message.col_values(1, 4, 5)[0],
+                         self.dr.find_element_by_xpath('//*[@id="gritter-item-1"]/div[2]/div[2]/p').text, '新增成功提示信息校验')
         print('管理防范-执勤点管理：新增功能正常')
 
-    def test2_zhiqindian_search_codeid(self):
+    def test02_zhiqindian_search_codeid(self):
         self.zhiqindian_search()
         search_value_codeid=codeid
         # print(search_value_codeid)
@@ -109,7 +112,7 @@ class TESTCAST_ZHIQINDIAN(TESTCASE):
         self.assertEqual(search_value_codeid, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[3]').text,'校验返回功能和默认排序')
         print('管理防范-执勤点管理：编号查询功能正常')
 
-    def test3_zhiqindian_search_name(self):
+    def test03_zhiqindian_search_name(self):
         self.zhiqindian_search()
         search_value_name='色拉崩坚执勤任务'
         self.dr.find_element_by_xpath('//*[@id="name"]').send_keys(search_value_name)
@@ -128,7 +131,7 @@ class TESTCAST_ZHIQINDIAN(TESTCASE):
         self.assertEqual(search_value_name, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[4]').text,'校验返回功能和默认排序')
         print('管理防范-执勤点管理：名称查询功能正常')
 
-    def test4_zhiqindian_search_address(self):
+    def test04_zhiqindian_search_address(self):
         self.zhiqindian_search()
         search_value_address='拉萨市城关区色拉路1号'
         self.dr.find_element_by_xpath('//*[@id="location"]').send_keys(search_value_address)
@@ -147,7 +150,7 @@ class TESTCAST_ZHIQINDIAN(TESTCASE):
         self.assertEqual(search_value_address, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[5]').text,'校验返回功能和默认排序')
         print('管理防范-执勤点管理：所在名称和具体方位查询功能正常')
 
-    def test5_zhiqindian_search_headName(self):
+    def test05_zhiqindian_search_headName(self):
         self.zhiqindian_search()
         search_value_headName='包涵'
         self.dr.find_element_by_xpath('//*[@id="headName"]').send_keys(search_value_headName)
@@ -166,7 +169,7 @@ class TESTCAST_ZHIQINDIAN(TESTCASE):
         self.assertEqual(search_value_headName, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[8]').text,'校验返回功能和默认排序')
         print('管理防范-执勤点管理：责任人姓名查询功能正常')
 
-    def test6_zhiqindian_search_gldw(self):
+    def test06_zhiqindian_search_gldw(self):
         self.zhiqindian_search()
         search_value_gldw='错那边防大队'
         self.dr.find_element_by_xpath('//*[@id="gxdw"]').click()
@@ -184,7 +187,7 @@ class TESTCAST_ZHIQINDIAN(TESTCASE):
         self.pagination_num(paginal_number, search_value_gldw, column)
         print('管理防范-执勤点管理：管理单位查询功能正常')
 
-    def test7_zhiqindian_search_zrdw(self):
+    def test07_zhiqindian_search_zrdw(self):
         self.zhiqindian_search()
         search_value_zrdw='错那边防大队'
         self.dr.find_element_by_xpath('//*[@id="zrdw"]').click()
@@ -202,7 +205,7 @@ class TESTCAST_ZHIQINDIAN(TESTCASE):
         self.pagination_num(paginal_number, search_value_zrdw, column)
         print('管理防范-执勤点管理：责任单位查询功能正常')
 
-    def test8_zhiqindian_edit(self):
+    def test08_zhiqindian_edit(self):
         self.zhiqindian_search()
         search_value_codeid=codeid
         # print(search_value_codeid)
@@ -225,7 +228,7 @@ class TESTCAST_ZHIQINDIAN(TESTCASE):
         self.assertEqual(edit_value_name, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[4]').text,'校验返回功能和默认排序')
         print('管理防范-执勤点管理：编辑功能正常')
 
-    def test9_zhiqindian_delete(self):
+    def test09_zhiqindian_delete(self):
         self.zhiqindian_search()
         search_value_codeid=codeid
         # print(search_value_codeid)

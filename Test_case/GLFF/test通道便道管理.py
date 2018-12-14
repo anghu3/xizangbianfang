@@ -13,6 +13,8 @@ import os
 import re
 from public_package.pubilc_package import url,login_name,login_name_test,login_password,login_password_test
 from public_package.pubilc_package import TESTCASE
+from public_package.pubilc_package import sheet_setting, search, reset, currMenupath, page_title, goback, saveBtn , sheet_menu,sheet_prompt_message,work_space
+import xlrd
 import HTMLTestRunner
 '''
 用例名称：
@@ -40,17 +42,17 @@ class TESTCAST_TONGDAOBIANDAO(TESTCASE):
 
     def tongdaobiandong_search(self):
         self.login(login_name, login_password)
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[2]/div/div/div/div/div/div/a[1]/div[2]/img[2]').click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(1,40,41)[0]).click()
         time.sleep(5)
-        self.assertEqual('管理防范',self.dr.find_element_by_xpath('//*[@id="currMenu"]').text, '管理防范')
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div/ul/li/p[2]').click()
-        self.dr.find_element_by_xpath('//*[@id="957"]').click()
+        self.assertEqual('管理防范',self.dr.find_element_by_xpath(currMenupath).text, '管理防范')
+        self.dr.find_element_by_xpath(sheet_menu.col_values(3,40,41)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(5,40,41)[0]).click()
         self.dr.switch_to.frame('iframeb')
         time.sleep(5)
         self.assertEqual('通道便道列表', self.dr.find_element_by_xpath('/html/body/div[1]/p').text,
                          '通道便道管理')
 
-    def test1_tongdaobiandao_add(self):
+    def test01_tongdaobiandao_add(self):
         self.tongdaobiandong_search()
         self.dr.find_element_by_xpath('/html/body/div[4]/div[1]/div[2]/a[2]').click()
         add_value_name='陈墉镇中尼通道'
@@ -87,7 +89,7 @@ class TESTCAST_TONGDAOBIANDAO(TESTCASE):
         self.assertEqual('通道便道列表', self.dr.find_element_by_xpath('/html/body/div[1]/p').text,'校验返回功能')
         print('管理防范-通道便道管理：新增功能正常')
 
-    def test2_tongdaobiandao_search_bianhao(self):
+    def test02_tongdaobiandao_search_bianhao(self):
         self.tongdaobiandong_search()
         search_value_biaoham=codeid
         self.dr.find_element_by_xpath('//*[@id="code"]').send_keys(search_value_biaoham)
@@ -106,7 +108,7 @@ class TESTCAST_TONGDAOBIANDAO(TESTCASE):
         self.assertEqual('通道便道列表', self.dr.find_element_by_xpath('/html/body/div[1]/p').text, '校验返回功能')
         print('管理防范-通道便道管理：编号条件查询功能正常')
 
-    def test3_tongdaobiandao_search_name(self):
+    def test03_tongdaobiandao_search_name(self):
         self.tongdaobiandong_search()
         search_value_name='陈墉镇中尼通道'
         self.dr.find_element_by_xpath('//*[@id="name"]').send_keys(search_value_name)
@@ -125,7 +127,7 @@ class TESTCAST_TONGDAOBIANDAO(TESTCASE):
         self.assertEqual('通道便道列表', self.dr.find_element_by_xpath('/html/body/div[1]/p').text, '校验返回功能')
         print('管理防范-通道便道管理：名称条件查询功能正常')
 
-    def test4_tongdaobiandao_search_gldw(self):
+    def test04_tongdaobiandao_search_gldw(self):
         self.tongdaobiandong_search()
         search_value_gldw='扎西岗边防派出所'
         self.dr.find_element_by_xpath('//*[@id="gxdw"]').click()
@@ -145,7 +147,7 @@ class TESTCAST_TONGDAOBIANDAO(TESTCASE):
         self.pagination_num(paginal_number,search_value_gldw,column)
         print('管理防范-通道便道管理：管理单位条件查询功能正常')
 
-    def test5_tongdaobiandao_search_zrdw(self):
+    def test05_tongdaobiandao_search_zrdw(self):
         self.tongdaobiandong_search()
         search_value_zrdw='扎西岗边防派出所'
         self.dr.find_element_by_xpath('//*[@id="zrdw"]').click()
@@ -165,7 +167,7 @@ class TESTCAST_TONGDAOBIANDAO(TESTCASE):
         self.pagination_num(paginal_number,search_value_zrdw,column)
         print('管理防范-通道便道管理：管理单位条件查询功能正常')
 
-    def test6_tongdaobiandao_search_address(self):
+    def test06_tongdaobiandao_search_address(self):
         self.tongdaobiandong_search()
         search_value_address='陈墉镇'
         self.dr.find_element_by_xpath('//*[@id="location"]').send_keys(search_value_address)
@@ -184,7 +186,7 @@ class TESTCAST_TONGDAOBIANDAO(TESTCASE):
         self.assertEqual('通道便道列表', self.dr.find_element_by_xpath('/html/body/div[1]/p').text, '校验返回功能')
         print('管理防范-通道便道管理：所在地名和具体位置条件查询功能正常')
 
-    def test7_tongdaobianhao_edit(self):
+    def test07_tongdaobianhao_edit(self):
         self.tongdaobiandong_search()
         search_value_biaoham = codeid
         self.dr.find_element_by_xpath('//*[@id="code"]').send_keys(search_value_biaoham)
@@ -206,7 +208,7 @@ class TESTCAST_TONGDAOBIANDAO(TESTCASE):
         self.assertEqual(edit_value_name,self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[4]').text,'校验编辑功能是否正常')
         print('管理防范-通道便道管理：编辑功能正常')
 
-    def test8_tongdaobiandao_delete(self):
+    def test08_tongdaobiandao_delete(self):
         self.tongdaobiandong_search()
         search_value_biaohao=codeid
         self.dr.find_element_by_xpath('//*[@id="code"]').send_keys(search_value_biaohao)

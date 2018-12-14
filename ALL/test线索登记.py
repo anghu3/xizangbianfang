@@ -13,6 +13,8 @@ import os
 import re
 from public_package.pubilc_package import url,login_name,login_name_test,login_password,login_password_test
 from public_package.pubilc_package import TESTCASE
+from public_package.pubilc_package import sheet_setting, search, reset, currMenupath, page_title, goback, saveBtn,sheet_menu,sheet_prompt_message,work_space
+import xlrd
 import HTMLTestRunner
 '''
 用例名称：
@@ -21,7 +23,12 @@ import HTMLTestRunner
 用例作者：
 '''
 
-class TESTCAST_XSDJ(TESTCASE):
+# xlsfile=work_space+r'\\'+sheet_menu.col_values(6,50,51)[0]
+# excel = xlrd.open_workbook(xlsfile)
+# global sheet
+# sheet = excel.sheet_by_name('线索登记')
+
+class TESTCASE_XSDJ(TESTCASE):
     def setUp(self):
         self.dr = webdriver.Chrome()
         self.dr.maximize_window()
@@ -38,14 +45,14 @@ class TESTCAST_XSDJ(TESTCASE):
 
     def xsdj_search(self):
         self.login(login_name, login_password)
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[2]/div/div/div/div/div/div/a[3]/div[2]/img[2]').click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(1,46,47)[0]).click()
         time.sleep(5)
-        self.assertEqual('社区警务',self.dr.find_element_by_xpath('//*[@id="currMenu"]').text, '社区警务')
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div/ul/li[1]/p[2]').click()
-        self.dr.find_element_by_xpath('//*[@id="945"]').click()
+        self.assertEqual('社区警务',self.dr.find_element_by_xpath(currMenupath).text, '社区警务')
+        self.dr.find_element_by_xpath(sheet_menu.col_values(3,46,47)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(5,46,47)[0]).click()
         self.dr.switch_to.frame('iframeb')
         time.sleep(5)
-        self.assertEqual('线索登记列表', self.dr.find_element_by_xpath('/html/body/div[1]/div').text,
+        self.assertEqual('线索登记列表', self.dr.find_element_by_xpath(page_title).text,
                          '线索登记')
 
     def test1_xsdj_add(self):

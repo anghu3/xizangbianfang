@@ -13,6 +13,8 @@ import os
 import re
 from public_package.pubilc_package import url,login_name,login_name_test,login_password,login_password_test
 from public_package.pubilc_package import TESTCASE
+from public_package.pubilc_package import sheet_setting, search, reset, currMenupath, page_title, goback, saveBtn , sheet_menu,sheet_prompt_message,work_space
+import xlrd
 import HTMLTestRunner
 '''
 用例名称：
@@ -38,17 +40,17 @@ class TESTCAST_HANGYECHANGSUO(TESTCASE):
 
     def hangyechangsuo_search(self):
         self.login(login_name, login_password)
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[2]/div/div/div/div/div/div/a[1]/div[2]/img[2]').click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(1,38,39)[0]).click()
         time.sleep(5)
-        self.assertEqual('管理防范',self.dr.find_element_by_xpath('//*[@id="currMenu"]').text, '管理防范')
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div/ul/li/p[2]').click()
-        self.dr.find_element_by_xpath('//*[@id="958"]').click()
+        self.assertEqual('管理防范',self.dr.find_element_by_xpath(currMenupath).text, '管理防范')
+        self.dr.find_element_by_xpath(sheet_menu.col_values(3,38,39)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(5,38,39)[0]).click()
         self.dr.switch_to.frame('iframeb')
         time.sleep(5)
         self.assertEqual('行业管理列表', self.dr.find_element_by_xpath('/html/body/div[1]/p').text,
                          '行业场所管理')
 
-    def test1_hangyechangsuo_add(self):
+    def test01_hangyechangsuo_add(self):
         self.hangyechangsuo_search()
         self.dr.find_element_by_xpath('/html/body/div[4]/div[1]/div[2]/a[2]').click()
         self.dr.find_element_by_xpath('//*[@id="localityName"]').click()
@@ -75,12 +77,14 @@ class TESTCAST_HANGYECHANGSUO(TESTCASE):
         self.dr.find_element_by_xpath('//*[@id="jqtreeSelect_5_switch"]').click()
         time.sleep(1)
         self.dr.find_element_by_xpath('//*[@id="jqtreeSelect_6_span"]').click()
+        time.sleep(1)
         self.dr.find_element_by_xpath('//*[@id="policeAreaContactTel"]').send_keys('15874587458')
         '''选择行业类型'''
         self.dr.find_element_by_xpath('//*[@id="zprxm2"]').click()
         self.dr.find_element_by_xpath('//*[@id="treeSelect2_52_switch"]').click()
         time.sleep(2)
         self.dr.find_element_by_xpath('//*[@id="treeSelect2_53_span"]').click()
+        time.sleep(1)
         '''选择企业性质'''
         Select(self.dr.find_element_by_xpath('//*[@id="character"]')).select_by_value('16')
         '''输入企业注册名称'''
@@ -94,9 +98,14 @@ class TESTCAST_HANGYECHANGSUO(TESTCASE):
         self.dr.find_element_by_xpath('//*[@id="businessAddress"]').send_keys('江苏路101号')
         '''点击保存'''
         self.dr.find_element_by_xpath('//*[@id="saveIndus"]').click()
+        self.dr.switch_to.default_content()
+        self.dr.switch_to.frame('iframeb')
+        time.sleep(1)
+        self.assertEqual(sheet_prompt_message.col_values(1, 4, 5)[0],
+                         self.dr.find_element_by_xpath('//*[@id="gritter-item-1"]/div[2]/div[2]/p').text, '新增成功提示信息校验')
         print('管理防范-行业场所管理：新增功能正常')
 
-    def test2_hangyechangsuo_search_farendaibiao(self):
+    def test02_hangyechangsuo_search_farendaibiao(self):
         self.hangyechangsuo_search()
         search_value_farendaibiao='张学阳'
         self.dr.find_element_by_xpath('//*[@id="legalRepresentative"]').send_keys(search_value_farendaibiao)
@@ -114,7 +123,7 @@ class TESTCAST_HANGYECHANGSUO(TESTCASE):
         self.assertEqual('行业管理列表', self.dr.find_element_by_xpath('/html/body/div[1]/p').text,'校验返回功能')
         print('管理防范-行业场所管理：法人代表条件查询功能正常')
 
-    def test3_hangyechangsuo_search_registrationName(self):
+    def test03_hangyechangsuo_search_registrationName(self):
         self.hangyechangsuo_search()
         search_value_registrationName='精伦电子'
         self.dr.find_element_by_xpath('//*[@id="registrationName"]').send_keys(search_value_registrationName)
@@ -132,11 +141,13 @@ class TESTCAST_HANGYECHANGSUO(TESTCASE):
         self.assertEqual('行业管理列表', self.dr.find_element_by_xpath('/html/body/div[1]/p').text,'校验返回功能')
         print('管理防范-行业场所管理：企业名称条件查询功能正常')
 
-    def test4_hangyechangsuo_search_hangyeleibie(self):
+    def test04_hangyechangsuo_search_hangyeleibie(self):
         self.hangyechangsuo_search()
         search_value_zprxm='其他'
         self.dr.find_element_by_xpath('//*[@id="zprxm"]').click()
+        time.sleep(1)
         self.dr.find_element_by_xpath('//*[@id="treeSelect_52_switch"]').click()
+        time.sleep(1)
         self.dr.find_element_by_xpath('//*[@id="treeSelect_53_span"]').click()
         time.sleep(2)
         self.dr.find_element_by_xpath('//*[@id="search"]').click()
@@ -153,7 +164,7 @@ class TESTCAST_HANGYECHANGSUO(TESTCASE):
         self.assertEqual('行业管理列表', self.dr.find_element_by_xpath('/html/body/div[1]/p').text,'校验返回功能')
         print('管理防范-行业场所管理：行业类别条件查询功能正常')
 
-    def test5_hangyechangsuo_search_businessAddress(self):
+    def test05_hangyechangsuo_search_businessAddress(self):
         self.hangyechangsuo_search()
         search_value_businessAddress='江苏路101号'
         self.dr.find_element_by_xpath('//*[@id="businessAddress"]').send_keys(search_value_businessAddress)
@@ -171,7 +182,7 @@ class TESTCAST_HANGYECHANGSUO(TESTCASE):
         self.assertEqual('行业管理列表', self.dr.find_element_by_xpath('/html/body/div[1]/p').text,'校验返回功能')
         print('管理防范-行业场所管理：经营地址条件查询功能正常')
 
-    def test6_hangyechangsuo_deleet(self):
+    def test06_hangyechangsuo_deleet(self):
         self.hangyechangsuo_search()
         search_value_registrationName = '精伦电子'
         self.dr.find_element_by_xpath('//*[@id="registrationName"]').send_keys(search_value_registrationName)

@@ -15,7 +15,7 @@ def allcase():
     case_dir_rk=dir_file+r'\..\ALL'
     # case_dir_rk=r'E:\workspace\webcase\西藏边防系统脚本\xizangbianfang\ALL'
     discover=unittest.defaultTestLoader.discover(case_dir_rk,pattern='test*.py')
-    print(discover)
+    # print(discover)
     return discover
 
 if __name__ == '__main__':

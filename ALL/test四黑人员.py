@@ -145,7 +145,7 @@ class TESTCAST_SIHEI(TESTCASE):
         self.dr.find_element_by_xpath(search).click()
         time.sleep(2)
         self.assertEqual('', self.dr.find_element_by_xpath(dutyPerson_path).get_attribute('value'), '责任人-重置功能异常')
-        print('人口管理-部局七类库-四黑人员：身份证号条件查询功能正常')
+        print('人口管理-部局七类库-四黑人员：责任人条件查询功能正常')
 
     def test05_sihei_search_personType(self):
         self.sihei_search()

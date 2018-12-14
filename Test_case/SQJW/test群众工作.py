@@ -13,6 +13,8 @@ import os
 import re
 from public_package.pubilc_package import url,login_name,login_name_test,login_password,login_password_test
 from public_package.pubilc_package import TESTCASE
+from public_package.pubilc_package import sheet_setting, search, reset, currMenupath, page_title, goback, saveBtn,sheet_menu,sheet_prompt_message,work_space
+import xlrd
 import HTMLTestRunner
 '''
 用例名称：
@@ -21,7 +23,12 @@ import HTMLTestRunner
 用例作者：
 '''
 
-class TESTCAST_QZGZ(TESTCASE):
+# xlsfile=work_space+r'\\'+sheet_menu.col_values(6,50,51)[0]
+# excel = xlrd.open_workbook(xlsfile)
+# global sheet
+# sheet = excel.sheet_by_name('群众工作')
+
+class TESTCASE_QZGZ(TESTCASE):
     def setUp(self):
         self.dr = webdriver.Chrome()
         self.dr.maximize_window()
@@ -38,17 +45,17 @@ class TESTCAST_QZGZ(TESTCASE):
 
     def qzgz_search(self):
         self.login(login_name, login_password)
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[2]/div/div/div/div/div/div/a[3]/div[2]/img[2]').click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(1,49,50)[0]).click()
         time.sleep(5)
-        self.assertEqual('社区警务',self.dr.find_element_by_xpath('//*[@id="currMenu"]').text, '社区警务')
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div/ul/li[1]/p[2]').click()
-        self.dr.find_element_by_xpath('//*[@id="947"]').click()
+        self.assertEqual('社区警务',self.dr.find_element_by_xpath(currMenupath).text, '社区警务')
+        self.dr.find_element_by_xpath(sheet_menu.col_values(3,49,50)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(5,49,50)[0]).click()
         self.dr.switch_to.frame('iframeb')
         time.sleep(5)
-        self.assertEqual('群众工作列表', self.dr.find_element_by_xpath('/html/body/div[1]/div').text,
+        self.assertEqual('群众工作列表', self.dr.find_element_by_xpath(page_title).text,
                          '群众工作')
 
-    def test1_qzgz_add(self):
+    def test01_qzgz_add(self):
         self.qzgz_search()
         times = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime(time.time()))
         self.dr.find_element_by_xpath('/html/body/div[3]/div[1]/div[2]/a[2]').click()
@@ -81,7 +88,7 @@ class TESTCAST_QZGZ(TESTCASE):
                          '校验返回功能')
         print('社区警务-群众工作：新增功能正常')
 
-    def test2_qzgz_search_date(self):
+    def test02_qzgz_search_date(self):
         self.qzgz_search()
         search_value_date=time.strftime("%Y-%m-%d", time.localtime(time.time()))
         self.dr.find_element_by_xpath('//*[@id="kzrqkssjA"]').send_keys(search_value_date)
@@ -96,7 +103,7 @@ class TESTCAST_QZGZ(TESTCASE):
         self.assertIn(search_value_date,self.dr.find_element_by_xpath('//*[@id="kzrqkssjA"]').get_attribute('value'),'校验详情页面开展日期')
         print('社区警务-群众工作：开展日期条件查询功能正常')
 
-    def test3_qzgz_search_gzlb(self):
+    def test03_qzgz_search_gzlb(self):
         self.qzgz_search()
         option_chioce=Select(self.dr.find_element_by_xpath('//*[@id="gzlb"]'))
         for i in range(0,3):
@@ -115,7 +122,7 @@ class TESTCAST_QZGZ(TESTCASE):
                 self.pagination_num(paginal_number, search_value_date, column)
         print('社区警务-群众工作：开展日期条件查询功能正常')
 
-    def test4_qzgz_search_jwqmjxm(self):
+    def test04_qzgz_search_jwqmjxm(self):
         self.qzgz_search()
         search_value_jwqmjxm = '包涵'
         self.dr.find_element_by_xpath('//*[@id="jwqmjxm"]').send_keys(search_value_jwqmjxm)
@@ -131,7 +138,7 @@ class TESTCAST_QZGZ(TESTCASE):
                       self.dr.find_element_by_xpath('//*[@id="jwqmjxm"]').get_attribute('value'), '校验详情页面警务区民警姓名')
         print('社区警务-群众工作：警务区民警条件查询功能正常')
 
-    def test5_qzgz_search_ssdw(self):
+    def test05_qzgz_search_ssdw(self):
         self.qzgz_search()
         search_value_ssdw='库局派出所'
         self.dr.find_element_by_xpath('//*[@id="jwqmjssdwName"]').click()
@@ -154,7 +161,7 @@ class TESTCAST_QZGZ(TESTCASE):
                       self.dr.find_element_by_xpath('//*[@id="jwqmjssdwName"]').get_attribute('value'), '校验详情页面所属单位')
         print('社区警务-群众工作：所属单位条件查询功能正常')
 
-    def test6_qzgz_edit(self):
+    def test06_qzgz_edit(self):
         self.qzgz_search()
         search_value_jwqmjxm = '包涵'
         self.dr.find_element_by_xpath('//*[@id="jwqmjxm"]').send_keys(search_value_jwqmjxm)
@@ -179,7 +186,7 @@ class TESTCAST_QZGZ(TESTCASE):
                       self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[5]').text, '校验编辑功能')
         print('社区警务-群众工作：编辑功能正常')
 
-    def test7_qzgz_delete(self):
+    def test07_qzgz_delete(self):
         self.qzgz_search()
         search_value_jwqmjxm = '包拯'
         self.dr.find_element_by_xpath('//*[@id="jwqmjxm"]').send_keys(search_value_jwqmjxm)

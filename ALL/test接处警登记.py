@@ -12,6 +12,8 @@ import time
 import os
 import re
 from public_package.pubilc_package import url,login_name,login_name_test,login_password,login_password_test
+from public_package.pubilc_package import sheet_setting, search, reset, currMenupath, page_title, goback, saveBtn,sheet_menu,sheet_prompt_message,work_space
+import xlrd
 from public_package.pubilc_package import TESTCASE
 import HTMLTestRunner
 '''
@@ -21,7 +23,12 @@ import HTMLTestRunner
 用例作者：
 '''
 
-class TESTCAST_JCJDJ(TESTCASE):
+xlsfile=work_space+r'\\'+sheet_menu.col_values(6,50,51)[0]
+excel = xlrd.open_workbook(xlsfile)
+global sheet
+sheet = excel.sheet_by_name('接处警登记')
+
+class TESTCASE_JCJDJ(TESTCASE):
     def setUp(self):
         self.dr = webdriver.Chrome()
         self.dr.maximize_window()
@@ -38,14 +45,14 @@ class TESTCAST_JCJDJ(TESTCASE):
 
     def jcjdj_search(self):
         self.login(login_name, login_password)
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[2]/div/div/div/div/div/div/a[3]/div[2]/img[2]').click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(1,50,51)[0]).click()
         time.sleep(5)
-        self.assertEqual('社区警务',self.dr.find_element_by_xpath('//*[@id="currMenu"]').text, '社区警务')
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div/ul/li[2]/p[2]').click()
-        self.dr.find_element_by_xpath('//*[@id="943"]').click()
+        self.assertEqual('社区警务',self.dr.find_element_by_xpath(currMenupath).text, '社区警务')
+        self.dr.find_element_by_xpath(sheet_menu.col_values(3,50,51)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(5,50,51)[0]).click()
         self.dr.switch_to.frame('iframeb')
         time.sleep(5)
-        self.assertEqual('接处警登记列表', self.dr.find_element_by_xpath('/html/body/div[1]/div').text,
+        self.assertEqual('接处警登记列表', self.dr.find_element_by_xpath(page_title).text,
                          '接处警登记')
 
     def test01_jcjdj_add(self):
@@ -75,25 +82,28 @@ class TESTCAST_JCJDJ(TESTCASE):
         self.dr.find_element_by_xpath('//*[@id="deathToll"]').send_keys('0')
         self.dr.find_element_by_xpath('//*[@id="economicsLoss"]').send_keys('24000')
         self.dr.find_element_by_xpath('//*[@id="saveBtn"]').click()
-        time.sleep(3)
-        self.dr.find_element_by_xpath('/html/body/a').click()
-        self.dr.implicitly_wait(2)
-        self.assertEqual('马腾',self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[5]').text,'校验新增，返回和默认排序')
+        self.dr.switch_to.default_content()
+        self.dr.switch_to.frame('iframeb')
+        time.sleep(1)
+        self.assertEqual(sheet_prompt_message.col_values(1, 4, 5)[0],
+                         self.dr.find_element_by_xpath('//*[@id="gritter-item-1"]/div[2]/div[2]/p').text, '新增成功提示信息校验')
         print('社区警务-接处警登记：新增功能正常')
 
     def test02_jcjdj_search_alarmTimeA(self):
         self.jcjdj_search()
         search_value_alarmTimeA=time.strftime("%Y-%m-%d", time.localtime(time.time()))
         self.dr.find_element_by_xpath('//*[@id="alarmTimeA"]').send_keys(search_value_alarmTimeA)
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
+        self.dr.find_element_by_xpath(search).click()
         self.dr.switch_to.default_content()
         time.sleep(5)
         self.dr.switch_to.frame('iframeb')
         paginal_number = self.dr.find_element_by_xpath('/html/body/div[3]/div[2]/div/div[4]/div[1]/span[1]').text
         column = 3
         self.pagination_num(paginal_number, search_value_alarmTimeA, column)
-        self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[14]/a').click()
-        self.assertIn(search_value_alarmTimeA,self.dr.find_element_by_xpath('//*[@id="alarmTimeA"]').get_attribute('value'),'校验详情页面接警时间')
+        self.dr.find_element_by_xpath(reset).click()
+        self.dr.implicitly_wait(5)
+        self.dr.find_element_by_xpath(search).click()
+        self.assertEqual('',self.dr.find_element_by_xpath('//*[@id="alarmTimeA"]').get_attribute('value'),'接警时间-重置功能异常')
         print('社区警务-接处警登记：接警时间条件查询功能正常')
 
     def test03_jcjdj_search_reportalarmType(self):
@@ -101,46 +111,53 @@ class TESTCAST_JCJDJ(TESTCASE):
         option_chioce=Select(self.dr.find_element_by_xpath('//*[@id="reportalarmType"]'))
         option_chioce.select_by_value('2')
         search_value_reportalarmType=option_chioce.first_selected_option.text
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
+        self.dr.find_element_by_xpath(search).click()
         self.dr.switch_to.default_content()
         time.sleep(5)
         self.dr.switch_to.frame('iframeb')
         paginal_number = self.dr.find_element_by_xpath('/html/body/div[3]/div[2]/div/div[4]/div[1]/span[1]').text
         column = 4
         self.pagination_num(paginal_number, search_value_reportalarmType, column)
-        self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[14]/a').click()
-        self.assertIn(search_value_reportalarmType,
-                      self.dr.find_element_by_xpath('//*[@id="reportalarmType"]/option[3]').text, '校验详情页面报警形式')
+        self.dr.find_element_by_xpath(reset).click()
+        self.dr.implicitly_wait(5)
+        self.dr.find_element_by_xpath(search).click()
+        self.assertEqual('全部',self.dr.find_element_by_xpath('//*[@id="reportalarmType"]/option[1]').text,'报警形式-重置功能异常')
         print('社区警务-接处警登记：报警形式条件查询功能正常')
 
     def test04_jcjdj_search_alarmpeople(self):
         self.jcjdj_search()
-        search_value_alarmpeople='马腾'
-        self.dr.find_element_by_xpath('//*[@id="alarmpeople"]').send_keys(search_value_alarmpeople)
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
+        search_value_alarmpeople=sheet.col_values(1,4,5)[0]
+        alarmpeople_path=sheet.col_values(1,5,6)[0]
+        self.dr.find_element_by_xpath(alarmpeople_path).send_keys(search_value_alarmpeople)
+        self.dr.find_element_by_xpath(search).click()
         self.dr.switch_to.default_content()
         time.sleep(5)
         self.dr.switch_to.frame('iframeb')
         paginal_number = self.dr.find_element_by_xpath('/html/body/div[3]/div[2]/div/div[4]/div[1]/span[1]').text
         column = 5
         self.pagination_num(paginal_number, search_value_alarmpeople, column)
-        self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[14]/a').click()
-        self.assertIn(search_value_alarmpeople,self.dr.find_element_by_xpath('//*[@id="alarmpeople"]').get_attribute('value'),'校验详情页面接警时间')
+        self.dr.find_element_by_xpath(reset).click()
+        self.dr.implicitly_wait(5)
+        self.dr.find_element_by_xpath(search).click()
+        self.assertEqual('',self.dr.find_element_by_xpath(alarmpeople_path).get_attribute('value'),'报警人-重置功能异常')
         print('社区警务-接处警登记：接警时间条件查询功能正常')
 
     def test05_jcjdj_search_unitAddress(self):
         self.jcjdj_search()
-        search_value_unitAddress='北京中路24号'
-        self.dr.find_element_by_xpath('//*[@id="unitAddress"]').send_keys(search_value_unitAddress)
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
+        search_value_unitAddress=sheet.col_values(1,6,7)[0]
+        unitAddress_path=sheet.col_values(1,7,8)[0]
+        self.dr.find_element_by_xpath(unitAddress_path).send_keys(search_value_unitAddress)
+        self.dr.find_element_by_xpath(search).click()
         self.dr.switch_to.default_content()
         time.sleep(5)
         self.dr.switch_to.frame('iframeb')
         paginal_number = self.dr.find_element_by_xpath('/html/body/div[3]/div[2]/div/div[4]/div[1]/span[1]').text
         column = 6
         self.pagination_num(paginal_number, search_value_unitAddress, column)
-        self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr/td[14]/a').click()
-        self.assertIn(search_value_unitAddress,self.dr.find_element_by_xpath('//*[@id="unitAddress"]').get_attribute('value'),'校验详情页面单位详址')
+        self.dr.find_element_by_xpath(reset).click()
+        self.dr.implicitly_wait(5)
+        self.dr.find_element_by_xpath(search).click()
+        self.assertEqual('',self.dr.find_element_by_xpath(unitAddress_path).get_attribute('value'),'居住地址-重置功能异常')
         print('社区警务-接处警登记：单位详址条件查询功能正常')
 
     def test06_jcjdj_search_alertType(self):

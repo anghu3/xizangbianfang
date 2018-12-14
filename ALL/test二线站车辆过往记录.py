@@ -57,11 +57,11 @@ class TESTCAST_ERXIANZHANCHELIANG(TESTCASE):
     def test1_erxianzhancheliang_search_cphm(self):
         self.erxianzhancheliang_search()
         time.sleep(30)
-        search_vale_cphm='青A7S171'
+        search_vale_cphm=sheet.col_values(1,0,1)[0]
         self.dr.find_element_by_xpath('//*[@id="form"]/div[1]/div/input').send_keys(search_vale_cphm)
-        self.dr.find_element_by_xpath('//*[@id="search"]').click()
+        self.dr.find_element_by_xpath(search).click()
         self.dr.switch_to.default_content()
-        time.sleep(3)
+        time.sleep(10)
         self.dr.switch_to.frame('iframeb')
         paginal_number = self.dr.find_element_by_xpath('/html/body/div[3]/div[2]/div/div[4]/div[1]/span[1]').text
         column = 2

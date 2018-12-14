@@ -13,6 +13,8 @@ import os
 import re
 from public_package.pubilc_package import url,login_name,login_name_test,login_password,login_password_test
 from public_package.pubilc_package import TESTCASE
+from public_package.pubilc_package import sheet_setting, search, reset, currMenupath, page_title, goback, saveBtn , sheet_menu,sheet_prompt_message,work_space
+import xlrd
 import HTMLTestRunner
 '''
 用例名称：
@@ -38,17 +40,17 @@ class TESTCAST_JIEBEIJIEZHUANG(TESTCASE):
 
     def jiebeijiezhuang_search(self):
         self.login(login_name, login_password)
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[2]/div/div/div/div/div/div/a[1]/div[2]/img[2]').click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(1,39,40)[0]).click()
         time.sleep(5)
-        self.assertEqual('管理防范',self.dr.find_element_by_xpath('//*[@id="currMenu"]').text, '管理防范')
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div/ul/li/p[2]').click()
-        self.dr.find_element_by_xpath('//*[@id="956"]').click()
+        self.assertEqual('管理防范',self.dr.find_element_by_xpath(currMenupath).text, '管理防范')
+        self.dr.find_element_by_xpath(sheet_menu.col_values(3,39,40)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(5,39,40)[0]).click()
         self.dr.switch_to.frame('iframeb')
         time.sleep(5)
         self.assertEqual('界碑界桩列表', self.dr.find_element_by_xpath('/html/body/div[1]/p').text,
                          '界碑界桩管理')
 
-    def test1_jiebeijiezhuang_add(self):
+    def test01_jiebeijiezhuang_add(self):
         self.jiebeijiezhuang_search()
         self.dr.find_element_by_xpath('/html/body/div[4]/div[1]/div[2]/a[2]').click()
         add_value_name='陈墉中尼边界245142'
@@ -63,10 +65,13 @@ class TESTCAST_JIEBEIJIEZHUANG(TESTCASE):
         self.dr.find_element_by_xpath('//*[@id="dutyPolice"]').send_keys('包涵')
         self.dr.find_element_by_xpath('//*[@id="dutyPoliceContact"]').send_keys('15869874587')
         self.dr.find_element_by_xpath('//*[@id="zrdw"]').click()
+        time.sleep(1)
         self.dr.find_element_by_xpath('//*[@id="treeSelect_45_span"]').click()
         self.dr.find_element_by_xpath('//*[@id="dutyRoomTel"]').send_keys('13574587451')
         self.dr.find_element_by_xpath('//*[@id="gxdw"]').click()
+        time.sleep(1)
         self.dr.find_element_by_xpath('//*[@id="gxtreeSelect_45_span"]').click()
+        time.sleep(2)
         self.dr.find_element_by_xpath('//*[@id="saveBound"]').click()
         self.dr.implicitly_wait(5)
         self.dr.find_element_by_xpath('/html/body/a').click()
@@ -74,7 +79,7 @@ class TESTCAST_JIEBEIJIEZHUANG(TESTCASE):
         self.assertEqual('界碑界桩列表', self.dr.find_element_by_xpath('/html/body/div[1]/p').text,'返回功能校验')
         print('管理防范-界碑界桩管理：新增功能正常')
 
-    def test2_jiebeijiezhuang_search_codeid(self):
+    def test02_jiebeijiezhuang_search_codeid(self):
         self.jiebeijiezhuang_search()
         search_value_codeid=codeid
         # print(codeid)
@@ -94,7 +99,7 @@ class TESTCAST_JIEBEIJIEZHUANG(TESTCASE):
         self.assertEqual('界碑界桩列表', self.dr.find_element_by_xpath('/html/body/div[1]/p').text, '返回功能校验')
         print('管理防范-界碑界桩管理：编号条件查询功能正常')
 
-    def test3_jiebeijiezhuang_search_name(self):
+    def test03_jiebeijiezhuang_search_name(self):
         self.jiebeijiezhuang_search()
         search_value_name='陈墉中尼边界245142'
         self.dr.find_element_by_xpath('//*[@id="name"]').send_keys(search_value_name)
@@ -113,9 +118,7 @@ class TESTCAST_JIEBEIJIEZHUANG(TESTCASE):
         self.assertEqual('界碑界桩列表', self.dr.find_element_by_xpath('/html/body/div[1]/p').text, '返回功能校验')
         print('管理防范-界碑界桩管理：名称条件查询功能正常')
 
-
-
-    def test4_jiebeijiezhuang_search_address(self):
+    def test04_jiebeijiezhuang_search_address(self):
         self.jiebeijiezhuang_search()
         search_value_address = '陈墉镇'
         self.dr.find_element_by_xpath('//*[@id="geographiPosition"]').send_keys(search_value_address)
@@ -136,7 +139,7 @@ class TESTCAST_JIEBEIJIEZHUANG(TESTCASE):
         self.assertEqual('界碑界桩列表', self.dr.find_element_by_xpath('/html/body/div[1]/p').text, '返回功能校验')
         print('管理防范-界碑界桩管理：所在名称和具体方位条件查询功能正常')
 
-    def test5_jiebeijiezhuang_search_dutyPolice(self):
+    def test05_jiebeijiezhuang_search_dutyPolice(self):
         self.jiebeijiezhuang_search()
         search_value_dutyPolice='包涵'
         self.dr.find_element_by_xpath('//*[@id="dutyPolice"]').send_keys(search_value_dutyPolice)
@@ -155,7 +158,7 @@ class TESTCAST_JIEBEIJIEZHUANG(TESTCASE):
         self.assertEqual('界碑界桩列表', self.dr.find_element_by_xpath('/html/body/div[1]/p').text, '返回功能校验')
         print('管理防范-界碑界桩管理：责任民警条件查询功能正常')
 
-    def test6_jiebeijiezhuang_search_zrdw(self):
+    def test06_jiebeijiezhuang_search_zrdw(self):
         self.jiebeijiezhuang_search()
         search_value_zrdw='山南支队'
         self.dr.find_element_by_xpath('//*[@id="zrdw"]').click()
@@ -175,7 +178,7 @@ class TESTCAST_JIEBEIJIEZHUANG(TESTCASE):
         # self.assertEqual('界碑界桩列表', self.dr.find_element_by_xpath('/html/body/div[1]/p').text, '返回功能校验')
         print('管理防范-界碑界桩管理：责任单位条件查询功能正常')
 
-    def test7_jiebeijiezhuang_search_gldw(self):
+    def test07_jiebeijiezhuang_search_gldw(self):
         self.jiebeijiezhuang_search()
         search_value_gldw='山南支队'
         self.dr.find_element_by_xpath('//*[@id="gxdw"]').click()
@@ -195,7 +198,7 @@ class TESTCAST_JIEBEIJIEZHUANG(TESTCASE):
         # self.assertEqual('界碑界桩列表', self.dr.find_element_by_xpath('/html/body/div[1]/p').text, '返回功能校验')
         print('管理防范-界碑界桩管理：责任单位条件查询功能正常')
 
-    def test8_jiebeijiezhuang_delete(self):
+    def test08_jiebeijiezhuang_delete(self):
         self.jiebeijiezhuang_search()
         search_value_codeid = codeid
         # print(codeid)

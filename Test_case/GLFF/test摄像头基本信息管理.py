@@ -14,6 +14,8 @@ import re
 from public_package.pubilc_package import url,login_name,login_name_test,login_password,login_password_test
 from public_package.pubilc_package import TESTCASE
 import HTMLTestRunner
+from public_package.pubilc_package import sheet_setting, search, reset, currMenupath, page_title, goback, saveBtn , sheet_menu,sheet_prompt_message,work_space
+import xlrd
 '''
 用例名称：
 用例编号：
@@ -38,17 +40,17 @@ class TESTCAST_SHEXIANGTOU(TESTCASE):
 
     def shexiangtou_search(self):
         self.login(login_name, login_password)
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[2]/div/div/div/div/div/div/a[1]/div[2]/img[2]').click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(1,37,38)[0]).click()
         time.sleep(5)
-        self.assertEqual('管理防范',self.dr.find_element_by_xpath('//*[@id="currMenu"]').text, '管理防范')
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div/ul/li/p[2]').click()
-        self.dr.find_element_by_xpath('//*[@id="954"]').click()
+        self.assertEqual('管理防范',self.dr.find_element_by_xpath(currMenupath).text, '管理防范')
+        self.dr.find_element_by_xpath(sheet_menu.col_values(3,37,38)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(5,37,38)[0]).click()
         self.dr.switch_to.frame('iframeb')
         time.sleep(5)
         self.assertEqual('摄像头基本信息列表', self.dr.find_element_by_xpath('/html/body/div[1]/p').text,
                          '摄像头基本信息')
 
-    def test1_shexiangtou_search_deviceCode(self):
+    def test01_shexiangtou_search_deviceCode(self):
         self.shexiangtou_search()
         search_value_deviceCode='54260000001310017818'
         self.dr.find_element_by_xpath('//*[@id="deviceCode"]').send_keys(search_value_deviceCode)
@@ -66,7 +68,7 @@ class TESTCAST_SHEXIANGTOU(TESTCASE):
         self.assertEqual('摄像头基本信息列表', self.dr.find_element_by_xpath('/html/body/div[1]/p').text,'摄像头基本信息')
         print('管理防范-摄像头基本信息管理：设备编号条件查询功能正常')
 
-    def test2_shexiangtou_search_detachment(self):
+    def test02_shexiangtou_search_detachment(self):
         self.shexiangtou_search()
         search_value_detachment='西藏公安边防总队'
         self.dr.find_element_by_xpath('//*[@id="detachment"]').send_keys(search_value_detachment)
@@ -84,7 +86,7 @@ class TESTCAST_SHEXIANGTOU(TESTCASE):
         self.assertEqual('摄像头基本信息列表', self.dr.find_element_by_xpath('/html/body/div[1]/p').text,'摄像头基本信息')
         print('管理防范-摄像头基本信息管理：支队条件查询功能正常')
 
-    def test3_shexiangtou_search_brigade(self):
+    def test03_shexiangtou_search_brigade(self):
         self.shexiangtou_search()
         search_value_brigade='总队机关营区'
         self.dr.find_element_by_xpath('//*[@id="brigade"]').send_keys(search_value_brigade)
@@ -102,7 +104,7 @@ class TESTCAST_SHEXIANGTOU(TESTCASE):
         self.assertEqual('摄像头基本信息列表', self.dr.find_element_by_xpath('/html/body/div[1]/p').text,'摄像头基本信息')
         print('管理防范-摄像头基本信息管理：大队条件查询功能正常')
 
-    def test4_shexiangtou_search_policeStation(self):
+    def test04_shexiangtou_search_policeStation(self):
         self.shexiangtou_search()
         search_value_policeStation='总队机关营区3'
         self.dr.find_element_by_xpath('//*[@id="policeStation"]').send_keys(search_value_policeStation)
@@ -120,7 +122,7 @@ class TESTCAST_SHEXIANGTOU(TESTCASE):
         self.assertEqual('摄像头基本信息列表', self.dr.find_element_by_xpath('/html/body/div[1]/p').text,'摄像头基本信息')
         print('管理防范-摄像头基本信息管理：派出所/工作站条件查询功能正常')
 
-    def test5_shexiangtou_search_units(self):
+    def test05_shexiangtou_search_units(self):
         self.shexiangtou_search()
         search_value_units='总队机关营区3'
         self.dr.find_element_by_xpath('//*[@id="units"]').send_keys(search_value_units)

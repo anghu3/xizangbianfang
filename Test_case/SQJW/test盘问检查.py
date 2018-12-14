@@ -13,6 +13,8 @@ import os
 import re
 from public_package.pubilc_package import url,login_name,login_name_test,login_password,login_password_test
 from public_package.pubilc_package import TESTCASE
+from public_package.pubilc_package import sheet_setting, search, reset, currMenupath, page_title, goback, saveBtn,sheet_menu,sheet_prompt_message,work_space
+import xlrd
 import HTMLTestRunner
 '''
 用例名称：
@@ -21,7 +23,12 @@ import HTMLTestRunner
 用例作者：
 '''
 
-class TESTCAST_PWJC(TESTCASE):
+# xlsfile=work_space+r'\\'+sheet_menu.col_values(6,50,51)[0]
+# excel = xlrd.open_workbook(xlsfile)
+# global sheet
+# sheet = excel.sheet_by_name('盘问检查')
+
+class TESTCASE_PWJC(TESTCASE):
     def setUp(self):
         self.dr = webdriver.Chrome()
         self.dr.maximize_window()
@@ -38,17 +45,17 @@ class TESTCAST_PWJC(TESTCASE):
 
     def pwjc_search(self):
         self.login(login_name, login_password)
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[2]/div/div/div/div/div/div/a[3]/div[2]/img[2]').click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(1,47,48)[0]).click()
         time.sleep(5)
-        self.assertEqual('社区警务',self.dr.find_element_by_xpath('//*[@id="currMenu"]').text, '社区警务')
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div/ul/li[1]/p[2]').click()
-        self.dr.find_element_by_xpath('//*[@id="949"]').click()
+        self.assertEqual('社区警务',self.dr.find_element_by_xpath(currMenupath).text, '社区警务')
+        self.dr.find_element_by_xpath(sheet_menu.col_values(3,47,48)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(5,47,48)[0]).click()
         self.dr.switch_to.frame('iframeb')
         time.sleep(5)
-        self.assertEqual('盘问检查基本信息列表', self.dr.find_element_by_xpath('/html/body/div[1]/div').text,
+        self.assertEqual('盘问检查基本信息列表', self.dr.find_element_by_xpath(page_title).text,
                          '盘问检查')
 
-    def test1_pwjc_add(self):
+    def test01_pwjc_add(self):
         self.pwjc_search()
         self.dr.find_element_by_xpath('/html/body/div[3]/div[1]/div[2]/a[2]').click()
         self.dr.find_element_by_xpath('//*[@id="pwkssjA"]').click()
@@ -84,7 +91,7 @@ class TESTCAST_PWJC(TESTCASE):
                          '检验新增、返回和默认排序')
         print('社区警务-盘问检查：新增功能正常')
 
-    def test2_pwjc_search_date(self):
+    def test02_pwjc_search_date(self):
         self.pwjc_search()
         search_value_date=time.strftime('%Y-%m-%d',time.localtime(time.time()))
         self.dr.find_element_by_xpath('//*[@id="pwkssjA"]').send_keys(search_value_date)
@@ -105,7 +112,7 @@ class TESTCAST_PWJC(TESTCASE):
                          '检验返回和默认排序')
         print('社区警务-盘问检查：盘问时间条件查询功能正常')
 
-    def test3_pwjc_search_name(self):
+    def test03_pwjc_search_name(self):
         self.pwjc_search()
         search_value_name='荆帅'
         self.dr.find_element_by_xpath('//*[@id="xm"]').send_keys(search_value_name)
@@ -126,7 +133,7 @@ class TESTCAST_PWJC(TESTCASE):
                          '检验返回和默认排序')
         print('社区警务-盘问检查：被盘问人姓名条件查询功能正常')
 
-    def test4_pwjc_search_carID(self):
+    def test04_pwjc_search_carID(self):
         self.pwjc_search()
         search_value_carid='370123198009220510'
         self.dr.find_element_by_xpath('//*[@id="sfzhm"]').send_keys(search_value_carid)
@@ -147,7 +154,7 @@ class TESTCAST_PWJC(TESTCASE):
                          '检验返回和默认排序')
         print('社区警务-盘问检查：被盘问人身份证号码条件查询功能正常')
 
-    def test5_pwjc_search_pwjg(self):
+    def test05_pwjc_search_pwjg(self):
         self.pwjc_search()
         option_chioce=Select(self.dr.find_element_by_xpath('//*[@id="pwjg"]'))
         for i in range(0, 4):
@@ -166,7 +173,7 @@ class TESTCAST_PWJC(TESTCASE):
                 self.pagination_num(paginal_number, search_value_pwjg, column)
         print('社区警务-盘问检查：盘问结果条件查询功能正常')
 
-    def test6_pwjc_search_pwjcmjxm(self):
+    def test06_pwjc_search_pwjcmjxm(self):
         self.pwjc_search()
         search_value_pwjcmjxm='包涵'
         self.dr.find_element_by_xpath('//*[@id="pwjcmjxm"]').send_keys(search_value_pwjcmjxm)
@@ -186,7 +193,7 @@ class TESTCAST_PWJC(TESTCASE):
                          '检验返回和默认排序')
         print('社区警务-盘问检查：盘问检查民警姓名条件查询功能正常')
 
-    def test7_pwjc_search_pwjcmjssdwName(self):
+    def test07_pwjc_search_pwjcmjssdwName(self):
         self.pwjc_search()
         search_value_pwjcmjssdwName='扎日派出所'
         self.dr.find_element_by_xpath('//*[@id="pwjcmjssdwName"]').click()
@@ -213,7 +220,7 @@ class TESTCAST_PWJC(TESTCASE):
                          '检验返回和默认排序')
         print('社区警务-盘问检查：盘问检查民警所属单位条件查询功能正常')
 
-    def test8_pwjc_edit(self):
+    def test08_pwjc_edit(self):
         self.pwjc_search()
         search_value_carid='370123198009220510'
         self.dr.find_element_by_xpath('//*[@id="sfzhm"]').send_keys(search_value_carid)
@@ -236,7 +243,7 @@ class TESTCAST_PWJC(TESTCASE):
                          '检验返回和默认排序')
         print('社区警务-盘问检查：编辑功能正常')
 
-    def test9_pwjc_delete(self):
+    def test09_pwjc_delete(self):
         self.pwjc_search()
         search_value_carid='370123198009220510'
         self.dr.find_element_by_xpath('//*[@id="sfzhm"]').send_keys(search_value_carid)

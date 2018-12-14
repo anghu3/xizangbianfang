@@ -13,6 +13,8 @@ import os
 import re
 from public_package.pubilc_package import url,login_name,login_name_test,login_password,login_password_test
 from public_package.pubilc_package import TESTCASE
+from public_package.pubilc_package import sheet_setting, search, reset, currMenupath, page_title, goback, saveBtn , sheet_menu,sheet_prompt_message,work_space
+import xlrd
 import HTMLTestRunner
 '''
 用例名称：
@@ -40,17 +42,17 @@ class TESTCAST_BIANMAODIAN(TESTCASE):
 
     def bianmaodian_search(self):
         self.login(login_name, login_password)
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[2]/div/div/div/div/div/div/a[1]/div[2]/img[2]').click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(1,42,43)[0]).click()
         time.sleep(5)
-        self.assertEqual('管理防范',self.dr.find_element_by_xpath('//*[@id="currMenu"]').text, '管理防范')
-        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div/ul/li/p[2]').click()
-        self.dr.find_element_by_xpath('//*[@id="960"]').click()
+        self.assertEqual('管理防范',self.dr.find_element_by_xpath(currMenupath).text, '管理防范')
+        self.dr.find_element_by_xpath(sheet_menu.col_values(3,42,43)[0]).click()
+        self.dr.find_element_by_xpath(sheet_menu.col_values(5,42,43)[0]).click()
         self.dr.switch_to.frame('iframeb')
         time.sleep(5)
         self.assertEqual('边贸点管理', self.dr.find_element_by_xpath('/html/body/div[1]/p').text,
                          '边贸点管理')
 
-    def test1_bianmaodian_add(self):
+    def test01_bianmaodian_add(self):
         self.bianmaodian_search()
         self.dr.find_element_by_xpath('/html/body/div[4]/div[1]/div[2]/a[2]').click()
         add_value_name='基隆口岸'
@@ -86,13 +88,13 @@ class TESTCAST_BIANMAODIAN(TESTCASE):
         self.dr.find_element_by_xpath('//*[@id="gxtreeSelect_369_span"]').click()
         time.sleep(1)
         self.dr.find_element_by_xpath('//*[@id="saveTrade"]').click()
-        time.sleep(3)
+        time.sleep(1)
         self.dr.find_element_by_xpath('/html/body/a').click()
         self.dr.implicitly_wait(2)
         self.assertEqual(add_value_name,self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[4]').text,'校验新增、返回和默认排序功能')
         print('管理防范-边贸点管理：新增功能正常')
 
-    def test2_bianmaodian_search_codeid(self):
+    def test02_bianmaodian_search_codeid(self):
         self.bianmaodian_search()
         search_value_codeid=codeid
         self.dr.find_element_by_xpath('//*[@id="code"]').send_keys(search_value_codeid)
@@ -111,7 +113,7 @@ class TESTCAST_BIANMAODIAN(TESTCASE):
         self.assertEqual(search_value_codeid,self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[3]').text,'校验返回功能和默认排序')
         print('管理防范-边贸点管理：编号条件查询功能正常')
 
-    def test3_bianmaodian_search_name(self):
+    def test03_bianmaodian_search_name(self):
         self.bianmaodian_search()
         search_value_name='基隆口岸'
         self.dr.find_element_by_xpath('//*[@id="name"]').send_keys(search_value_name)
@@ -130,7 +132,7 @@ class TESTCAST_BIANMAODIAN(TESTCASE):
         self.assertEqual(search_value_name,self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[4]').text,'校验返回功能和默认排序')
         print('管理防范-边贸点管理：名称条件查询功能正常')
 
-    def test4_bianmaodian_search_address(self):
+    def test04_bianmaodian_search_address(self):
         self.bianmaodian_search()
         search_value_address='西藏自治区吉隆县吉隆镇热索村'
         self.dr.find_element_by_xpath('//*[@id="location"]').send_keys(search_value_address)
@@ -149,7 +151,7 @@ class TESTCAST_BIANMAODIAN(TESTCASE):
         self.assertEqual(search_value_address,self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[5]').text,'校验返回功能和默认排序')
         print('管理防范-边贸点管理：所在地名和具体方位条件查询功能正常')
 
-    def test5_bianmaodian_search_headName(self):
+    def test05_bianmaodian_search_headName(self):
         self.bianmaodian_search()
         search_value_headName='马汉'
         self.dr.find_element_by_xpath('//*[@id="headName"]').send_keys(search_value_headName)
@@ -168,7 +170,7 @@ class TESTCAST_BIANMAODIAN(TESTCASE):
         self.assertEqual(search_value_headName,self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[8]').text,'校验返回功能和默认排序')
         print('管理防范-边贸点管理：责任人姓名条件查询功能正常')
 
-    def test6_bianmaodian_search_gldw(self):
+    def test06_bianmaodian_search_gldw(self):
         self.bianmaodian_search()
         search_value_gldw='执勤业务一科'
         self.dr.find_element_by_xpath('//*[@id="gxdw"]').click()
@@ -186,7 +188,7 @@ class TESTCAST_BIANMAODIAN(TESTCASE):
         self.pagination_num(paginal_number, search_value_gldw, column)
         print('管理防范-边贸点管理：管理单位条件查询功能正常')
 
-    def test7_bianmaodian_search_zrdw(self):
+    def test07_bianmaodian_search_zrdw(self):
         self.bianmaodian_search()
         search_value_zrdw='执勤业务一科'
         self.dr.find_element_by_xpath('//*[@id="zrdw"]').click()
@@ -204,7 +206,7 @@ class TESTCAST_BIANMAODIAN(TESTCASE):
         self.pagination_num(paginal_number, search_value_zrdw, column)
         print('管理防范-边贸点管理：责任单位条件查询功能正常')
 
-    def test8_bianmaodian_edit(self):
+    def test08_bianmaodian_edit(self):
         self.bianmaodian_search()
         search_value_codeid=codeid
         self.dr.find_element_by_xpath('//*[@id="code"]').send_keys(search_value_codeid)
@@ -226,7 +228,7 @@ class TESTCAST_BIANMAODIAN(TESTCASE):
         self.assertEqual(edit_value_name, self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[4]').text,'校验编辑、返回和默认排序')
         print('管理防范-边贸点管理：编辑功能正常')
 
-    def test9_bianmaodian_delete(self):
+    def test09_bianmaodian_delete(self):
         self.bianmaodian_search()
         search_value_codeid=codeid
         self.dr.find_element_by_xpath('//*[@id="code"]').send_keys(search_value_codeid)

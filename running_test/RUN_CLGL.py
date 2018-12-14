@@ -13,7 +13,7 @@ def allcase():
     dir_file = os.getcwd()
     case_dir = dir_file + r'\..\Test_case\CLGL\\'
     discover=unittest.defaultTestLoader.discover(case_dir,pattern='test*.py',top_level_dir=None)
-    print(discover)
+    # print(discover)
     return discover
 
 if __name__ == '__main__':
