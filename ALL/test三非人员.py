@@ -6,15 +6,13 @@ Created on Thu Jun 21 14:11:17 2018
 """
 import unittest
 from selenium import webdriver
-import selenium.webdriver.support.ui as ui
 from selenium.webdriver.support.ui import Select
 import time
 import os
 import re
 from public_package.pubilc_package import url,login_name,login_name_test,login_password,login_password_test
-from public_package.pubilc_package import sheet_setting, search, reset, currMenupath, page_title, goback, saveBtn,sheet_menu,sheet_prompt_message
+from public_package.pubilc_package import sheet_setting, search, reset, currMenupath, page_title, goback, saveBtn,sheet_menu,sheet_prompt_message,work_space
 from public_package.pubilc_package import TESTCASE
-import HTMLTestRunner
 import xlrd
 '''
 用例名称：
@@ -23,7 +21,7 @@ import xlrd
 用例作者：
 '''
 
-xlsfile = r'F:\pythonkeys\自动化测试\lasa\RKGL.xls'
+xlsfile=work_space+r'\\'+sheet_menu.col_values(6,22,23)[0]
 excel = xlrd.open_workbook(xlsfile)
 global sheet
 sheet = excel.sheet_by_name('三非人员')

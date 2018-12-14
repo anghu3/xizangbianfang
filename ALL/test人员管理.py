@@ -12,7 +12,7 @@ import time
 import os
 import re
 from public_package.pubilc_package import url,login_name,login_name_test,login_password,login_password_test,login_password_test2
-from public_package.pubilc_package import sheet_setting, search, reset, currMenupath, page_title, goback, saveBtn,sheet_menu,sheet_prompt_message
+from public_package.pubilc_package import sheet_setting, search, reset, currMenupath, page_title, goback, saveBtn,sheet_menu,sheet_prompt_message,work_space
 from public_package.pubilc_package import TESTCASE
 import HTMLTestRunner
 import xlrd
@@ -23,7 +23,7 @@ import xlrd
 用例作者：
 '''
 
-xlsfile = r'F:\pythonkeys\自动化测试\lasa\XTGL.xlsx'
+xlsfile=work_space+r'\\'+sheet_menu.col_values(6,64,65)[0]
 excel = xlrd.open_workbook(xlsfile)
 global sheet
 sheet = excel.sheet_by_name('人员管理')
@@ -91,7 +91,7 @@ class TESTCAST_RKGL(TESTCASE):
         self.dr.switch_to.default_content()
         self.dr.switch_to.frame('iframeb')
         time.sleep(1)
-        self.assertEqual(sheet_prompt_message.col_values(1, 4, 5)[0],
+        self.assertEqual('登陆账号已存在！',
                          self.dr.find_element_by_xpath('//*[@id="gritter-item-1"]/div[2]/div[2]/p').text, '新增成功提示信息校验')
         print('系统管理-人口管理：人员新增功能正常')
 
@@ -192,8 +192,8 @@ class TESTCAST_RKGL(TESTCASE):
         self.dr.find_element_by_xpath('//*[@id="saveBtn"]').click()
         time.sleep(3)
         # self.dr.delete_all_cookies()
-        self.assertEqual('警员',self.dr.find_element_by_xpath('//*[@id="duty"]').get_attribute('value'),'校验编辑功能')
-        self.assertEqual('13585745874',self.dr.find_element_by_xpath('//*[@id="phone"]').get_attribute('value'),'校验编辑功能')
+        self.assertEqual('科员',self.dr.find_element_by_xpath('//*[@id="duty"]').get_attribute('value'),'校验编辑功能')
+        self.assertEqual('15247456354',self.dr.find_element_by_xpath('//*[@id="phone"]').get_attribute('value'),'校验编辑功能')
         print('系统管理-人口管理：编辑功能正常')
 
     def test07_rkgl_pwd(self):
@@ -217,6 +217,30 @@ class TESTCAST_RKGL(TESTCASE):
         time.sleep(3)
         self.dr.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[4]/a[2]').click()
         self.login(login_name_test,login_password_test2)
+        self.assertEqual('用户：test',self.dr.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/div[1]').text,'校验修改密码后登录')
+        print('系统管理-人员管理：修改密码功能')
+
+    def test08_rkgl_pwd(self):
+        self.rkgl_search()
+        search_value_loginId='test'
+        self.dr.find_element_by_xpath('//*[@id="form"]/div[2]/div/input').send_keys(search_value_loginId)
+        self.dr.find_element_by_xpath('//*[@id="search"]').click()
+        self.dr.switch_to.default_content()
+        time.sleep(3)
+        self.dr.switch_to.frame('iframeb')
+        paginal_number = self.dr.find_element_by_xpath('/html/body/div[3]/div[2]/div/div[4]/div[1]/span[1]').text
+        column = 3
+        self.pagination_num(paginal_number, search_value_loginId, column)
+        self.dr.find_element_by_xpath('//*[@id="list"]/tbody/tr[1]/td[8]/a[1]').click()
+        self.dr.switch_to.default_content()
+        time.sleep(3)
+        self.dr.switch_to.frame('iframeb')
+        self.dr.find_element_by_xpath('//*[@id="pwd"]').send_keys(login_password_test)
+        self.dr.find_element_by_xpath('/html/body/div[6]/div[3]/div/button[2]/span').click()
+        self.dr.switch_to.default_content()
+        time.sleep(3)
+        self.dr.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[4]/a[2]').click()
+        self.login(login_name_test,login_password_test)
         self.assertEqual('用户：test',self.dr.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[3]/div[1]').text,'校验修改密码后登录')
         print('系统管理-人员管理：修改密码功能')
 

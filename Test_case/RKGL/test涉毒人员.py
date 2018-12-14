@@ -13,8 +13,7 @@ import os
 import re
 from public_package.pubilc_package import url,login_name,login_name_test,login_password,login_password_test
 from public_package.pubilc_package import TESTCASE
-from public_package.pubilc_package import sheet_setting, search, reset, currMenupath, page_title, goback, saveBtn,sheet_menu,sheet_prompt_message
-import HTMLTestRunner
+from public_package.pubilc_package import sheet_setting, search, reset, currMenupath, page_title, goback, saveBtn,sheet_menu,sheet_prompt_message,work_space
 import xlrd
 '''
 用例名称：
@@ -22,7 +21,8 @@ import xlrd
 用例场景：
 用例作者：
 '''
-xlsfile = r'F:\pythonkeys\自动化测试\lasa\RKGL.xls'
+
+xlsfile=work_space+r'\\'+sheet_menu.col_values(6,14,15)[0]
 excel = xlrd.open_workbook(xlsfile)
 global sheet
 sheet = excel.sheet_by_name('涉毒人员')

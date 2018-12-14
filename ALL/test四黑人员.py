@@ -13,7 +13,7 @@ import os
 import re
 from public_package.pubilc_package import url,login_name,login_name_test,login_password,login_password_test
 from public_package.pubilc_package import TESTCASE
-from public_package.pubilc_package import sheet_setting, search, reset, currMenupath, page_title, goback, saveBtn,sheet_menu,sheet_prompt_message
+from public_package.pubilc_package import sheet_setting, search, reset, currMenupath, page_title, goback, saveBtn,sheet_menu,sheet_prompt_message,work_space
 import xlrd
 '''
 用例名称：
@@ -21,7 +21,7 @@ import xlrd
 用例场景：
 用例作者：
 '''
-xlsfile = r'F:\pythonkeys\自动化测试\lasa\RKGL.xls'
+xlsfile=work_space+r'\\'+sheet_menu.col_values(6,21,22)[0]
 excel = xlrd.open_workbook(xlsfile)
 global sheet
 sheet = excel.sheet_by_name('四黑人员')
@@ -78,9 +78,11 @@ class TESTCAST_SIHEI(TESTCASE):
         self.dr.find_element_by_xpath('//*[@id="treeSelect_46_switch"]').click()
         time.sleep(1)
         self.dr.find_element_by_xpath('//*[@id="treeSelect_48_span"]').click()
+        time.sleep(2)
         self.dr.find_element_by_xpath('//*[@id="dayTraffic"]').click()
+        time.sleep(1)
         self.dr.find_element_by_xpath('//*[@id="remark"]').send_keys(sheet.col_values(1,19,20)[0])
-        self.dr.find_element_by_xpath('//*[@id="saveBtn"]').click()
+        self.dr.find_element_by_xpath(saveBtn).click()
         self.dr.switch_to.default_content()
         self.dr.switch_to.frame('iframeb')
         time.sleep(1)
@@ -106,7 +108,6 @@ class TESTCAST_SIHEI(TESTCASE):
         time.sleep(2)
         self.assertEqual('', self.dr.find_element_by_xpath(name_path).get_attribute('value'), '姓名-重置功能异常')
         print('人口管理-部局七类库-四黑人员：姓名条件查询功能正常')
-
 
     def test03_sihei_search_cardid(self):
         self.sihei_search()
